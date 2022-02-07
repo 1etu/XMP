@@ -1,0 +1,30 @@
+{
+  "name": "xmp",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "pnpm --filter vsh-web start",
+    "dev": "pnpm --filter vsh-web dev",
+    "build": "pnpm -r build",
+    "typecheck": "tsc --build && tsc --noEmit -p tools/resource-compiler && tsc --noEmit -p apps/vsh-web/server",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "extract": "pnpm --filter @vsh/resource-compiler extract"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.3",
+    "eslint": "^10.10.0",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.0",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}
