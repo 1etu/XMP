@@ -1,0 +1,11 @@
+{
+  "name": "@vsh/resource-compiler",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Research-time extraction of wave parameters and palettes from qrc archives",
+  "scripts": {
+    "extract": "node --experimental-strip-types src/cli.ts",
+    "typecheck": "tsc --build"
+  }
+}
