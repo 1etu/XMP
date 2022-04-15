@@ -1,0 +1,96 @@
+{
+  "classification": "VERIFIED",
+  "source": "xmb_plugin_normal.rco list order; icons identified against a live XMB capture",
+  "order": [
+    "user",
+    "sysconf",
+    "photo",
+    "music",
+    "video",
+    "game",
+    "network",
+    "psn",
+    "friend"
+  ],
+  "categories": {
+    "user": {
+      "icon": "cat_user",
+      "title": "msg_category_user",
+      "xml": "category_user.xml"
+    },
+    "sysconf": {
+      "icon": "cat_sysconf",
+      "title": "msg_category_sysconf",
+      "xml": "category_sysconf.xml"
+    },
+    "photo": {
+      "icon": "cat_photo",
+      "title": "msg_category_photo",
+      "xml": "category_photo.xml",
+      "railOnly": true
+    },
+    "music": {
+      "icon": "cat_music",
+      "title": "msg_category_music",
+      "xml": "category_music.xml",
+      "railOnly": true
+    },
+    "video": {
+      "icon": "cat_video",
+      "title": "msg_category_video",
+      "xml": "category_video.xml",
+      "railOnly": true
+    },
+    "game": {
+      "icon": "cat_game",
+      "title": "msg_category_game",
+      "xml": "category_game.xml",
+      "railOnly": true
+    },
+    "network": {
+      "icon": "cat_network",
+      "title": "msg_category_network",
+      "xml": "category_network.xml"
+    },
+    "psn": {
+      "icon": "cat_psn",
+      "title": "msg_category_psn",
+      "xml": "category_psn.xml",
+      "railOnly": true
+    },
+    "friend": {
+      "icon": "cat_friend",
+      "title": "msg_category_friend",
+      "xml": "category_friend.xml",
+      "railOnly": true
+    }
+  },
+  "providers": {
+    "user://localhost/create": [
+      {
+        "id": "newuser",
+        "icon": "tex_newuser",
+        "title": "msg_newuser",
+        "info": "msg_newuser_explanation"
+      }
+    ]
+  },
+  "drop": [
+    "edy",
+    "PRemo",
+    "console_qa",
+    "game_psp_emu_viewmode",
+    "game_psp_emu_3d",
+    "game_psp_emu_adhoc_ch",
+    "game_psp_emu_adhoc_mode"
+  ],
+  "note": "photo, music, video and game are populated at runtime from media libraries on real hardware; with no library they are rail-only here",
+  "gameSettingsSource": "https://manuals.playstation.net/document/en/ps3/3_10/settings/gamesettings.html",
+  "attrs": {
+    "poweroff": {
+      "icon": "tex_poweroff",
+      "title": "msg_poweroff",
+      "info": "msg_poweroff_explanation"
+    }
+  }
+}
