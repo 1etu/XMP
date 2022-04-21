@@ -15,3 +15,4 @@ import * as Tree from "./tree.ts";
 import * as Vag from "./vag.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+const DATA = join(ROOT, "tools", "resource-compiler", "data");
