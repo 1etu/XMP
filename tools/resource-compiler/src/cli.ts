@@ -16,3 +16,4 @@ import * as Vag from "./vag.ts";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const DATA = join(ROOT, "tools", "resource-compiler", "data");
+const OUT = join(ROOT, "resources");
