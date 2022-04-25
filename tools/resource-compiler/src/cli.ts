@@ -18,3 +18,5 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const DATA = join(ROOT, "tools", "resource-compiler", "data");
 const OUT = join(ROOT, "resources");
 const LOCAL = join(ROOT, "assets", "original");
+
+const FW = join(ROOT, "research/fw493/dev_flash/vsh/resource");
