@@ -21,3 +21,4 @@ const LOCAL = join(ROOT, "assets", "original");
 
 const FW = join(ROOT, "research/fw493/dev_flash/vsh/resource");
 const QGL = join(FW, "qgl");
+const XMB = join(FW, "explore/xmb");
