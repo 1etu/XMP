@@ -23,3 +23,10 @@ const FW = join(ROOT, "research/fw493/dev_flash/vsh/resource");
 const QGL = join(FW, "qgl");
 const XMB = join(FW, "explore/xmb");
 const FONT = join(ROOT, "research/fw493/dev_flash/data/font");
+
+const WANT_FONT = [
+  "SCE-PS3-RD-R-LATIN.TTF",
+  "SCE-PS3-RD-L-LATIN.TTF",
+  "SCE-PS3-RD-B-LATIN.TTF",
+  "SCE-PS3-NR-R-JPN.TTF",
+];
