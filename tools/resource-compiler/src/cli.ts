@@ -42,3 +42,14 @@ const WANT_WAVE = [
   "yoake",
   "higure",
 ];
+
+const WANT_SOUND: Readonly<Record<string, string>> = {
+  snd_cursor: "SE02_Cursor",
+  snd_decide: "SE03_Normal_OK",
+  snd_cancel: "SE04_Back",
+  snd_category_decide: "SE05_Category_OK",
+  snd_option: "SE08_Option",
+  snd_error: "SE09_Error",
+  snd_system_ok: "SE12_System_OK",
+  snd_system_ng: "SE13_System_NG",
+};
