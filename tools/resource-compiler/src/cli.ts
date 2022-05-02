@@ -30,3 +30,15 @@ const WANT_FONT = [
   "SCE-PS3-RD-B-LATIN.TTF",
   "SCE-PS3-NR-R-JPN.TTF",
 ];
+
+const WANT_WAVE = [
+  "base",
+  "coldboot1",
+  "coldboot2",
+  "welcome_1",
+  "welcome_2",
+  "day",
+  "night",
+  "yoake",
+  "higure",
+];
