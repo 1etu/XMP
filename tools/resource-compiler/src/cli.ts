@@ -53,3 +53,5 @@ const WANT_SOUND: Readonly<Record<string, string>> = {
   snd_system_ok: "SE12_System_OK",
   snd_system_ng: "SE13_System_NG",
 };
+
+const LUT_PFX = "textures/TGA/";
