@@ -55,3 +55,18 @@ const WANT_SOUND: Readonly<Record<string, string>> = {
 };
 
 const LUT_PFX = "textures/TGA/";
+
+function stable(v: unknown): unknown {
+  if (Array.isArray(v)) {
+    return v.map(stable);
+  }
+  if (v !== null && typeof v === "object") {
+    const src = v as Record<string, unknown>;
+    const out: Record<string, unknown> = {};
+    for (const k of Object.keys(src).sort()) {
+      out[k] = stable(src[k]);
+    }
+    return out;
+  }
+  return v;
+}
