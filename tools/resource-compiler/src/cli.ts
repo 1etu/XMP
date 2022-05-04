@@ -70,3 +70,8 @@ function stable(v: unknown): unknown {
   }
   return v;
 }
+
+function emit(path: string, body: unknown): void {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, `${JSON.stringify(stable(body), null, 2)}\n`, "utf8");
+}
