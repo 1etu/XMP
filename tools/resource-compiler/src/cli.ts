@@ -75,3 +75,8 @@ function emit(path: string, body: unknown): void {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, `${JSON.stringify(stable(body), null, 2)}\n`, "utf8");
 }
+
+function blob(path: string, body: Buffer): void {
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, body);
+}
