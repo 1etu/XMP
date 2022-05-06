@@ -80,3 +80,7 @@ function blob(path: string, body: Buffer): void {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, body);
 }
+
+function data(name: string): unknown {
+  return JSON.parse(readFileSync(join(DATA, name), "utf8"));
+}
