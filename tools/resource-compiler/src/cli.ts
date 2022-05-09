@@ -84,3 +84,7 @@ function blob(path: string, body: Buffer): void {
 function data(name: string): unknown {
   return JSON.parse(readFileSync(join(DATA, name), "utf8"));
 }
+
+function hashOf(buf: Buffer): string {
+  return createHash("sha256").update(buf).digest("hex").slice(0, 16);
+}
