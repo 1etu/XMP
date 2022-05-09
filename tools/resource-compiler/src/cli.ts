@@ -119,3 +119,20 @@ function wave(log: string[]): void {
     `wave: ${String(WANT_WAVE.length)} presets, ${String(months.length)} palettes, ${String(Object.keys(luts).length)} luts`,
   );
 }
+
+function icons(log: string[]): void {
+  const buf = readFileSync(join(QGL, "icons.qrc"));
+  const arc = Qrc.read(buf);
+  const meta = { classification: "MEASURED", source: "icons.qrc", sourceHash: hashOf(buf) };
+  const sets = Icons.build(arc);
+
+  for (const id of WANT_WAVE) {
+    const set = sets.get(id);
+    if (set === undefined) {
+      continue;
+    }
+    emit(join(OUT, "qgl/icons", `${id}.json`), { ...meta, ...set });
+  }
+
+  log.push(`icons: ${String(sets.size)} sets, ${String(WANT_WAVE.length)} emitted`);
+}
