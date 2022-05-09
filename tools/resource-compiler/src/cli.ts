@@ -88,3 +88,34 @@ function data(name: string): unknown {
 function hashOf(buf: Buffer): string {
   return createHash("sha256").update(buf).digest("hex").slice(0, 16);
 }
+
+function wave(log: string[]): void {
+  const buf = readFileSync(join(QGL, "lines.qrc"));
+  const arc = Qrc.read(buf);
+  const meta = { classification: "MEASURED", source: "lines.qrc", sourceHash: hashOf(buf) };
+
+  for (const id of WANT_WAVE) {
+    const preset = Preset.build(arc).get(id);
+    if (preset === undefined) {
+      throw new Error(`missing wave preset ${id}`);
+    }
+    emit(join(OUT, "qgl/presets", `${id}.json`), { ...meta, ...preset });
+  }
+
+  const months = Palette.build(arc);
+  emit(join(OUT, "qgl/month-palette.json"), { ...meta, months });
+
+  const luts: Record<string, unknown> = {};
+  for (const f of arc.files.filter((x) => x.name.startsWith(LUT_PFX))) {
+    const img = Tga.decode(arc.dat.subarray(f.off, f.off + f.len));
+    if (img.hgt !== 1) {
+      continue;
+    }
+    luts[f.name] = { width: img.wid, bpp: img.bpp, ...Tga.row(img) };
+  }
+  emit(join(OUT, "qgl/fres-lut.json"), { ...meta, luts });
+
+  log.push(
+    `wave: ${String(WANT_WAVE.length)} presets, ${String(months.length)} palettes, ${String(Object.keys(luts).length)} luts`,
+  );
+}
