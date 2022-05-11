@@ -136,3 +136,17 @@ function icons(log: string[]): void {
 
   log.push(`icons: ${String(sets.size)} sets, ${String(WANT_WAVE.length)} emitted`);
 }
+
+function icontex(log: string[]): void {
+  const arc = Qrc.read(readFileSync(join(QGL, "icontex.qrc")));
+  const tex = Icontex.build(arc);
+
+  for (const t of tex) {
+    blob(
+      join(LOCAL, "icon", `${Icontex.slot(t.name)}.png`),
+      Png.encode(t.img.wid, t.img.hgt, t.img.rgba),
+    );
+  }
+
+  log.push(`icontex: ${String(tex.length)} textures`);
+}
