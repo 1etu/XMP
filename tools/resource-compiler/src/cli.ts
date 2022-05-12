@@ -150,3 +150,11 @@ function icontex(log: string[]): void {
 
   log.push(`icontex: ${String(tex.length)} textures`);
 }
+
+function fonts(log: string[]): void {
+  for (const name of WANT_FONT) {
+    blob(join(LOCAL, "font", name), readFileSync(join(FONT, name)));
+  }
+
+  log.push(`fonts: ${String(WANT_FONT.length)} faces`);
+}
