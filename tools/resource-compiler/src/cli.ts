@@ -158,3 +158,39 @@ function fonts(log: string[]): void {
 
   log.push(`fonts: ${String(WANT_FONT.length)} faces`);
 }
+
+function sounds(log: string[]): void {
+  const buf = readFileSync(join(FW, "system_plugin.rco"));
+  const region = Rco.sounds(buf);
+  const clips = new Map<string, Vag.Clip>();
+
+  for (const clip of Vag.scan(buf, region.off, region.off + region.len)) {
+    if (!clips.has(clip.name)) {
+      clips.set(clip.name, clip);
+    }
+  }
+
+  const entries: Record<string, unknown> = {};
+
+  for (const [id, name] of Object.entries(WANT_SOUND)) {
+    const clip = clips.get(name);
+    if (clip === undefined) {
+      throw new Error(`rco has no clip ${name}`);
+    }
+    blob(join(LOCAL, "sound", `${id}.wav`), Vag.wav(clip));
+    entries[id] = {
+      rate: clip.rate,
+      samples: clip.pcm.length,
+      durationMs: Math.round((clip.pcm.length / clip.rate) * 1000),
+    };
+  }
+
+  emit(join(OUT, "audio/manifest.json"), {
+    classification: "MEASURED",
+    source: "system_plugin.rco",
+    sourceHash: hashOf(buf),
+    clips: entries,
+  });
+
+  log.push(`sounds: ${String(Object.keys(entries).length)} clips`);
+}
