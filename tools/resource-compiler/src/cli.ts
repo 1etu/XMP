@@ -243,3 +243,18 @@ function xmb(log: string[]): void {
     log.push(`  atlas slots unused: ${spare.join(", ")}`);
   }
 }
+
+function main(): void {
+  const log: string[] = [];
+
+  wave(log);
+  icons(log);
+  icontex(log);
+  fonts(log);
+  sounds(log);
+  xmb(log);
+
+  process.stdout.write(`${log.join("\n")}\n`);
+}
+
+main();
