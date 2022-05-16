@@ -194,3 +194,52 @@ function sounds(log: string[]): void {
 
   log.push(`sounds: ${String(Object.keys(entries).length)} clips`);
 }
+
+function xmb(log: string[]): void {
+  const spec = data("categories.json") as Tree.Spec;
+  const atlasFile = data("atlas.json") as { slots: Record<string, number> };
+  const strings = data("strings.json") as { text: Record<string, string> };
+
+  const atlas = new Tree.Atlas(atlasFile.slots);
+  const categories = Tree.build(spec, atlas, (xml) =>
+    readFileSync(join(XMB, xml), "utf8"),
+  );
+
+  const missing = new Set<string>();
+  const visit = (items: readonly Tree.Item[]): void => {
+    for (const i of items) {
+      for (const key of [i.title, i.info]) {
+        if (key.length > 0 && strings.text[key] === undefined) {
+          missing.add(key);
+        }
+      }
+      visit(i.items);
+    }
+  };
+  for (const c of categories) {
+    if (strings.text[c.title] === undefined) {
+      missing.add(c.title);
+    }
+    visit(c.items);
+  }
+
+  emit(join(OUT, "xmb/tree.json"), {
+    classification: "MEASURED",
+    source: "explore/xmb/category_*.xml",
+    categories,
+  });
+  emit(join(OUT, "xmb/strings.json"), strings);
+  emit(join(OUT, "xmb/layout.json"), data("layout.json"));
+
+  const nItem = categories.reduce((n, c) => n + c.items.length, 0);
+  log.push(
+    `xmb: ${String(categories.length)} categories, ${String(nItem)} items, ${String(missing.size)} strings missing`,
+  );
+  if (missing.size > 0) {
+    log.push(`  missing: ${[...missing].sort().join(", ")}`);
+  }
+  const spare = atlas.unused();
+  if (spare.length > 0) {
+    log.push(`  atlas slots unused: ${spare.join(", ")}`);
+  }
+}
