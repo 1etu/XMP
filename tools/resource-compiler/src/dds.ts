@@ -5,3 +5,9 @@ const WID_OFF = 0x10;
 const PF_BPP = 0x58;
 const PF_RMASK = 0x5c;
 const BGRA_RMASK = 0x00ff0000;
+
+export interface Image {
+  readonly wid: number;
+  readonly hgt: number;
+  readonly rgba: Uint8Array;
+}
