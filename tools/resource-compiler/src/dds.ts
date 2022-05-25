@@ -11,3 +11,13 @@ export interface Image {
   readonly hgt: number;
   readonly rgba: Uint8Array;
 }
+
+export class FormatError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "DdsFormatError";
+    this.detail = detail;
+  }
+}
