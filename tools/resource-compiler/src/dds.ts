@@ -58,3 +58,21 @@ export function decode(dat: Buffer, off: number): Image {
 
   return { wid, hgt, rgba };
 }
+
+export function extract(dat: Buffer): Image[] {
+  const tag = Buffer.from(MAGIC, "latin1");
+  const out: Image[] = [];
+  let p = 0;
+
+  for (;;) {
+    const start = dat.indexOf(tag, p);
+    if (start < 0) {
+      break;
+    }
+
+    out.push(decode(dat, start));
+    p = start + HDR_SIZE;
+  }
+
+  return out;
+}
