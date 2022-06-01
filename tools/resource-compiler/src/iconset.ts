@@ -4,3 +4,4 @@ import * as Qrc from "./qrc.ts";
 
 const MNU_EXT = ".mnu";
 const BASE_ID = "base";
+const SIG_KEY = "ATTN DIFF";
