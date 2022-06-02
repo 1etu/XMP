@@ -11,3 +11,13 @@ export interface Set {
   readonly val: Mnu.Block;
   readonly ints: readonly string[];
 }
+
+export class PairError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "IconsetPairError";
+    this.detail = detail;
+  }
+}
