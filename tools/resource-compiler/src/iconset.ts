@@ -70,3 +70,9 @@ export function build(arc: Qrc.Archive): Map<string, Set> {
 
   return out;
 }
+
+export function ids(arc: Qrc.Archive): string[] {
+  return arc.names
+    .filter((n) => n.endsWith(MNU_EXT) && leafOf(n) === `ICONS${MNU_EXT}`)
+    .map(idOf);
+}
