@@ -30,3 +30,30 @@ function flip(img: Dds.Image): Dds.Image {
 
   return { wid: img.wid, hgt: img.hgt, rgba };
 }
+
+export function build(arc: Qrc.Archive): Tex[] {
+  const out = arc.files.map((file) => ({
+    name: file.name,
+    img: flip(Dds.decode(Qrc.bytes(arc, file), 0)),
+  }));
+
+  const env = out.find((t) => t.name === ENV_NAME);
+  if (env === undefined) {
+    throw new SetError(`set lacks ${ENV_NAME}`);
+  }
+  if (env.img.wid !== ENV_PX || env.img.hgt !== ENV_PX) {
+    throw new SetError(
+      `${ENV_NAME} is ${String(env.img.wid)}x${String(env.img.hgt)}, want ${String(ENV_PX)}`,
+    );
+  }
+
+  for (const t of out) {
+    if (t.name !== ENV_NAME && (t.img.wid !== ATLAS_PX || t.img.hgt !== ATLAS_PX)) {
+      throw new SetError(
+        `${t.name} is ${String(t.img.wid)}x${String(t.img.hgt)}, want ${String(ATLAS_PX)}`,
+      );
+    }
+  }
+
+  return out;
+}
