@@ -57,3 +57,8 @@ export function build(arc: Qrc.Archive): Tex[] {
 
   return out;
 }
+
+export function slot(name: string): string {
+  const n = Number(name.replace(/n$/, ""));
+  return Number.isInteger(n) ? String(n).padStart(2, "0") : name;
+}
