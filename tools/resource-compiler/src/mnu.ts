@@ -9,3 +9,13 @@ export interface Entry {
   readonly kind: Kind;
   readonly val: number;
 }
+
+export class FormatError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "MnuFormatError";
+    this.detail = detail;
+  }
+}
