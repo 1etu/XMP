@@ -19,3 +19,5 @@ export class FormatError extends Error {
     this.detail = detail;
   }
 }
+
+const LEGACY = /^([^=]+)=\[([^\]]*)\]$/;
