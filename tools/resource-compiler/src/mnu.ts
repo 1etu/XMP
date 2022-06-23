@@ -21,3 +21,21 @@ export class FormatError extends Error {
 }
 
 const LEGACY = /^([^=]+)=\[([^\]]*)\]$/;
+
+function legacy(lines: readonly string[]): Entry[] {
+  const out: Entry[] = [];
+
+  for (const line of lines) {
+    const m = LEGACY.exec(line.trim());
+    const key = m?.[1]?.trim();
+    const val = Number(m?.[2]);
+
+    if (key === undefined || key.length === 0 || !Number.isFinite(val)) {
+      continue;
+    }
+
+    out.push({ key, kind: "float", val });
+  }
+
+  return out;
+}
