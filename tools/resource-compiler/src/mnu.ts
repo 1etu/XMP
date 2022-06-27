@@ -79,3 +79,11 @@ export function entries(src: string): Entry[] {
 
   return out;
 }
+
+export function parse(src: string): Block {
+  const out: Record<string, number> = {};
+  for (const e of entries(src)) {
+    out[e.key] = e.val;
+  }
+  return out;
+}
