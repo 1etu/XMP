@@ -95,3 +95,19 @@ export function kinds(src: string): Kinds {
   }
   return out;
 }
+
+export function slices(dat: Buffer): string[] {
+  const tag = Buffer.from(HDR, "latin1");
+  const starts: number[] = [];
+
+  for (let p = dat.indexOf(tag, 0); p >= 0; p = dat.indexOf(tag, p + tag.length)) {
+    starts.push(p);
+  }
+
+  return starts.map((start, i) => {
+    const next = starts[i + 1] ?? dat.byteLength;
+    const nul = dat.indexOf(0, start);
+    const end = nul < 0 ? next : Math.min(nul, next);
+    return dat.subarray(start, end).toString("latin1");
+  });
+}
