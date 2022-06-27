@@ -87,3 +87,11 @@ export function parse(src: string): Block {
   }
   return out;
 }
+
+export function kinds(src: string): Kinds {
+  const out: Record<string, Kind> = {};
+  for (const e of entries(src)) {
+    out[e.key] = e.kind;
+  }
+  return out;
+}
