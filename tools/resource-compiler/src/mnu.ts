@@ -111,3 +111,7 @@ export function slices(dat: Buffer): string[] {
     return dat.subarray(start, end).toString("latin1");
   });
 }
+
+export function extract(dat: Buffer): Block[] {
+  return slices(dat).map(parse);
+}
