@@ -5,3 +5,4 @@ const N_MONTH = 12;
 const GRID_W = 4;
 const GRID_H = 8;
 const DAY_PFX = "textures/month_bg/rgb/";
+const NIGHT_PFX = "textures/month_bg/night/";
