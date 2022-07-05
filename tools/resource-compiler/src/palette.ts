@@ -6,3 +6,5 @@ const GRID_W = 4;
 const GRID_H = 8;
 const DAY_PFX = "textures/month_bg/rgb/";
 const NIGHT_PFX = "textures/month_bg/night/";
+
+export type Rgb = readonly [number, number, number];
