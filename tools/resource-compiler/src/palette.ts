@@ -14,3 +14,13 @@ export interface Palette {
   readonly day: readonly Rgb[];
   readonly night: readonly Rgb[];
 }
+
+export class PairError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "PalettePairError";
+    this.detail = detail;
+  }
+}
