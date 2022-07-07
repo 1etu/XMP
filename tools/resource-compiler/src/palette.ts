@@ -8,3 +8,9 @@ const DAY_PFX = "textures/month_bg/rgb/";
 const NIGHT_PFX = "textures/month_bg/night/";
 
 export type Rgb = readonly [number, number, number];
+
+export interface Palette {
+  readonly month: number;
+  readonly day: readonly Rgb[];
+  readonly night: readonly Rgb[];
+}
