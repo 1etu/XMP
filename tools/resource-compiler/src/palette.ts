@@ -39,3 +39,52 @@ function sample(img: Dds.Image): Rgb[] {
 
   return out;
 }
+
+export function build(arc: Qrc.Archive): Palette[] {
+  const names = arc.names.filter((n) => n.endsWith(".dds"));
+  const imgs = Dds.extract(arc.raw);
+
+  if (names.length !== imgs.length) {
+    throw new PairError(
+      `${String(names.length)} dds names, ${String(imgs.length)} images`,
+    );
+  }
+
+  const day = new Map<number, Dds.Image>();
+  const night = new Map<number, Dds.Image>();
+
+  names.forEach((name, i) => {
+    const img = imgs[i];
+    if (img === undefined) {
+      return;
+    }
+    const n = Number(name.slice(-6, -4));
+    if (!Number.isInteger(n) || n < 1 || n > N_MONTH) {
+      return;
+    }
+    if (name.startsWith(DAY_PFX)) {
+      day.set(n, img);
+    } else if (name.startsWith(NIGHT_PFX)) {
+      night.set(n, img);
+    }
+  });
+
+  if (day.size !== N_MONTH || night.size !== N_MONTH) {
+    throw new PairError(
+      `want ${String(N_MONTH)} day and night, got ${String(day.size)} and ${String(night.size)}`,
+    );
+  }
+
+  const out: Palette[] = [];
+
+  for (let m = 1; m <= N_MONTH; m += 1) {
+    const d = day.get(m);
+    const n = night.get(m);
+    if (d === undefined || n === undefined) {
+      continue;
+    }
+    out.push({ month: m, day: sample(d), night: sample(n) });
+  }
+
+  return out;
+}
