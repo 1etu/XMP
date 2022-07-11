@@ -24,3 +24,18 @@ export class PairError extends Error {
     this.detail = detail;
   }
 }
+
+function sample(img: Dds.Image): Rgb[] {
+  const out: Rgb[] = [];
+
+  for (let gy = 0; gy < GRID_H; gy += 1) {
+    for (let gx = 0; gx < GRID_W; gx += 1) {
+      const x = Math.min(img.wid - 1, Math.round(((gx + 0.5) / GRID_W) * img.wid));
+      const y = Math.min(img.hgt - 1, Math.round(((gy + 0.5) / GRID_H) * img.hgt));
+      const o = (y * img.wid + x) * 4;
+      out.push([img.rgba[o] ?? 0, img.rgba[o + 1] ?? 0, img.rgba[o + 2] ?? 0]);
+    }
+  }
+
+  return out;
+}
