@@ -6,3 +6,15 @@ const COLOR_RGBA = 6;
 const CHAN = 4;
 const FILTER_NONE = 0;
 const CRC_POLY = 0xedb88320;
+
+const TBL = (() => {
+  const t = new Uint32Array(256);
+  for (let i = 0; i < 256; i += 1) {
+    let c = i;
+    for (let k = 0; k < 8; k += 1) {
+      c = (c & 1) !== 0 ? CRC_POLY ^ (c >>> 1) : c >>> 1;
+    }
+    t[i] = c >>> 0;
+  }
+  return t;
+})();
