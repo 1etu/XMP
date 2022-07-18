@@ -5,3 +5,4 @@ const BIT_DEPTH = 8;
 const COLOR_RGBA = 6;
 const CHAN = 4;
 const FILTER_NONE = 0;
+const CRC_POLY = 0xedb88320;
