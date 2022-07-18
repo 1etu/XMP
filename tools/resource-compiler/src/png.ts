@@ -18,3 +18,11 @@ const TBL = (() => {
   }
   return t;
 })();
+
+function crc32(buf: Buffer): number {
+  let c = 0xffffffff;
+  for (const b of buf) {
+    c = (TBL[(c ^ b) & 0xff] ?? 0) ^ (c >>> 8);
+  }
+  return (c ^ 0xffffffff) >>> 0;
+}
