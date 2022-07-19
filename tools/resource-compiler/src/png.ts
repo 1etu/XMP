@@ -26,3 +26,14 @@ function crc32(buf: Buffer): number {
   }
   return (c ^ 0xffffffff) >>> 0;
 }
+
+function chunk(tag: string, body: Buffer): Buffer {
+  const head = Buffer.alloc(8);
+  head.writeUInt32BE(body.byteLength, 0);
+  head.write(tag, 4, "latin1");
+
+  const tail = Buffer.alloc(4);
+  tail.writeUInt32BE(crc32(Buffer.concat([head.subarray(4), body])), 0);
+
+  return Buffer.concat([head, body, tail]);
+}
