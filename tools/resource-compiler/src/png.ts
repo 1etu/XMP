@@ -37,3 +37,26 @@ function chunk(tag: string, body: Buffer): Buffer {
 
   return Buffer.concat([head, body, tail]);
 }
+
+export function encode(wid: number, hgt: number, rgba: Uint8Array): Buffer {
+  const stride = wid * CHAN;
+  const rows = Buffer.alloc(hgt * (stride + 1));
+
+  for (let y = 0; y < hgt; y += 1) {
+    rows[y * (stride + 1)] = FILTER_NONE;
+    rows.set(rgba.subarray(y * stride, (y + 1) * stride), y * (stride + 1) + 1);
+  }
+
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(wid, 0);
+  ihdr.writeUInt32BE(hgt, 4);
+  ihdr[8] = BIT_DEPTH;
+  ihdr[9] = COLOR_RGBA;
+
+  return Buffer.concat([
+    SIG,
+    chunk("IHDR", ihdr),
+    chunk("IDAT", deflateSync(rows, { level: 9 })),
+    chunk("IEND", Buffer.alloc(0)),
+  ]);
+}
