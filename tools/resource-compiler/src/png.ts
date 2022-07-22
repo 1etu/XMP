@@ -60,3 +60,5 @@ export function encode(wid: number, hgt: number, rgba: Uint8Array): Buffer {
     chunk("IEND", Buffer.alloc(0)),
   ]);
 }
+
+const IHDR = "IHDR";
