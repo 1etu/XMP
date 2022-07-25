@@ -63,3 +63,4 @@ export function encode(wid: number, hgt: number, rgba: Uint8Array): Buffer {
 
 const IHDR = "IHDR";
 const IDAT = "IDAT";
+const IEND = "IEND";
