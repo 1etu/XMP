@@ -65,3 +65,9 @@ const IHDR = "IHDR";
 const IDAT = "IDAT";
 const IEND = "IEND";
 const HDR_OFF = 8;
+
+export interface Image {
+  readonly wid: number;
+  readonly hgt: number;
+  readonly rgba: Uint8Array;
+}
