@@ -81,3 +81,12 @@ export class FormatError extends Error {
     this.detail = detail;
   }
 }
+
+function paeth(a: number, b: number, c: number): number {
+  const p = a + b - c;
+  const pa = Math.abs(p - a);
+  const pb = Math.abs(p - b);
+  const pc = Math.abs(p - c);
+
+  return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
+}
