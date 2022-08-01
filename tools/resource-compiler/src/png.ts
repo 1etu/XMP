@@ -90,3 +90,37 @@ function paeth(a: number, b: number, c: number): number {
 
   return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
 }
+
+function unfilter(rows: Buffer, wid: number, hgt: number, bpp: number): Uint8Array {
+  const stride = wid * bpp;
+  const out = new Uint8Array(stride * hgt);
+
+  for (let y = 0; y < hgt; y += 1) {
+    const type = rows[y * (stride + 1)] ?? 0;
+    const src = y * (stride + 1) + 1;
+    const dst = y * stride;
+    const up = dst - stride;
+
+    for (let x = 0; x < stride; x += 1) {
+      const raw = rows[src + x] ?? 0;
+      const a = x >= bpp ? (out[dst + x - bpp] ?? 0) : 0;
+      const b = y > 0 ? (out[up + x] ?? 0) : 0;
+      const c = y > 0 && x >= bpp ? (out[up + x - bpp] ?? 0) : 0;
+
+      let v = raw;
+      if (type === 1) {
+        v = raw + a;
+      } else if (type === 2) {
+        v = raw + b;
+      } else if (type === 3) {
+        v = raw + ((a + b) >> 1);
+      } else if (type === 4) {
+        v = raw + paeth(a, b, c);
+      }
+
+      out[dst + x] = v & 0xff;
+    }
+  }
+
+  return out;
+}
