@@ -124,3 +124,54 @@ function unfilter(rows: Buffer, wid: number, hgt: number, bpp: number): Uint8Arr
 
   return out;
 }
+
+export function decode(buf: Buffer): Image {
+  let p = HDR_OFF;
+  let wid = 0;
+  let hgt = 0;
+  let bpp = 0;
+  const parts: Buffer[] = [];
+
+  while (p + 8 <= buf.byteLength) {
+    const len = buf.readUInt32BE(p);
+    const tag = buf.subarray(p + 4, p + 8).toString("latin1");
+    const body = buf.subarray(p + 8, p + 8 + len);
+
+    if (tag === IHDR) {
+      wid = body.readUInt32BE(0);
+      hgt = body.readUInt32BE(4);
+      const depth = body[8] ?? 0;
+      const color = body[9] ?? 0;
+
+      if (depth !== BIT_DEPTH) {
+        throw new FormatError(`want 8-bit, got ${String(depth)}`);
+      }
+      if (color !== COLOR_RGBA && color !== 2) {
+        throw new FormatError(`want rgb or rgba, got colour type ${String(color)}`);
+      }
+      bpp = color === COLOR_RGBA ? 4 : 3;
+    } else if (tag === IDAT) {
+      parts.push(body);
+    } else if (tag === IEND) {
+      break;
+    }
+
+    p += 12 + len;
+  }
+
+  const flat = unfilter(inflateSync(Buffer.concat(parts)), wid, hgt, bpp);
+
+  if (bpp === CHAN) {
+    return { wid, hgt, rgba: flat };
+  }
+
+  const rgba = new Uint8Array(wid * hgt * CHAN);
+  for (let i = 0; i < wid * hgt; i += 1) {
+    rgba[i * 4] = flat[i * 3] ?? 0;
+    rgba[i * 4 + 1] = flat[i * 3 + 1] ?? 0;
+    rgba[i * 4 + 2] = flat[i * 3 + 2] ?? 0;
+    rgba[i * 4 + 3] = 0xff;
+  }
+
+  return { wid, hgt, rgba };
+}
