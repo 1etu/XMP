@@ -15,3 +15,8 @@ const SIG: Readonly<Record<string, string>> = {
 };
 
 export type Rgb = readonly [number, number, number];
+
+export interface Group {
+  readonly val: Mnu.Block;
+  readonly ints: readonly string[];
+}
