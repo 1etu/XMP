@@ -20,3 +20,12 @@ export interface Group {
   readonly val: Mnu.Block;
   readonly ints: readonly string[];
 }
+
+export interface Preset {
+  readonly id: string;
+  readonly corners: readonly Rgb[];
+  readonly bg: Group;
+  readonly hdr: Group;
+  readonly line: Group;
+  readonly part: Group;
+}
