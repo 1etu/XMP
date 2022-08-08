@@ -13,3 +13,5 @@ const SIG: Readonly<Record<string, string>> = {
   PARTICLES_SPE: "delta time",
   PARTICLES_UI: "brownian",
 };
+
+export type Rgb = readonly [number, number, number];
