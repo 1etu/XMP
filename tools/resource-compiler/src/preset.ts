@@ -29,3 +29,8 @@ export interface Preset {
   readonly line: Group;
   readonly part: Group;
 }
+
+interface Src {
+  readonly val: Mnu.Block;
+  readonly kind: Mnu.Kinds;
+}
