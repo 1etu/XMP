@@ -34,3 +34,13 @@ interface Src {
   readonly val: Mnu.Block;
   readonly kind: Mnu.Kinds;
 }
+
+export class PairError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "PresetPairError";
+    this.detail = detail;
+  }
+}
