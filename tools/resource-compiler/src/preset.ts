@@ -44,3 +44,15 @@ export class PairError extends Error {
     this.detail = detail;
   }
 }
+
+export function camel(key: string): string {
+  const parts = key
+    .trim()
+    .split(/[\s_]+/)
+    .filter((p) => p.length > 0)
+    .map((p) => p.toLowerCase());
+
+  return parts
+    .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
+    .join("");
+}
