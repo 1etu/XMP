@@ -56,3 +56,13 @@ export function camel(key: string): string {
     .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
     .join("");
 }
+
+function rekey(block: Mnu.Block, skip: ReadonlySet<string>): Mnu.Block {
+  const out: Record<string, number> = {};
+  for (const [k, v] of Object.entries(block)) {
+    if (!skip.has(k)) {
+      out[camel(k)] = v;
+    }
+  }
+  return out;
+}
