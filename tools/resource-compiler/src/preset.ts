@@ -87,3 +87,8 @@ export function idOf(name: string): string {
   const parts = name.split("/");
   return parts.length >= 3 ? (parts[1] ?? BASE_ID) : BASE_ID;
 }
+
+export function leafOf(name: string): string {
+  const seg = name.split("/");
+  return seg[seg.length - 1] ?? name;
+}
