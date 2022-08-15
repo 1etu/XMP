@@ -82,3 +82,8 @@ function corners(block: Mnu.Block): { rgb: Rgb[]; keys: Set<string> } {
 
   return { rgb, keys };
 }
+
+export function idOf(name: string): string {
+  const parts = name.split("/");
+  return parts.length >= 3 ? (parts[1] ?? BASE_ID) : BASE_ID;
+}
