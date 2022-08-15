@@ -66,3 +66,19 @@ function rekey(block: Mnu.Block, skip: ReadonlySet<string>): Mnu.Block {
   }
   return out;
 }
+
+function corners(block: Mnu.Block): { rgb: Rgb[]; keys: Set<string> } {
+  const rgb: Rgb[] = [];
+  const keys = new Set<string>();
+
+  for (let i = 1; i <= N_CORNER; i += 1) {
+    const triple = CHAN.map((c) => {
+      const key = `${String(i)} ${c}`;
+      keys.add(key);
+      return block[key] ?? 0;
+    });
+    rgb.push([triple[0] ?? 0, triple[1] ?? 0, triple[2] ?? 0]);
+  }
+
+  return { rgb, keys };
+}
