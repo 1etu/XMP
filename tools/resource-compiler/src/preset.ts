@@ -92,3 +92,8 @@ export function leafOf(name: string): string {
   const seg = name.split("/");
   return seg[seg.length - 1] ?? name;
 }
+
+function kindOf(name: string): string {
+  const leaf = leafOf(name);
+  return leaf.slice(0, leaf.lastIndexOf("."));
+}
