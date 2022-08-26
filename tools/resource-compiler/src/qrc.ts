@@ -14,3 +14,5 @@ const DAT_SIZE = 0x34;
 
 const NODE_HDR = 28;
 const ATTR_LEN = 16;
+const LINK_LEN = 4;
+const TAG_FILE = "file";
