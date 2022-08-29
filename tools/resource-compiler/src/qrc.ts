@@ -16,3 +16,5 @@ const NODE_HDR = 28;
 const ATTR_LEN = 16;
 const LINK_LEN = 4;
 const TAG_FILE = "file";
+const TAG_SRC = "src";
+const TAG_ID = "id";
