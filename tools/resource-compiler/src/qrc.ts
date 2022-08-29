@@ -26,3 +26,22 @@ export interface Archive {
   readonly dat: Buffer;
   readonly files: readonly File[];
 }
+
+export interface File {
+  readonly name: string;
+  readonly off: number;
+  readonly len: number;
+  readonly rawLen: number;
+}
+
+export class FormatError extends Error {
+  readonly detail: string;
+  readonly off: number | undefined;
+
+  constructor(detail: string, off?: number) {
+    super(off === undefined ? detail : `${detail} at ${String(off)}`);
+    this.name = "QrcFormatError";
+    this.detail = detail;
+    this.off = off;
+  }
+}
