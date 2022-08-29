@@ -18,3 +18,11 @@ const LINK_LEN = 4;
 const TAG_FILE = "file";
 const TAG_SRC = "src";
 const TAG_ID = "id";
+const TAG_SIZE_ATTR = "size";
+
+export interface Archive {
+  readonly names: readonly string[];
+  readonly raw: Buffer;
+  readonly dat: Buffer;
+  readonly files: readonly File[];
+}
