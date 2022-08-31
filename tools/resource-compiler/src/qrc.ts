@@ -67,3 +67,29 @@ export function inflate(buf: Buffer): Buffer {
 
   return raw;
 }
+
+function strTbl(arc: Buffer, off: number, size: number): string[] {
+  const names: string[] = [];
+  const end = off + size;
+  let p = off;
+
+  while (p + 4 < end) {
+    p += 4;
+    const nul = arc.indexOf(0, p);
+    if (nul < 0 || nul >= end) {
+      break;
+    }
+    const s = arc.subarray(p, nul).toString("latin1");
+    if (s.length > 0) {
+      names.push(s);
+    }
+    p = nul + 1;
+  }
+
+  return names;
+}
+
+function cstr(buf: Buffer, off: number): string {
+  const nul = buf.indexOf(0, off);
+  return buf.subarray(off, nul < 0 ? buf.byteLength : nul).toString("latin1");
+}
