@@ -45,3 +45,25 @@ export class FormatError extends Error {
     this.off = off;
   }
 }
+
+function magic4(buf: Buffer, off: number): string {
+  return buf.subarray(off, off + 4).toString("latin1");
+}
+
+export function inflate(buf: Buffer): Buffer {
+  const magic = magic4(buf, 0);
+  if (magic !== CNT_MAGIC) {
+    throw new FormatError(`want ${CNT_MAGIC}, got ${magic}`, 0);
+  }
+
+  const want = buf.readUInt32BE(4);
+  const raw = inflateSync(buf.subarray(CNT_HDR_SIZE));
+
+  if (raw.byteLength !== want) {
+    throw new FormatError(
+      `inflated ${String(raw.byteLength)}, header says ${String(want)}`,
+    );
+  }
+
+  return raw;
+}
