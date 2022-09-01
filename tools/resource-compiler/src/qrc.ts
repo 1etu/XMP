@@ -93,3 +93,80 @@ function cstr(buf: Buffer, off: number): string {
   const nul = buf.indexOf(0, off);
   return buf.subarray(off, nul < 0 ? buf.byteLength : nul).toString("latin1");
 }
+
+function fileTbl(arc: Buffer): File[] {
+  const tbl = arc.readUInt32BE(TBL_OFF);
+  const end = tbl + arc.readUInt32BE(TBL_SIZE);
+  const tags = arc.subarray(arc.readUInt32BE(TAG_OFF));
+  const strs = arc.readUInt32BE(STR_TBL_OFF);
+
+  const out: File[] = [];
+  let p = tbl;
+
+  while (p + NODE_HDR <= end) {
+    const tag = cstr(tags, arc.readUInt32BE(p));
+    const nAttr = arc.readUInt32BE(p + 4);
+    const attrs = p + NODE_HDR;
+
+    if (tag === TAG_FILE) {
+      let name = "";
+      let off = -1;
+      let len = -1;
+      let rawLen = -1;
+
+      for (let i = 0; i < nAttr; i += 1) {
+        const a = attrs + i * ATTR_LEN;
+        const v0 = arc.readUInt32BE(a + 8);
+        const v1 = arc.readUInt32BE(a + 12);
+
+        switch (cstr(tags, arc.readUInt32BE(a))) {
+          case TAG_SRC:
+            off = v0;
+            len = v1;
+            break;
+          case TAG_ID:
+            name = cstr(arc, strs + v0 + LINK_LEN);
+            break;
+          case TAG_SIZE_ATTR:
+            rawLen = v0;
+            break;
+          default:
+            break;
+        }
+      }
+
+      if (off < 0 || len < 0) {
+        throw new FormatError(`file node lacks ${TAG_SRC}`, p);
+      }
+
+      out.push({ name, off, len, rawLen: rawLen < 0 ? len : rawLen });
+    }
+
+    p = attrs + nAttr * ATTR_LEN;
+  }
+
+  return out;
+}
+
+export function parse(arc: Buffer): Archive {
+  const magic = magic4(arc, 0);
+  if (magic !== ARC_MAGIC) {
+    throw new FormatError(`want ${ARC_MAGIC}, got ${magic}`, 0);
+  }
+
+  const datOff = arc.readUInt32BE(DAT_OFF);
+  const datSize = arc.readUInt32BE(DAT_SIZE);
+
+  if (datOff + datSize !== arc.byteLength) {
+    throw new FormatError(
+      `dat ${String(datOff)}+${String(datSize)} misses eof ${String(arc.byteLength)}`,
+    );
+  }
+
+  return {
+    names: strTbl(arc, arc.readUInt32BE(STR_TBL_OFF), arc.readUInt32BE(STR_TBL_SIZE)),
+    raw: arc,
+    dat: arc.subarray(datOff, datOff + datSize),
+    files: fileTbl(arc),
+  };
+}
