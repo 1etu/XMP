@@ -170,3 +170,23 @@ export function parse(arc: Buffer): Archive {
     files: fileTbl(arc),
   };
 }
+
+export function read(buf: Buffer): Archive {
+  return parse(magic4(buf, 0) === CNT_MAGIC ? inflate(buf) : buf);
+}
+
+export function bytes(arc: Archive, file: File): Buffer {
+  const slice = arc.dat.subarray(file.off, file.off + file.len);
+  if (file.rawLen === file.len) {
+    return slice;
+  }
+
+  const raw = inflateSync(slice);
+  if (raw.byteLength !== file.rawLen) {
+    throw new FormatError(
+      `${file.name}: inflated ${String(raw.byteLength)}, table says ${String(file.rawLen)}`,
+    );
+  }
+
+  return raw;
+}
