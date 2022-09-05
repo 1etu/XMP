@@ -1,0 +1,1 @@
+const MAGIC = 0x46525000;
