@@ -8,3 +8,13 @@ export interface Sounds {
   readonly off: number;
   readonly len: number;
 }
+
+export class FormatError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "RcoFormatError";
+    this.detail = detail;
+  }
+}
