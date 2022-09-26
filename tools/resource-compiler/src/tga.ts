@@ -9,3 +9,10 @@ const DESC_OFF = 0x11;
 
 const TYPE_RGB = 2;
 const TOP_DOWN = 0x20;
+
+export interface Image {
+  readonly wid: number;
+  readonly hgt: number;
+  readonly bpp: number;
+  readonly rgba: Uint8Array;
+}
