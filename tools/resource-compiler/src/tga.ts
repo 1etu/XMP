@@ -8,3 +8,4 @@ const BPP_OFF = 0x10;
 const DESC_OFF = 0x11;
 
 const TYPE_RGB = 2;
+const TOP_DOWN = 0x20;
