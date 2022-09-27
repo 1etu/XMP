@@ -16,3 +16,13 @@ export interface Image {
   readonly bpp: number;
   readonly rgba: Uint8Array;
 }
+
+export class FormatError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "TgaFormatError";
+    this.detail = detail;
+  }
+}
