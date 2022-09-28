@@ -65,3 +65,18 @@ export function decode(buf: Buffer): Image {
 
   return { wid, hgt, bpp, rgba };
 }
+
+export function row(img: Image): { r: number[]; g: number[]; b: number[] } {
+  const r: number[] = [];
+  const g: number[] = [];
+  const b: number[] = [];
+
+  for (let x = 0; x < img.wid; x += 1) {
+    const o = x * 4;
+    r.push(img.rgba[o] ?? 0);
+    g.push(img.rgba[o + 1] ?? 0);
+    b.push(img.rgba[o + 2] ?? 0);
+  }
+
+  return { r, g, b };
+}
