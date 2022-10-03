@@ -1,3 +1,4 @@
 import * as Xmbml from "./xmbml.ts";
 
 const ROOT_VIEW = "root";
+const MAX_DEPTH = 4;
