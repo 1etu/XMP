@@ -8,3 +8,4 @@ const KEY_INFO = "info_rsc";
 const KEY_CHILD = "child";
 const KEY_POS = "ch_pos";
 const KEY_ACTION = "bar_action";
+const ACT_NONE = "none";
