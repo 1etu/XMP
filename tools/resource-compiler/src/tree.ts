@@ -9,3 +9,13 @@ const KEY_CHILD = "child";
 const KEY_POS = "ch_pos";
 const KEY_ACTION = "bar_action";
 const ACT_NONE = "none";
+
+export interface Item {
+  readonly id: string;
+  readonly icon: number;
+  readonly title: string;
+  readonly info: string;
+  readonly action: string;
+  readonly childPos: number;
+  readonly items: readonly Item[];
+}
