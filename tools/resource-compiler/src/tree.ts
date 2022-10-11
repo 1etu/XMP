@@ -19,3 +19,10 @@ export interface Item {
   readonly childPos: number;
   readonly items: readonly Item[];
 }
+
+export interface Category {
+  readonly id: string;
+  readonly icon: number;
+  readonly title: string;
+  readonly items: readonly Item[];
+}
