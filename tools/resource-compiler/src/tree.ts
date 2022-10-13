@@ -26,3 +26,10 @@ export interface Category {
   readonly title: string;
   readonly items: readonly Item[];
 }
+
+export interface Provided {
+  readonly id: string;
+  readonly icon: string;
+  readonly title: string;
+  readonly info?: string;
+}
