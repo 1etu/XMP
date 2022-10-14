@@ -40,3 +40,11 @@ export interface Meta {
   readonly xml: string;
   readonly railOnly?: boolean;
 }
+
+export interface Spec {
+  readonly order: readonly string[];
+  readonly categories: Readonly<Record<string, Meta>>;
+  readonly providers: Readonly<Record<string, readonly Provided[]>>;
+  readonly attrs: Readonly<Record<string, Provided>>;
+  readonly drop: readonly string[];
+}
