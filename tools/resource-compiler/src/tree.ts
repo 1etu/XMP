@@ -33,3 +33,10 @@ export interface Provided {
   readonly title: string;
   readonly info?: string;
 }
+
+export interface Meta {
+  readonly icon: string;
+  readonly title: string;
+  readonly xml: string;
+  readonly railOnly?: boolean;
+}
