@@ -58,3 +58,27 @@ export class BuildError extends Error {
     this.detail = detail;
   }
 }
+
+export class Atlas {
+  readonly #slots: Readonly<Record<string, number>>;
+  readonly #seen = new Set<string>();
+
+  constructor(slots: Readonly<Record<string, number>>) {
+    this.#slots = slots;
+  }
+
+  of(name: string): number {
+    const slot = this.#slots[name];
+    if (slot === undefined) {
+      throw new BuildError(`no atlas slot for ${name}`);
+    }
+    this.#seen.add(name);
+    return slot;
+  }
+
+  unused(): string[] {
+    return Object.keys(this.#slots)
+      .filter((k) => !this.#seen.has(k))
+      .sort();
+  }
+}
