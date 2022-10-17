@@ -48,3 +48,13 @@ export interface Spec {
   readonly attrs: Readonly<Record<string, Provided>>;
   readonly drop: readonly string[];
 }
+
+export class BuildError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "TreeBuildError";
+    this.detail = detail;
+  }
+}
