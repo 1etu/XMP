@@ -82,3 +82,22 @@ export class Atlas {
       .sort();
   }
 }
+
+function itemOf(
+  key: string,
+  table: Xmbml.Table,
+  kids: readonly Item[],
+  atlas: Atlas,
+): Item {
+  const icon = table[KEY_ICON];
+
+  return {
+    id: key,
+    icon: icon === undefined ? 0 : atlas.of(icon),
+    title: table[KEY_TITLE] ?? "",
+    info: table[KEY_INFO] ?? "",
+    action: table[KEY_ACTION] ?? ACT_NONE,
+    childPos: Number(table[KEY_POS] ?? 0),
+    items: kids,
+  };
+}
