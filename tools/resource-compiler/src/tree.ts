@@ -101,3 +101,70 @@ function itemOf(
     items: kids,
   };
 }
+
+function collect(
+  views: Map<string, Xmbml.View>,
+  id: string,
+  depth: number,
+  spec: Spec,
+  atlas: Atlas,
+  seen: ReadonlySet<string>,
+): Item[] {
+  const view = views.get(id);
+  if (view === undefined || depth > MAX_DEPTH || seen.has(id)) {
+    return [];
+  }
+
+  const mark = new Set(seen);
+  mark.add(id);
+
+  const out: Item[] = [];
+
+  for (const entry of view.items) {
+    if (spec.drop.includes(entry.key)) {
+      continue;
+    }
+
+    const fixed = spec.attrs[entry.key];
+    const table =
+      view.tables[entry.attr] ??
+      (fixed === undefined
+        ? {}
+        : { [KEY_ICON]: fixed.icon, [KEY_TITLE]: fixed.title, [KEY_INFO]: fixed.info ?? "" });
+
+    if (!entry.query) {
+      out.push(itemOf(entry.key, table, [], atlas));
+      continue;
+    }
+
+    const provided = spec.providers[entry.src];
+    if (provided !== undefined) {
+      for (const p of provided) {
+        out.push(
+          itemOf(
+            p.id,
+            { [KEY_ICON]: p.icon, [KEY_TITLE]: p.title, [KEY_INFO]: p.info ?? "" },
+            [],
+            atlas,
+          ),
+        );
+      }
+      continue;
+    }
+
+    const kids = collect(views, entry.src, depth + 1, spec, atlas, mark);
+
+    if (table[KEY_TITLE] === undefined) {
+      out.push(...kids);
+      continue;
+    }
+
+    if (table[KEY_CHILD] !== undefined && kids.length === 0) {
+      throw new BuildError(`${entry.key} declares ${KEY_CHILD} but resolved to nothing`);
+    }
+
+    out.push(itemOf(entry.key, table, kids, atlas));
+  }
+
+  return out;
+}
