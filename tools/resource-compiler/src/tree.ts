@@ -168,3 +168,23 @@ function collect(
 
   return out;
 }
+
+export function build(
+  spec: Spec,
+  atlas: Atlas,
+  read: (xml: string) => string,
+): Category[] {
+  return spec.order.map((id) => {
+    const meta = spec.categories[id];
+    if (meta === undefined) {
+      throw new BuildError(`${id} is in order but has no definition`);
+    }
+
+    const items =
+      meta.railOnly === true
+        ? []
+        : collect(Xmbml.views(read(meta.xml)), ROOT_VIEW, 0, spec, atlas, new Set());
+
+    return { id, icon: atlas.of(meta.icon), title: meta.title, items };
+  });
+}
