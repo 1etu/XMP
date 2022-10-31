@@ -7,3 +7,4 @@ const NAME_LEN = 0x10;
 
 const FRAME_LEN = 16;
 const FRAME_PCM = 28;
+const FLAG_END = 0x07;
