@@ -6,3 +6,4 @@ const NAME_OFF = 0x20;
 const NAME_LEN = 0x10;
 
 const FRAME_LEN = 16;
+const FRAME_PCM = 28;
