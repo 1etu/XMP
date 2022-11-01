@@ -8,3 +8,11 @@ const NAME_LEN = 0x10;
 const FRAME_LEN = 16;
 const FRAME_PCM = 28;
 const FLAG_END = 0x07;
+
+const COEF: readonly (readonly [number, number])[] = [
+  [0, 0],
+  [60, 0],
+  [115, -52],
+  [98, -55],
+  [122, -60],
+];
