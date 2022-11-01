@@ -16,3 +16,4 @@ const COEF: readonly (readonly [number, number])[] = [
   [98, -55],
   [122, -60],
 ];
+const COEF_SHIFT = 6;
