@@ -17,3 +17,4 @@ const COEF: readonly (readonly [number, number])[] = [
   [122, -60],
 ];
 const COEF_SHIFT = 6;
+const NIB_SHIFT = 12;
