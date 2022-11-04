@@ -18,3 +18,4 @@ const COEF: readonly (readonly [number, number])[] = [
 ];
 const COEF_SHIFT = 6;
 const NIB_SHIFT = 12;
+const PCM_MIN = -0x8000;
