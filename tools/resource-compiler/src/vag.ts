@@ -22,3 +22,4 @@ const PCM_MIN = -0x8000;
 const PCM_MAX = 0x7fff;
 
 const WAV_HDR = 44;
+const WAV_PCM = 1;
