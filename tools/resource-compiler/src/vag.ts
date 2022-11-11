@@ -30,3 +30,15 @@ export interface Clip {
   readonly rate: number;
   readonly pcm: Int16Array;
 }
+
+export class FormatError extends Error {
+  readonly detail: string;
+  readonly off: number;
+
+  constructor(detail: string, off: number) {
+    super(`${detail} at ${String(off)}`);
+    this.name = "VagFormatError";
+    this.detail = detail;
+    this.off = off;
+  }
+}
