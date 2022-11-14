@@ -93,3 +93,14 @@ export function decode(buf: Buffer, off: number): Clip {
 
   return { name, rate, pcm: pcm.subarray(0, w) };
 }
+
+export function scan(buf: Buffer, from: number, to: number): Clip[] {
+  const tag = Buffer.from(MAGIC, "latin1");
+  const out: Clip[] = [];
+
+  for (let p = buf.indexOf(tag, from); p >= 0 && p < to; p = buf.indexOf(tag, p + 4)) {
+    out.push(decode(buf, p));
+  }
+
+  return out;
+}
