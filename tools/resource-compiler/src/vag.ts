@@ -42,3 +42,7 @@ export class FormatError extends Error {
     this.off = off;
   }
 }
+
+function clamp(v: number): number {
+  return v < PCM_MIN ? PCM_MIN : v > PCM_MAX ? PCM_MAX : v;
+}
