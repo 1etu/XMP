@@ -104,3 +104,28 @@ export function scan(buf: Buffer, from: number, to: number): Clip[] {
 
   return out;
 }
+
+export function wav(clip: Clip): Buffer {
+  const bytes = clip.pcm.byteLength;
+  const out = Buffer.alloc(WAV_HDR + bytes);
+
+  out.write("RIFF", 0, "latin1");
+  out.writeUInt32LE(36 + bytes, 4);
+  out.write("WAVE", 8, "latin1");
+  out.write("fmt ", 12, "latin1");
+  out.writeUInt32LE(16, 16);
+  out.writeUInt16LE(WAV_PCM, 20);
+  out.writeUInt16LE(1, 22);
+  out.writeUInt32LE(clip.rate, 24);
+  out.writeUInt32LE(clip.rate * (WAV_BITS / 8), 28);
+  out.writeUInt16LE(WAV_BITS / 8, 32);
+  out.writeUInt16LE(WAV_BITS, 34);
+  out.write("data", 36, "latin1");
+  out.writeUInt32LE(bytes, 40);
+
+  for (let i = 0; i < clip.pcm.length; i += 1) {
+    out.writeInt16LE(clip.pcm[i] ?? 0, WAV_HDR + i * 2);
+  }
+
+  return out;
+}
