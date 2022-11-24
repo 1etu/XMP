@@ -5,3 +5,4 @@ const TABLE = "Table";
 const PAIR = "Pair";
 const ITEMS = "Items";
 const ITEM = "Item";
+const QUERY = "Query";
