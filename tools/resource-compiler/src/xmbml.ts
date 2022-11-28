@@ -17,3 +17,9 @@ export interface Item {
   readonly src: string;
   readonly query: boolean;
 }
+
+export interface View {
+  readonly id: string;
+  readonly tables: Readonly<Record<string, Table>>;
+  readonly items: readonly Item[];
+}
