@@ -7,3 +7,5 @@ const ITEMS = "Items";
 const ITEM = "Item";
 const QUERY = "Query";
 const REF = "#";
+
+export type Table = Readonly<Record<string, string>>;
