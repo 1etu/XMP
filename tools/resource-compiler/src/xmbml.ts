@@ -9,3 +9,11 @@ const QUERY = "Query";
 const REF = "#";
 
 export type Table = Readonly<Record<string, string>>;
+
+export interface Item {
+  readonly key: string;
+  readonly cls: string;
+  readonly attr: string;
+  readonly src: string;
+  readonly query: boolean;
+}
