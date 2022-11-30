@@ -23,3 +23,10 @@ export interface View {
   readonly tables: Readonly<Record<string, Table>>;
   readonly items: readonly Item[];
 }
+
+interface Node {
+  readonly tag: string;
+  readonly attrs: Readonly<Record<string, string>>;
+  readonly kids: Node[];
+  text: string;
+}
