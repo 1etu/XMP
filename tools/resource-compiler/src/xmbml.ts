@@ -30,3 +30,13 @@ interface Node {
   readonly kids: Node[];
   text: string;
 }
+
+export class FormatError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "XmbmlFormatError";
+    this.detail = detail;
+  }
+}
