@@ -64,3 +64,48 @@ function unesc(s: string): string {
     .replace(/&apos;/g, "'")
     .replace(/&amp;/g, "&");
 }
+
+export function parse(src: string): Node {
+  const doc: Node = { tag: "", attrs: {}, kids: [], text: "" };
+  const stack: Node[] = [doc];
+  const re = /<([!?/]?)([\w:-]*)([^>]*?)(\/?)>/g;
+  let last = 0;
+
+  for (let m = re.exec(src); m !== null; m = re.exec(src)) {
+    const top = stack[stack.length - 1];
+    if (top !== undefined) {
+      top.text += unesc(src.slice(last, m.index));
+    }
+    last = re.lastIndex;
+
+    const lead = m[1] ?? "";
+    const tag = m[2] ?? "";
+    const body = m[3] ?? "";
+    const shut = m[4] === "/";
+
+    if (lead === "!" || lead === "?") {
+      continue;
+    }
+
+    if (lead === "/") {
+      if (stack.length > 1) {
+        stack.pop();
+      }
+      continue;
+    }
+
+    const node: Node = { tag, attrs: attrs(body), kids: [], text: "" };
+    top?.kids.push(node);
+
+    if (!shut) {
+      stack.push(node);
+    }
+  }
+
+  const root = doc.kids.find((n) => n.tag === ROOT);
+  if (root === undefined) {
+    throw new FormatError(`no <${ROOT}> element`);
+  }
+
+  return root;
+}
