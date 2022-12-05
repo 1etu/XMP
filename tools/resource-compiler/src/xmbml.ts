@@ -40,3 +40,18 @@ export class FormatError extends Error {
     this.detail = detail;
   }
 }
+
+function attrs(src: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  const re = /([A-Za-z_][\w.:-]*)\s*=\s*"([^"]*)"/g;
+
+  for (let m = re.exec(src); m !== null; m = re.exec(src)) {
+    const k = m[1];
+    const v = m[2];
+    if (k !== undefined && v !== undefined) {
+      out[k] = v;
+    }
+  }
+
+  return out;
+}
