@@ -109,3 +109,20 @@ export function parse(src: string): Node {
 
   return root;
 }
+
+function tableOf(node: Node): Table {
+  const out: Record<string, string> = {};
+
+  for (const pair of node.kids) {
+    if (pair.tag !== PAIR) {
+      continue;
+    }
+    const key = pair.attrs["key"];
+    if (key === undefined) {
+      continue;
+    }
+    out[key] = (pair.kids[0]?.text ?? pair.text).trim();
+  }
+
+  return out;
+}
