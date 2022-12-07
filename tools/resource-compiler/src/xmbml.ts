@@ -126,3 +126,16 @@ function tableOf(node: Node): Table {
 
   return out;
 }
+
+function itemOf(node: Node): Item {
+  const src = node.attrs["src"] ?? "";
+  const hash = src.lastIndexOf(REF);
+
+  return {
+    key: node.attrs["key"] ?? "",
+    cls: node.attrs["class"] ?? "",
+    attr: node.attrs["attr"] ?? "",
+    src: hash < 0 ? src : src.slice(hash + REF.length),
+    query: node.tag === QUERY,
+  };
+}
