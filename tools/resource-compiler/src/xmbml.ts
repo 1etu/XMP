@@ -139,3 +139,42 @@ function itemOf(node: Node): Item {
     query: node.tag === QUERY,
   };
 }
+
+export function views(src: string): Map<string, View> {
+  const out = new Map<string, View>();
+
+  for (const view of parse(src).kids) {
+    if (view.tag !== VIEW) {
+      continue;
+    }
+
+    const id = view.attrs["id"];
+    if (id === undefined) {
+      throw new FormatError(`<${VIEW}> without id`);
+    }
+
+    const tables: Record<string, Table> = {};
+    const items: Item[] = [];
+
+    for (const kid of view.kids) {
+      if (kid.tag === ATTRS) {
+        for (const t of kid.kids) {
+          const key = t.attrs["key"];
+          if (t.tag === TABLE && key !== undefined) {
+            tables[key] = tableOf(t);
+          }
+        }
+      } else if (kid.tag === ITEMS) {
+        for (const i of kid.kids) {
+          if (i.tag === ITEM || i.tag === QUERY) {
+            items.push(itemOf(i));
+          }
+        }
+      }
+    }
+
+    out.set(id, { id, tables, items });
+  }
+
+  return out;
+}
