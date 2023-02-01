@@ -5,3 +5,8 @@ export interface Frame {
   readonly deltaMs: number;
   readonly elapsedMs: number;
 }
+
+export interface Clock {
+  advance(stampMs: number): Frame;
+  reset(): void;
+}
