@@ -40,3 +40,5 @@ class Base implements Clock {
     this.#prev = 0;
   }
 }
+
+export class FrameClock extends Base {}
