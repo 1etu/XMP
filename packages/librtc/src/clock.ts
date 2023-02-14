@@ -42,3 +42,18 @@ class Base implements Clock {
 }
 
 export class FrameClock extends Base {}
+
+export class ManualClock extends Base {
+  #stamp = 0;
+
+  step(deltaMs: number): Frame {
+    this.#stamp += deltaMs;
+
+    return this.advance(this.#stamp);
+  }
+
+  override reset(): void {
+    super.reset();
+    this.#stamp = 0;
+  }
+}
