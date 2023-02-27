@@ -9,3 +9,9 @@ export interface Sched {
   readonly day2nightBegin: number;
   readonly day2nightEnd: number;
 }
+
+export interface EnvState {
+  readonly month: number;
+  readonly hour: number;
+  readonly daylight: number;
+}
