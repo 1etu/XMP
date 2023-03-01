@@ -15,3 +15,13 @@ export interface EnvState {
   readonly hour: number;
   readonly daylight: number;
 }
+
+function smoothstep(a: number, b: number, x: number): number {
+  if (b <= a) {
+    return x < a ? 0 : 1;
+  }
+
+  const t = Math.min(Math.max((x - a) / (b - a), 0), 1);
+
+  return t * t * (3 - 2 * t);
+}
