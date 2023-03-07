@@ -42,3 +42,7 @@ export function daylightAt(hour: number, s: Sched): number {
 
   return 0;
 }
+
+export function clampMonth(month: number): number {
+  return Math.min(Math.max(Math.round(month), 1), N_MONTH);
+}
