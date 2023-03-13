@@ -46,3 +46,13 @@ export function daylightAt(hour: number, s: Sched): number {
 export function clampMonth(month: number): number {
   return Math.min(Math.max(Math.round(month), 1), N_MONTH);
 }
+
+export function sample(rtc: Rtc, s: Sched): EnvState {
+  const hour = hourOf(rtc);
+
+  return {
+    month: clampMonth(monthOf(rtc)),
+    hour,
+    daylight: daylightAt(hour, s),
+  };
+}
