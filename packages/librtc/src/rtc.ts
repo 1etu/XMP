@@ -1,0 +1,1 @@
+const MS_PER_HOUR = 3_600_000;
