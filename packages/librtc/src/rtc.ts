@@ -4,3 +4,9 @@ const HOURS_PER_DAY = 24;
 export interface Rtc {
   now(): number;
 }
+
+export class SysRtc implements Rtc {
+  now(): number {
+    return Date.now();
+  }
+}
