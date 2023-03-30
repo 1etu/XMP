@@ -10,3 +10,27 @@ export class SysRtc implements Rtc {
     return Date.now();
   }
 }
+
+export class FixedRtc implements Rtc {
+  #ms: number;
+
+  constructor(at: string | number | Date) {
+    this.#ms = at instanceof Date ? at.getTime() : new Date(at).getTime();
+
+    if (!Number.isFinite(this.#ms)) {
+      throw new RangeError(`FixedRtc cannot read ${String(at)}`);
+    }
+  }
+
+  now(): number {
+    return this.#ms;
+  }
+
+  set(at: string | number | Date): void {
+    this.#ms = at instanceof Date ? at.getTime() : new Date(at).getTime();
+  }
+
+  advance(ms: number): void {
+    this.#ms += ms;
+  }
+}
