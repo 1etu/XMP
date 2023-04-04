@@ -34,3 +34,14 @@ export class FixedRtc implements Rtc {
     this.#ms += ms;
   }
 }
+
+export function hourOf(rtc: Rtc): number {
+  const d = new Date(rtc.now());
+
+  return (
+    d.getHours() +
+    d.getMinutes() / 60 +
+    d.getSeconds() / 3600 +
+    d.getMilliseconds() / MS_PER_HOUR
+  );
+}
