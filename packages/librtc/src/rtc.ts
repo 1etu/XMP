@@ -45,3 +45,7 @@ export function hourOf(rtc: Rtc): number {
     d.getMilliseconds() / MS_PER_HOUR
   );
 }
+
+export function monthOf(rtc: Rtc): number {
+  return new Date(rtc.now()).getMonth() + 1;
+}
