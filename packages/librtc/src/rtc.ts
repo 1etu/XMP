@@ -49,3 +49,9 @@ export function hourOf(rtc: Rtc): number {
 export function monthOf(rtc: Rtc): number {
   return new Date(rtc.now()).getMonth() + 1;
 }
+
+export function monthPositionOf(rtc: Rtc): number {
+  const date = new Date(rtc.now());
+  const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  return date.getMonth() + 1 + (date.getDate() - 1) / days;
+}
