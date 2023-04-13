@@ -55,3 +55,7 @@ export function monthPositionOf(rtc: Rtc): number {
   const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   return date.getMonth() + 1 + (date.getDate() - 1) / days;
 }
+
+export function dayOf(rtc: Rtc): number {
+  return new Date(rtc.now()).getDate();
+}
