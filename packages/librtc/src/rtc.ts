@@ -59,3 +59,7 @@ export function monthPositionOf(rtc: Rtc): number {
 export function dayOf(rtc: Rtc): number {
   return new Date(rtc.now()).getDate();
 }
+
+export function minuteOf(rtc: Rtc): number {
+  return new Date(rtc.now()).getMinutes();
+}
