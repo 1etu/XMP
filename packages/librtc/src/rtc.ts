@@ -63,3 +63,9 @@ export function dayOf(rtc: Rtc): number {
 export function minuteOf(rtc: Rtc): number {
   return new Date(rtc.now()).getMinutes();
 }
+
+export function wrapHour(hour: number): number {
+  const h = hour % HOURS_PER_DAY;
+
+  return h < 0 ? h + HOURS_PER_DAY : h;
+}
