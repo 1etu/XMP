@@ -9,3 +9,7 @@ const EVIDENCE: Readonly<Record<Class, number>> = {
   PROJECT: 3,
   INFERRED: 4,
 };
+
+export function isClass(v: string): v is Class {
+  return (CLASSES as readonly string[]).includes(v);
+}
