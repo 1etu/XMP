@@ -13,3 +13,7 @@ const EVIDENCE: Readonly<Record<Class, number>> = {
 export function isClass(v: string): v is Class {
   return (CLASSES as readonly string[]).includes(v);
 }
+
+export function rank(c: Class): number {
+  return EVIDENCE[c];
+}
