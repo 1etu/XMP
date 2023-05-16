@@ -17,3 +17,7 @@ export function isClass(v: string): v is Class {
 export function rank(c: Class): number {
   return EVIDENCE[c];
 }
+
+export function weakest(a: Class, b: Class): Class {
+  return rank(a) >= rank(b) ? a : b;
+}
