@@ -6,3 +6,15 @@ export interface Meta {
   readonly source: string;
   readonly sourceHash?: string;
 }
+
+export class MetaError extends Error {
+  readonly path: string;
+  readonly detail: string;
+
+  constructor(path: string, detail: string) {
+    super(`${path}: ${detail}`);
+    this.name = "ResourceMetaError";
+    this.path = path;
+    this.detail = detail;
+  }
+}
