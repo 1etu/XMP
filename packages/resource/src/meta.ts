@@ -18,3 +18,26 @@ export class MetaError extends Error {
     this.detail = detail;
   }
 }
+
+export function metaOf(path: string, body: unknown): Meta {
+  if (typeof body !== "object" || body === null) {
+    throw new MetaError(path, "resource is not an object");
+  }
+
+  const rec = body as Record<string, unknown>;
+  const cls = rec["classification"];
+  const src = rec["source"];
+
+  if (typeof cls !== "string" || !isClass(cls)) {
+    throw new MetaError(path, `classification ${String(cls)} is not recognised`);
+  }
+  if (typeof src !== "string" || src.length === 0) {
+    throw new MetaError(path, "source is missing");
+  }
+
+  const hash = rec["sourceHash"];
+
+  return typeof hash === "string"
+    ? { classification: cls, source: src, sourceHash: hash }
+    : { classification: cls, source: src };
+}
