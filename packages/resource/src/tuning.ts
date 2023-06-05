@@ -5,3 +5,7 @@ export function verified(v: number): number {
 export function measured(v: number): number {
   return v;
 }
+
+export function design(v: number): number {
+  return v;
+}
