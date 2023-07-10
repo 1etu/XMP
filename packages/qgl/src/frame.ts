@@ -4,3 +4,9 @@ import type { Lattice } from "./lines/spline.js";
 export const QUALITIES = ["static", "low", "standard", "high"] as const;
 
 export type Quality = (typeof QUALITIES)[number];
+
+export interface Viewport {
+  readonly wid: number;
+  readonly hgt: number;
+  readonly dpr: number;
+}
