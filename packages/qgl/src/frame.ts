@@ -30,3 +30,10 @@ export interface Scene {
   readonly waveTransfer?: readonly [number, number, number];
   readonly waveGain?: number;
 }
+
+export interface QglFrame {
+  readonly no: number;
+  readonly deltaMs: number;
+  readonly elapsedMs: number;
+  readonly scene: Scene;
+}
