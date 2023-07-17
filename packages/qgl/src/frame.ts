@@ -39,3 +39,11 @@ export interface QglFrame {
 }
 
 export type BackendKind = "webgpu" | "webgl";
+
+export interface QglBackend {
+  readonly kind: BackendKind;
+  initialize(target: HTMLCanvasElement): Promise<void>;
+  resize(viewport: Viewport): void;
+  render(frame: QglFrame): void;
+  dispose(): void;
+}
