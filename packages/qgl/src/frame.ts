@@ -37,3 +37,5 @@ export interface QglFrame {
   readonly elapsedMs: number;
   readonly scene: Scene;
 }
+
+export type BackendKind = "webgpu" | "webgl";
