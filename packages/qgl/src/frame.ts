@@ -47,3 +47,13 @@ export interface QglBackend {
   render(frame: QglFrame): void;
   dispose(): void;
 }
+
+export class QglInitError extends Error {
+  readonly backend: BackendKind;
+
+  constructor(backend: BackendKind, detail: string, cause?: unknown) {
+    super(`${backend}: ${detail}`, cause === undefined ? {} : { cause });
+    this.name = "QglInitError";
+    this.backend = backend;
+  }
+}
