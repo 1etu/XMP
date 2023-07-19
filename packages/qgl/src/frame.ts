@@ -57,3 +57,9 @@ export class QglInitError extends Error {
     this.backend = backend;
   }
 }
+
+export interface Budget {
+  readonly particles: number;
+  readonly renderScale: number;
+  readonly glareMips: number;
+}
