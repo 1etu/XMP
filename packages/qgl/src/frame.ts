@@ -63,3 +63,10 @@ export interface Budget {
   readonly renderScale: number;
   readonly glareMips: number;
 }
+
+const BUDGET: Readonly<Record<Quality, Budget>> = {
+  static: { particles: 2048, renderScale: 1, glareMips: 8 },
+  low: { particles: 320, renderScale: 0.75, glareMips: 3 },
+  standard: { particles: 2048, renderScale: 1, glareMips: 8 },
+  high: { particles: 2048, renderScale: 1, glareMips: 8 },
+};
