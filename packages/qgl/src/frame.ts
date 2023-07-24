@@ -70,3 +70,7 @@ const BUDGET: Readonly<Record<Quality, Budget>> = {
   standard: { particles: 2048, renderScale: 1, glareMips: 8 },
   high: { particles: 2048, renderScale: 1, glareMips: 8 },
 };
+
+export function budgetOf(quality: Quality): Budget {
+  return BUDGET[quality];
+}
