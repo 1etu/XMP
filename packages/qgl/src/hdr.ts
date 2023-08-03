@@ -4,3 +4,4 @@ export const GAUSSIAN_TAPS = verified(8);
 const MAX_GLARE_SIZE = design(9);
 const MAX_GLARE_LEVELS = design(9);
 const scratch = new Float32Array(1);
+const scratchBits = new Uint32Array(scratch.buffer);
