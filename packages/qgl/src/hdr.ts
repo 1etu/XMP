@@ -21,3 +21,14 @@ function exposureSample(index: number, h: Hdr): number {
   const whiteSq = Math.max(h.whiteLevel * h.whiteLevel, 0.000001);
   return (x * (1 + x / whiteSq)) / (1 + x);
 }
+
+export function writeExposure(h: Hdr, out: Float32Array): void {
+  for (let i = 0; i < EXPOSURE_SAMPLES; i += 1) {
+    const p = exposureSample(i, h);
+    out[i * 4] = halfTruncate(DISPLAY_GAIN * p);
+    out[i * 4 + 1] =
+      i === 0 ? 0 : halfTruncate(((p / Math.min(p, 1)) * (p - h.glareThresh)) / 8);
+    out[i * 4 + 2] = 0;
+    out[i * 4 + 3] = 1;
+  }
+}
