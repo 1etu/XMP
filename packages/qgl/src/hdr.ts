@@ -15,3 +15,9 @@ function halfTruncate(value: number): number {
   scratchBits[0] = bits & 0xffffe000;
   return scratch[0];
 }
+
+function exposureSample(index: number, h: Hdr): number {
+  const x = (index / (EXPOSURE_SAMPLES - 1)) * 16 * h.exposure;
+  const whiteSq = Math.max(h.whiteLevel * h.whiteLevel, 0.000001);
+  return (x * (1 + x / whiteSq)) / (1 + x);
+}
