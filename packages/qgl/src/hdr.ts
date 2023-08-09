@@ -32,3 +32,25 @@ export function writeExposure(h: Hdr, out: Float32Array): void {
     out[i * 4 + 3] = 1;
   }
 }
+
+export function inverseDisplay(display: number, h: Hdr): number {
+  if (h.enabled < 0.5) return Math.max(0, display);
+  if (display <= 0) return 0.5 / 8;
+  const p = display / DISPLAY_GAIN;
+  const whiteSq = Math.max(h.whiteLevel * h.whiteLevel, 0.000001);
+  const x = 0.5 * whiteSq * (p - 1 + Math.sqrt((1 - p) ** 2 + (4 * p) / whiteSq));
+  const estimate = ((x / Math.max(h.exposure, 0.000001)) * (EXPOSURE_SAMPLES - 1)) / 16;
+  let lo = Math.min(EXPOSURE_SAMPLES - 2, Math.max(0, Math.floor(estimate)));
+  while (lo > 0 && halfTruncate(DISPLAY_GAIN * exposureSample(lo, h)) > display)
+    lo -= 1;
+  while (
+    lo < EXPOSURE_SAMPLES - 2 &&
+    halfTruncate(DISPLAY_GAIN * exposureSample(lo + 1, h)) < display
+  )
+    lo += 1;
+  const a = halfTruncate(DISPLAY_GAIN * exposureSample(lo, h));
+  const b = halfTruncate(DISPLAY_GAIN * exposureSample(lo + 1, h));
+  return (
+    (lo + Math.min(1, Math.max(0, (display - a) / Math.max(b - a, 0.000001))) + 0.5) / 8
+  );
+}
