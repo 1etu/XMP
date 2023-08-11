@@ -54,3 +54,17 @@ export function inverseDisplay(display: number, h: Hdr): number {
     (lo + Math.min(1, Math.max(0, (display - a) / Math.max(b - a, 0.000001))) + 0.5) / 8
   );
 }
+
+export function writeGaussian(h: Hdr, out: Float32Array): void {
+  const sigmas = [h.gaussianRadR, h.gaussianRadG, h.gaussianRadB];
+  out.fill(0);
+  for (let channel = 0; channel < 3; channel += 1) {
+    const sigma = Math.max(sigmas[channel] ?? 0, 0.000001);
+    const radius = Math.min(GAUSSIAN_TAPS - 1, Math.max(0, Math.floor(3 * sigma) - 1));
+    let sum = 1;
+    for (let i = 1; i <= radius; i += 1)
+      sum += 2 * Math.exp((-i * i) / (2 * sigma * sigma));
+    for (let i = 0; i <= radius; i += 1)
+      out[i * 4 + channel] = Math.exp((-i * i) / (2 * sigma * sigma)) / sum;
+  }
+}
