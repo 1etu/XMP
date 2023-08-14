@@ -68,3 +68,20 @@ export function writeGaussian(h: Hdr, out: Float32Array): void {
       out[i * 4 + channel] = Math.exp((-i * i) / (2 * sigma * sigma)) / sum;
   }
 }
+
+export function glareLayout(
+  h: Hdr,
+  aspect: number,
+  budget: number,
+): { wid: number; hgt: number; levels: number } {
+  const size = Math.min(MAX_GLARE_SIZE, Math.max(1, Math.round(h.texSize)));
+  const hgt = 2 ** (size - 1);
+  const wid = hgt * (aspect > 1.5 ? 2 : 1);
+  const levels = Math.min(
+    MAX_GLARE_LEVELS,
+    size,
+    Math.max(1, Math.round(h.texMaxMip)),
+    Math.max(1, budget),
+  );
+  return { wid, hgt, levels };
+}
