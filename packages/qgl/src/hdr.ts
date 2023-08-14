@@ -85,3 +85,11 @@ export function glareLayout(
   );
   return { wid, hgt, levels };
 }
+
+export function writeGlareWeights(h: Hdr, levels: number, out: Float32Array): void {
+  const power = Math.max(0, h.glareSumPow);
+  let sum = 0;
+  for (let i = 0; i < levels; i += 1) sum += power ** i;
+  for (let i = 0; i < levels; i += 1)
+    out[i] = (h.glareLevel * h.glareLevel * power ** i) / sum;
+}
