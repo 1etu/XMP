@@ -93,3 +93,19 @@ export function writeGlareWeights(h: Hdr, levels: number, out: Float32Array): vo
   for (let i = 0; i < levels; i += 1)
     out[i] = (h.glareLevel * h.glareLevel * power ** i) / sum;
 }
+
+export function writeHalfPalette(
+  source: Float32Array | Uint8Array,
+  out: Uint16Array,
+): void {
+  const scale = source instanceof Uint8Array ? 1 / 255 : 1;
+  for (let i = 0; i < source.length; i += 1) {
+    scratch[0] = Math.min(65504, Math.max(0, (source[i] ?? 0) * scale));
+    const bits = scratchBits[0] ?? 0;
+    const exponent = ((bits >>> 23) & 255) - 127 + 15;
+    out[i] =
+      exponent <= 0
+        ? Math.trunc(scratch[0] * 16777216)
+        : (exponent << 10) | ((bits >>> 13) & 1023);
+  }
+}
