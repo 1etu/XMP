@@ -1,3 +1,6 @@
+﻿import { design, verified } from "@vsh/resource";
+import type { Hdr } from "./preset.js";
+
 export const EXPOSURE_SAMPLES = verified(128);
 export const DISPLAY_GAIN = verified(0.8);
 export const GAUSSIAN_TAPS = verified(8);
@@ -107,5 +110,20 @@ export function writeHalfPalette(
       exponent <= 0
         ? Math.trunc(scratch[0] * 16777216)
         : (exponent << 10) | ((bits >>> 13) & 1023);
+  }
+}
+
+export function writeParticleBlur(sigma: number, out: Float32Array): void {
+  out.fill(0);
+  const width = Math.max(sigma, 0.000001);
+  const radius = Math.min(GAUSSIAN_TAPS - 1, Math.ceil(width * 3));
+  let sum = 1;
+  for (let i = 1; i <= radius; i += 1)
+    sum += 2 * Math.exp((-i * i) / (2 * width * width));
+  for (let i = 0; i <= radius; i += 1) {
+    const value = Math.exp((-i * i) / (2 * width * width)) / sum;
+    out[i * 4] = value;
+    out[i * 4 + 1] = value;
+    out[i * 4 + 2] = value;
   }
 }
