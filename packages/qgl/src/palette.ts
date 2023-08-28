@@ -8,3 +8,4 @@ export const PAL_STOPS = PAL_W * PAL_H;
 export const LUT_W = measured(512);
 
 const N_MONTH = 12;
+const RGBA = 4;
