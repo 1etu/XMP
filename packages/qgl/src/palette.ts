@@ -9,3 +9,4 @@ export const LUT_W = measured(512);
 
 const N_MONTH = 12;
 const RGBA = 4;
+const FULL = 255;
