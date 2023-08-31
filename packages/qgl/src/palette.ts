@@ -10,3 +10,9 @@ export const LUT_W = measured(512);
 const N_MONTH = 12;
 const RGBA = 4;
 const FULL = 255;
+
+export interface MonthPalette {
+  readonly month: number;
+  readonly day: readonly Rgb[];
+  readonly night: readonly Rgb[];
+}
