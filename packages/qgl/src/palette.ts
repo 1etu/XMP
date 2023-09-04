@@ -20,3 +20,13 @@ export interface MonthPalette {
 export interface PaletteFile {
   readonly months: readonly MonthPalette[];
 }
+
+export class PaletteError extends Error {
+  readonly detail: string;
+
+  constructor(detail: string) {
+    super(detail);
+    this.name = "PaletteError";
+    this.detail = detail;
+  }
+}
