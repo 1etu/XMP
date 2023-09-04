@@ -16,3 +16,7 @@ export interface MonthPalette {
   readonly day: readonly Rgb[];
   readonly night: readonly Rgb[];
 }
+
+export interface PaletteFile {
+  readonly months: readonly MonthPalette[];
+}
