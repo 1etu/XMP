@@ -30,3 +30,14 @@ export class PaletteError extends Error {
     this.detail = detail;
   }
 }
+
+export function forMonth(file: PaletteFile, month: number): MonthPalette {
+  const want = Math.min(Math.max(Math.round(month), 1), N_MONTH);
+  const found = file.months.find((m) => m.month === want);
+
+  if (found === undefined) {
+    throw new PaletteError(`palette has no month ${String(want)}`);
+  }
+
+  return found;
+}
