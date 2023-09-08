@@ -71,3 +71,7 @@ export function blend(
 
   return out;
 }
+
+export function alloc(): Uint8Array<ArrayBuffer> {
+  return new Uint8Array(PAL_STOPS * RGBA);
+}
