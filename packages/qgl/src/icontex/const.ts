@@ -15,3 +15,9 @@ export const DEFAULT_COLOR: Rgb = [
   measured(160 / 255),
   measured(238 / 255),
 ];
+export const DEFAULT_EYE: Quad = [
+  measured(-278),
+  measured(-299),
+  measured(1200),
+  measured(37.48500061),
+];
