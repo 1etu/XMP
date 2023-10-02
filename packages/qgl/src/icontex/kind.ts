@@ -10,3 +10,9 @@ export interface IconTexture {
   readonly width: number;
   readonly height: number;
 }
+
+export interface IconAmbientPalette {
+  readonly width: number;
+  readonly height: number;
+  readonly rgb: readonly Rgb[];
+}
