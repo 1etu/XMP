@@ -16,3 +16,14 @@ export interface IconAmbientPalette {
   readonly height: number;
   readonly rgb: readonly Rgb[];
 }
+
+export interface IconMaterialState {
+  readonly color?: Rgb;
+  readonly eye?: Quad;
+  readonly background?: IconTexture;
+  readonly screen?: Quad;
+  readonly pixelSize?: Pair;
+  readonly environmentRotation?: number;
+  readonly displayGain?: number;
+  readonly supersample?: boolean;
+}
