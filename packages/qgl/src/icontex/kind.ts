@@ -27,3 +27,24 @@ export interface IconMaterialState {
   readonly displayGain?: number;
   readonly supersample?: boolean;
 }
+
+export interface IconMaterial {
+  readonly ambient: Rgb;
+  readonly lights: readonly [Rgb, Rgb];
+  readonly diffuseGain: number;
+  readonly specularGains: Pair;
+  readonly specularPowers: Pair;
+  readonly environmentGain: number;
+  readonly environmentRotation: Pair;
+  readonly exposure: number;
+  readonly displayGain: number;
+  readonly changingColor: Quad;
+  readonly refraction: Quad;
+  readonly luminance: Curve;
+  readonly eye: Quad;
+  readonly supersampling: Pair;
+  readonly background?: IconTexture;
+  readonly backgroundLod: number;
+  readonly screen: Quad;
+  readonly pixelSize?: Pair;
+}
