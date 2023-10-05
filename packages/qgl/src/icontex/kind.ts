@@ -48,3 +48,9 @@ export interface IconMaterial {
   readonly screen: Quad;
   readonly pixelSize?: Pair;
 }
+
+export interface IconTextures {
+  readonly normals: Readonly<Record<number, ImageData>>;
+  readonly diffuse: ImageData | undefined;
+  readonly environment: ImageData | undefined;
+}
