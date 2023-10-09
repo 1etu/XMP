@@ -50,3 +50,12 @@ export function shadeLoadedIcons(
   });
   return Object.fromEntries(entries);
 }
+
+export async function shadeIcons(
+  ids: readonly number[],
+  base: string,
+  signal: AbortSignal,
+  material: IconMaterial | ((id: number) => IconMaterial) = iconMaterialOf(),
+): Promise<Readonly<Record<number, string>>> {
+  return shadeLoadedIcons(await loadIconTextures(ids, base, signal), material);
+}
