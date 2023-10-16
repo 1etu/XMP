@@ -80,3 +80,7 @@ export function iconMaterialOf(
     ...(state.pixelSize === undefined ? {} : { pixelSize: state.pixelSize }),
   };
 }
+
+function wrap(value: number, size: number): number {
+  return ((value % size) + size) % size;
+}
