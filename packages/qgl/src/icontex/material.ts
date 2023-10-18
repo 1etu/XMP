@@ -84,3 +84,30 @@ export function iconMaterialOf(
 function wrap(value: number, size: number): number {
   return ((value % size) + size) % size;
 }
+
+export function iconThemeColor(
+  palette: IconAmbientPalette,
+  dayFraction: number,
+  monthPosition: number,
+): Rgb {
+  const x = wrap(dayFraction, 1) * palette.width - 0.5;
+  const y = (wrap(monthPosition, 12) / 12 + verified(1 / 24)) * palette.height - 0.5;
+  const x0 = Math.floor(x);
+  const y0 = Math.floor(y);
+  const tx = x - x0;
+  const ty = y - y0;
+  const at = (px: number, py: number): Rgb =>
+    palette.rgb[wrap(py, palette.height) * palette.width + wrap(px, palette.width)] ?? [
+      0, 0, 0,
+    ];
+  const a = at(x0, y0);
+  const b = at(x0 + 1, y0);
+  const c = at(x0, y0 + 1);
+  const d = at(x0 + 1, y0 + 1);
+  const channelAt = (channel: 0 | 1 | 2): number => {
+    const top = a[channel] * (1 - tx) + b[channel] * tx;
+    const bottom = c[channel] * (1 - tx) + d[channel] * tx;
+    return (top * (1 - ty) + bottom * ty) / 255;
+  };
+  return [channelAt(0), channelAt(1), channelAt(2)];
+}
