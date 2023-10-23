@@ -46,3 +46,14 @@ function backgroundSamples(material: IconMaterial): BackgroundSamples | undefine
   if (lod === Math.floor(lod)) lower = upper;
   return [lower, upper, lod - Math.floor(lod)];
 }
+
+function sampleBackground(
+  images: BackgroundSamples,
+  u: number,
+  v: number,
+  channel: number,
+): number {
+  const a = sample(images[0], u, v, channel);
+  if (images[2] === 0) return a;
+  return a + (sample(images[1], u, v, channel) - a) * images[2];
+}
