@@ -160,3 +160,77 @@ function fragment(
     out[k] = material.displayGain * (1 - 2 ** (-linear * material.exposure * LOG2_E));
   }
 }
+
+export function shadeIcon(
+  image: ImageData,
+  diffuse: IconTexture | undefined,
+  environment: IconTexture | undefined,
+  material: IconMaterial = iconMaterialOf(),
+): void {
+  const normal: IconTexture = {
+    data: new Uint8ClampedArray(image.data),
+    width: image.width,
+    height: image.height,
+  };
+  const [radius, rotation] = material.supersampling;
+  const width = material.pixelSize?.[0] ?? image.width;
+  const height = material.pixelSize?.[1] ?? image.height;
+  const c = Math.cos(rotation);
+  const s = Math.sin(rotation);
+  const offsets =
+    radius === 0
+      ? []
+      : [
+          [(radius * (s - c)) / width, (radius * (s + c)) / height],
+          [(radius * (s + c)) / width, (radius * (c - s)) / height],
+          [(-radius * (s - c)) / width, (-radius * (s + c)) / height],
+          [(-radius * (s + c)) / width, (-radius * (c - s)) / height],
+        ];
+  const color = new Float64Array(4);
+  const subsample = new Float64Array(4);
+  const background = backgroundSamples(material);
+  for (let i = 0; i < image.data.length; i += 4) {
+    if (normal.data[i + 3] === 0) continue;
+    const u = (((i / 4) % image.width) + 0.5) / image.width;
+    const v = (Math.floor(i / 4 / image.width) + 0.5) / image.height;
+    const screenU = material.screen[0] + u * material.screen[2];
+    const screenV = material.screen[1] + v * material.screen[3];
+    fragment(
+      normal,
+      diffuse,
+      environment,
+      material,
+      background,
+      u,
+      v,
+      screenU,
+      screenV,
+      color,
+    );
+    if (offsets.length > 0) {
+      for (let k = 0; k < 4; k += 1) color[k] = (color[k] ?? 0) * 0.5;
+      for (const offset of offsets) {
+        fragment(
+          normal,
+          diffuse,
+          environment,
+          material,
+          background,
+          u + (offset[0] ?? 0),
+          v + (offset[1] ?? 0),
+          screenU,
+          screenV,
+          subsample,
+        );
+        if (subsample[3] === 0) {
+          color.fill(0);
+          break;
+        }
+        for (let k = 0; k < 4; k += 1)
+          color[k] = (color[k] ?? 0) + (subsample[k] ?? 0) * 0.125;
+      }
+    }
+    for (let k = 0; k < 4; k += 1)
+      image.data[i + k] = Math.round(255 * (color[k] ?? 0));
+  }
+}
