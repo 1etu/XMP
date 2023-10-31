@@ -14,3 +14,17 @@ export function derivative(t: number, out: Float32Array, offset = 0): void {
   out[offset + 2] = 0.5 + t - 1.5 * t2;
   out[offset + 3] = t2 / 2;
 }
+
+export function evalSpline(cp: Float32Array, u: number, b: Float32Array): number {
+  const n = cp.length - 3;
+  if (n < 1) return 0;
+  const s = Math.min(Math.max(u * n, 0), n - 1e-6);
+  const seg = Math.floor(s);
+  basis(s - seg, b);
+  return (
+    (b[0] ?? 0) * (cp[seg] ?? 0) +
+    (b[1] ?? 0) * (cp[seg + 1] ?? 0) +
+    (b[2] ?? 0) * (cp[seg + 2] ?? 0) +
+    (b[3] ?? 0) * (cp[seg + 3] ?? 0)
+  );
+}
