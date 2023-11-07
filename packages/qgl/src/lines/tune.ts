@@ -7,3 +7,5 @@ export const CONTROL_SIZE = measured(19);
 export const COMPONENTS = 4;
 export const BASIS_SIZE = 4;
 export const SPANS = CONTROL_SIZE - 3;
+export const FIXED_HZ = verified(60);
+export const TIME_SCALE = verified(0.0001);
