@@ -9,3 +9,5 @@ export const BASIS_SIZE = 4;
 export const SPANS = CONTROL_SIZE - 3;
 export const FIXED_HZ = verified(60);
 export const TIME_SCALE = verified(0.0001);
+export const FFD_TIME_SCALE = verified(10);
+export const MAX_FRAME_GAP = design(1000);
