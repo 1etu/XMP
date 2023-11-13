@@ -11,3 +11,5 @@ export const FIXED_HZ = verified(60);
 export const TIME_SCALE = verified(0.0001);
 export const FFD_TIME_SCALE = verified(10);
 export const MAX_FRAME_GAP = design(1000);
+export const FOVY = measured(71.846);
+export const ASPECT = measured(16 / 9);
