@@ -15,3 +15,5 @@ export const FOVY = measured(71.846);
 export const ASPECT = measured(16 / 9);
 export const NEAR = measured(0.1);
 export const FAR = measured(1000);
+export const FFD_MAX = verified(0.9989999532699585);
+export const FFD_W = verified(8);
