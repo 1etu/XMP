@@ -17,3 +17,5 @@ export const NEAR = measured(0.1);
 export const FAR = measured(1000);
 export const FFD_MAX = verified(0.9989999532699585);
 export const FFD_W = verified(8);
+export const FFD_D = verified(4);
+export const TIME_RESET = verified(10);
