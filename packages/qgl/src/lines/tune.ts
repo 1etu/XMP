@@ -19,3 +19,5 @@ export const FFD_MAX = verified(0.9989999532699585);
 export const FFD_W = verified(8);
 export const FFD_D = verified(4);
 export const TIME_RESET = verified(10);
+export const FFD_FADE_STEP = verified(0.005);
+export const SPRING_SECOND_NEIGHBOR = verified(10);
