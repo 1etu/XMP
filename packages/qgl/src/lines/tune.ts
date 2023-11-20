@@ -21,3 +21,5 @@ export const FFD_D = verified(4);
 export const TIME_RESET = verified(10);
 export const FFD_FADE_STEP = verified(0.005);
 export const SPRING_SECOND_NEIGHBOR = verified(10);
+export const EDGE_SMOOTHING = verified(0.1);
+export const EDGE_PUSH = verified(0.02);
