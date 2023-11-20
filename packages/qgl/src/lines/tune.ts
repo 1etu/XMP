@@ -23,3 +23,5 @@ export const FFD_FADE_STEP = verified(0.005);
 export const SPRING_SECOND_NEIGHBOR = verified(10);
 export const EDGE_SMOOTHING = verified(0.1);
 export const EDGE_PUSH = verified(0.02);
+export const EDGE_Y_RATE = verified(11);
+export const EDGE_Z_RATE = verified(15);
