@@ -25,3 +25,5 @@ export const EDGE_SMOOTHING = verified(0.1);
 export const EDGE_PUSH = verified(0.02);
 export const EDGE_Y_RATE = verified(11);
 export const EDGE_Z_RATE = verified(15);
+export const HASH_SHIFT = verified(13);
+export const HASH_CUBIC = verified(15731);
