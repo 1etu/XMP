@@ -27,3 +27,5 @@ export const EDGE_Y_RATE = verified(11);
 export const EDGE_Z_RATE = verified(15);
 export const HASH_SHIFT = verified(13);
 export const HASH_CUBIC = verified(15731);
+export const HASH_LINEAR = verified(789221);
+export const HASH_OFFSET = verified(1376312589);
