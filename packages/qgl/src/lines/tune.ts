@@ -29,3 +29,23 @@ export const HASH_SHIFT = verified(13);
 export const HASH_CUBIC = verified(15731);
 export const HASH_LINEAR = verified(789221);
 export const HASH_OFFSET = verified(1376312589);
+export const HASH_SCALE = verified(1073741824);
+export const FFD = {
+  timeDecay: verified(0.0001),
+  centerRate: verified(0.1),
+  riseRate: verified(0.25),
+  amplitudeRate: verified(2),
+  amplitudeBias: verified(3),
+  xLinear: verified(0.2),
+  xQuadratic: verified(1.3),
+  xOffset: verified(0.15),
+  envelopeScale: verified(0.24),
+  centerScale: verified(0.833333313),
+  waveSpan: verified(7.85000038),
+  waveRate: verified(2.5),
+  waveOffset: verified(1.25),
+  gaussian: verified(50),
+  twistSpan: verified(6.28000021),
+  twistAmplitude: verified(0.125),
+  taperLength: verified(5),
+};
