@@ -49,3 +49,11 @@ export const FFD = {
   twistAmplitude: verified(0.125),
   taperLength: verified(5),
 };
+
+export interface Lattice {
+  readonly width: number;
+  readonly height: number;
+  readonly points: readonly number[];
+  readonly velocities: readonly number[];
+  readonly phaseMs?: number;
+}
