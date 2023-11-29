@@ -5,3 +5,5 @@ import type { Part } from "../preset.js";
 
 export const MAX_PARTICLES = verified(2048);
 export const STATE_FLOATS = verified(12);
+export const CAMERA_Z = verified(2);
+export const LIFE_BOUND = verified(10);
