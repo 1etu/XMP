@@ -13,3 +13,5 @@ const MAX_FRAME_GAP = design(1000);
 const DEAD_AGE = verified(-666);
 const RETIRE_AGE = verified(0.999989986);
 const MIN_AGE_RATE = verified(0.001);
+const MIN_MOTION = verified(0.0001);
+const TRAIL_PROBABILITY = verified(0.06);
