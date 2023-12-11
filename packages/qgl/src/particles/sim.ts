@@ -17,3 +17,5 @@ const MIN_MOTION = verified(0.0001);
 const TRAIL_PROBABILITY = verified(0.06);
 const TRAIL_LENGTH = verified(100);
 const TRAIL_VARIANCE = verified(80);
+const HASH_SHIFT = verified(13);
+const HASH_CUBIC = verified(15731);
