@@ -21,3 +21,5 @@ const HASH_SHIFT = verified(13);
 const HASH_CUBIC = verified(15731);
 const HASH_LINEAR = verified(789221);
 const HASH_OFFSET = verified(1376312589);
+const HASH_SCALE = verified(1073741824);
+const BROWNIAN_MULTIPLIER = verified(16807);
