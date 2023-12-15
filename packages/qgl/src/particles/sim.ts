@@ -25,3 +25,5 @@ const HASH_SCALE = verified(1073741824);
 const BROWNIAN_MULTIPLIER = verified(16807);
 const BROWNIAN_X = verified(0x98756161);
 const BROWNIAN_Y = verified(0x21324889);
+const BROWNIAN_Z = verified(0x82181158);
+const SPIN_X = verified(0.37);
