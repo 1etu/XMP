@@ -27,3 +27,5 @@ const BROWNIAN_X = verified(0x98756161);
 const BROWNIAN_Y = verified(0x21324889);
 const BROWNIAN_Z = verified(0x82181158);
 const SPIN_X = verified(0.37);
+const SPIN_Y = verified(0.17);
+const SPIN_Z = verified(0.31);
