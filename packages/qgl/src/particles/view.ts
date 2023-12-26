@@ -14,3 +14,4 @@ export const PARTICLE_FLOATS = 16;
 const ASPECT = measured(16 / 9);
 const DISPLAY_GAIN = measured(0.8);
 const LIFE_FADE_IN = verified(0.02);
+const LIFE_FADE_OUT = verified(0.94);
