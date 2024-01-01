@@ -16,3 +16,4 @@ const DISPLAY_GAIN = measured(0.8);
 const LIFE_FADE_IN = verified(0.02);
 const LIFE_FADE_OUT = verified(0.94);
 const LIFE_FADE_OUT_GAIN = verified(16.6666667);
+const BOUND_FADE = verified(5);
