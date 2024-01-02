@@ -18,3 +18,4 @@ const LIFE_FADE_OUT = verified(0.94);
 const LIFE_FADE_OUT_GAIN = verified(16.6666667);
 const BOUND_FADE = verified(5);
 const FOCUS_BAND = verified(0.2);
+const FOCUS_BAND_COUNT = verified(3);
