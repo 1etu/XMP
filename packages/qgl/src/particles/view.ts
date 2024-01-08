@@ -21,3 +21,7 @@ const FOCUS_BAND = verified(0.2);
 const FOCUS_BAND_COUNT = verified(3);
 const BASE_FUZZINESS = verified(0.85);
 const FIXED_HZ = verified(60);
+
+function clamp(x: number): number {
+  return Math.max(0, Math.min(1, x));
+}
