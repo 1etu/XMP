@@ -9,3 +9,5 @@ export const PRESET_IDS = [
   "yoake",
   "higure",
 ] as const;
+
+export type PresetId = (typeof PRESET_IDS)[number];
