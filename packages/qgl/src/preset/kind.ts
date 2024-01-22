@@ -17,3 +17,5 @@ export interface Preset {
   readonly part: Group;
   readonly icons?: Group;
 }
+
+export type Catalog = Readonly<Record<PresetId, Preset>>;
