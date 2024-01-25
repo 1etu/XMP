@@ -27,3 +27,15 @@ function mixPar(a: Group, b: Group, t: number): Group {
 
   return { val: out, ints: [...step] };
 }
+
+function mixCorners(a: readonly Rgb[], b: readonly Rgb[], t: number): readonly Rgb[] {
+  const out: Rgb[] = [];
+
+  for (let i = 0; i < N_CORNER; i += 1) {
+    const ca = a[i] ?? [0, 0, 0];
+    const cb = b[i] ?? ca;
+    out.push([mix(ca[0], cb[0], t), mix(ca[1], cb[1], t), mix(ca[2], cb[2], t)]);
+  }
+
+  return out;
+}
