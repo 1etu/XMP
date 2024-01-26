@@ -39,3 +39,26 @@ function mixCorners(a: readonly Rgb[], b: readonly Rgb[], t: number): readonly R
 
   return out;
 }
+
+export function lerp(a: Preset, b: Preset, t: number): Preset {
+  const k = Math.min(Math.max(t, 0), 1);
+
+  if (k === 0) {
+    return a;
+  }
+  if (k === 1) {
+    return b;
+  }
+
+  return {
+    id: `${a.id}->${b.id}`,
+    corners: mixCorners(a.corners, b.corners, k),
+    bg: mixPar(a.bg, b.bg, k),
+    hdr: mixPar(a.hdr, b.hdr, k),
+    line: mixPar(a.line, b.line, k),
+    part: mixPar(a.part, b.part, k),
+    ...(a.icons !== undefined && b.icons !== undefined
+      ? { icons: mixPar(a.icons, b.icons, k) }
+      : {}),
+  };
+}
