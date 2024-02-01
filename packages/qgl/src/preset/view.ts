@@ -31,3 +31,37 @@ export interface Hdr {
   readonly dither: number;
   readonly gamma: number;
 }
+
+export interface Line {
+  readonly damping: number;
+  readonly length: number;
+  readonly tension: number;
+  readonly spacing: number;
+  readonly thinness: number;
+  readonly brightness: number;
+  readonly mipmapBias: number;
+  readonly fresnel: number;
+  readonly falloff: number;
+  readonly timestep: number;
+  readonly perturbation: number;
+  readonly posX: number;
+  readonly posY: number;
+  readonly posZ: number;
+  readonly angX: number;
+  readonly angY: number;
+  readonly angZ: number;
+  readonly angRot: number;
+  readonly endX: number;
+  readonly endY: number;
+  readonly endZ: number;
+  readonly ffdScale1X: number;
+  readonly ffdScale1Y: number;
+  readonly ffdScale1Z: number;
+  readonly ffdScale2X: number;
+  readonly ffdScale2Y: number;
+  readonly ffdScale2Z: number;
+  readonly ffdOffsetX: number;
+  readonly ffdOffsetY: number;
+  readonly ffdOffsetZ: number;
+  readonly ffdParam1: number;
+}
