@@ -65,3 +65,58 @@ export interface Line {
   readonly ffdOffsetZ: number;
   readonly ffdParam1: number;
 }
+
+export interface Part {
+  readonly spinTimeScale: number;
+  readonly spotPosX: number;
+  readonly spotPosY: number;
+  readonly spotPosZ: number;
+  readonly specularPower: number;
+  readonly specularCoeff: number;
+  readonly spotAttnX: number;
+  readonly spotAttnY: number;
+  readonly spotAttnZ: number;
+  readonly iridescentExp: number;
+  readonly colorControl: number;
+  readonly lambertCoeff: number;
+  readonly exposure: number;
+  readonly fresnel: number;
+  readonly nearFocus: number;
+  readonly nearFocusDist: number;
+  readonly nearFocusPow: number;
+  readonly nearDarkness: number;
+  readonly nearFuzziness: number;
+  readonly farFocus: number;
+  readonly farFocusDist: number;
+  readonly farFocusPow: number;
+  readonly farDarkness: number;
+  readonly nearAlign: number;
+  readonly sizeAlign: number;
+  readonly glareP1: number;
+  readonly glareP2: number;
+
+  readonly emitVelMin: number;
+  readonly emitVelMul: number;
+  readonly emitVelVar: number;
+  readonly emitVelZscale: number;
+  readonly emitConeAngle: number;
+  readonly emitNegProb: number;
+  readonly emitPerFrame: number;
+  readonly emitProb: number;
+  readonly agingSpeed: number;
+  readonly agingVariance: number;
+  readonly friction: number;
+  readonly deltaTime: number;
+  readonly gravity: number;
+  readonly windDirX: number;
+  readonly windDirY: number;
+  readonly windDirZ: number;
+  readonly windScale: number;
+  readonly brownianScale: number;
+  readonly globalAlpha: number;
+  readonly sizeMiddle: number;
+  readonly sizeNear: number;
+  readonly sizeFar: number;
+  readonly glare: number;
+  readonly glareScale: number;
+}
