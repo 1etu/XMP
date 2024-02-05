@@ -120,3 +120,10 @@ export interface Part {
   readonly glare: number;
   readonly glareScale: number;
 }
+
+export interface Sched {
+  readonly night2dayBegin: number;
+  readonly night2dayEnd: number;
+  readonly day2nightBegin: number;
+  readonly day2nightEnd: number;
+}
