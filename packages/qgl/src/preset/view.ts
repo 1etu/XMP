@@ -127,3 +127,19 @@ export interface Sched {
   readonly day2nightBegin: number;
   readonly day2nightEnd: number;
 }
+
+export function bgOf(p: Preset): Bg {
+  const v = p.bg.val;
+
+  return {
+    fovy: v["fovy"] ?? 0,
+    colourShader: v["colourShader"] ?? 0,
+    nightBlend: v["nightBlend"] ?? 0,
+    night2dayBegin: v["night2dayBegin"] ?? 0,
+    night2dayEnd: v["night2dayEnd"] ?? 0,
+    day2nightBegin: v["day2nightBegin"] ?? 0,
+    day2nightEnd: v["day2nightEnd"] ?? 0,
+    dayspread: v["dayspread"] ?? 0,
+    nightWhitBias: v["nightWhitBias"] ?? 0,
+  };
+}
