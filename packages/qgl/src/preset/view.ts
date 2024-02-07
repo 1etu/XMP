@@ -143,3 +143,13 @@ export function bgOf(p: Preset): Bg {
     nightWhitBias: v["nightWhitBias"] ?? 0,
   };
 }
+
+export function hasSched(p: Preset): boolean {
+  const v = p.bg.val;
+
+  return (
+    v["night2dayEnd"] !== undefined &&
+    v["day2nightBegin"] !== undefined &&
+    v["day2nightEnd"] !== undefined
+  );
+}
