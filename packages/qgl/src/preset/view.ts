@@ -153,3 +153,14 @@ export function hasSched(p: Preset): boolean {
     v["day2nightEnd"] !== undefined
   );
 }
+
+export function schedOf(p: Preset): Sched {
+  const bg = bgOf(p);
+
+  return {
+    night2dayBegin: bg.night2dayBegin,
+    night2dayEnd: bg.night2dayEnd,
+    day2nightBegin: bg.day2nightBegin,
+    day2nightEnd: bg.day2nightEnd,
+  };
+}
