@@ -164,3 +164,27 @@ export function schedOf(p: Preset): Sched {
     day2nightEnd: bg.day2nightEnd,
   };
 }
+
+export function hdrOf(p: Preset): Hdr {
+  const v = p.hdr.val;
+
+  return {
+    enabled: v["enabled"] ?? 0,
+    exposure: v["exposure"] ?? 0,
+    whiteLevel: v["whiteLevel"] ?? 0,
+    glareLevel: v["glareLevel"] ?? 0,
+    glareThresh: v["glareThresh"] ?? 0,
+    gaussianRadR: v["gaussianRadR"] ?? 0,
+    gaussianRadG: v["gaussianRadG"] ?? 0,
+    gaussianRadB: v["gaussianRadB"] ?? 0,
+    glareSumPow: v["glareSumPow"] ?? 0,
+    texSize: v["texSize"] ?? 0,
+    texMaxMip: v["texMaxMip"] ?? 0,
+    glare: v["glare"] ?? 0,
+    glareOnly: v["glareOnly"] ?? 0,
+    tonebefore: v["tonebefore"] ?? 0,
+    blur: v["blur"] ?? 0,
+    dither: v["dither"] ?? 0,
+    gamma: v["gamma"] ?? 1,
+  };
+}
