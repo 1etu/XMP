@@ -188,3 +188,41 @@ export function hdrOf(p: Preset): Hdr {
     gamma: v["gamma"] ?? 1,
   };
 }
+
+export function lineOf(p: Preset): Line {
+  const v = p.line.val;
+
+  return {
+    damping: v["damping"] ?? 0,
+    length: v["length"] ?? 0,
+    tension: v["tension"] ?? 0,
+    spacing: v["spacing"] ?? 0,
+    thinness: v["thinness"] ?? 0,
+    brightness: v["brightness"] ?? 0,
+    mipmapBias: v["mipmapBias"] ?? 0,
+    fresnel: v["fresnel"] ?? 0,
+    falloff: v["falloff"] ?? 0,
+    timestep: v["timestep"] ?? 0,
+    perturbation: v["perturbation"] ?? 0,
+    posX: v["posX"] ?? 0,
+    posY: v["posY"] ?? 0,
+    posZ: v["posZ"] ?? 0,
+    angX: v["angX"] ?? 0,
+    angY: v["angY"] ?? 0,
+    angZ: v["angZ"] ?? 0,
+    angRot: v["angRot"] ?? 0,
+    endX: v["endX"] ?? 0,
+    endY: v["endY"] ?? 0,
+    endZ: v["endZ"] ?? 0,
+    ffdScale1X: v["ffdScale1X"] ?? 0,
+    ffdScale1Y: v["ffdScale1Y"] ?? 0,
+    ffdScale1Z: v["ffdScale1Z"] ?? 0,
+    ffdScale2X: v["ffdScale2X"] ?? 0,
+    ffdScale2Y: v["ffdScale2Y"] ?? 0,
+    ffdScale2Z: v["ffdScale2Z"] ?? 0,
+    ffdOffsetX: v["ffdOffsetX"] ?? 0,
+    ffdOffsetY: v["ffdOffsetY"] ?? 0,
+    ffdOffsetZ: v["ffdOffsetZ"] ?? 0,
+    ffdParam1: v["ffdParam1"] ?? 0,
+  };
+}
