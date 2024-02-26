@@ -117,3 +117,95 @@ describe("icon environment material", () => {
     expect([...actual.data]).toEqual([...expected.data]);
   });
 });
+
+function grid(
+  width: number,
+  height: number,
+  color: (x: number, y: number) => readonly number[],
+): ImageData {
+  const pixels: number[] = [];
+  for (let y = 0; y < height; y += 1)
+    for (let x = 0; x < width; x += 1) pixels.push(...color(x, y));
+  return image(pixels, width);
+}
+
+describe("native firmware 3.00 icon vectors", () => {
+  const cases = [
+    [
+      false,
+      [
+        144, 111, 142, 255, 149, 116, 144, 255, 141, 101, 131, 255, 154, 127, 151, 255,
+        160, 135, 155, 255, 143, 107, 133, 255, 154, 128, 150, 255, 160, 137, 155, 255,
+        142, 107, 131, 255,
+      ],
+    ],
+    [
+      true,
+      [
+        146, 114, 144, 255, 149, 116, 144, 255, 142, 103, 133, 255, 154, 128, 152, 255,
+        158, 132, 153, 255, 145, 110, 135, 255, 155, 131, 152, 255, 159, 134, 153, 255,
+        145, 111, 134, 255,
+      ],
+    ],
+  ] as const;
+
+  it.each(cases)(
+    "matches the no-shadow fragment program with full sampling %s",
+    (supersample, expected) => {
+      const normal = grid(3, 3, (x, y) => [
+        96 + x * 24,
+        112 + y * 16,
+        30 + x * 70,
+        255,
+      ]);
+      const diffuse = grid(4, 4, (x, y) => [102 + x * 17, 76 + y * 13, 128, 255]);
+      const environment = grid(4, 4, (x, y) => [32 + x * 20, 16 + y * 20, 64, 255]);
+      const background = grid(4, 4, (x, y) => [
+        80 + x * 20,
+        40 + y * 10,
+        50 + (x + y) * 10,
+        255,
+      ]);
+      const material = iconMaterialOf(
+        { refrBlur: 0 },
+        { background, supersample, screen: [0.2, 0.3, 0.2, 0.15] },
+      );
+      shadeIcon(normal, diffuse, environment, material);
+      expect([...normal.data]).toEqual(expected);
+    },
+  );
+
+  it("builds the captured luminance polynomial from the glass parameter", () => {
+    const material = iconMaterialOf({ glass: 0.152523 });
+    expect(material.luminance[0][2]).toBeCloseTo(-0.415340155363, 6);
+    expect(material.luminance[1][2]).toBeCloseTo(0.255999624729, 6);
+    expect(material.luminance[2][2]).toBe(0);
+  });
+});
+
+describe("native icon theme palette", () => {
+  const palette = JSON.parse(
+    readFileSync(
+      new URL("../../../resources/qgl/icons/ambient-palette.json", import.meta.url),
+      "utf8",
+    ),
+  ) as IconAmbientPalette;
+
+  it("selects the September midnight purple and midday color", () => {
+    expect(iconThemeColor(palette, 0, 8)).toEqual([230 / 255, 160 / 255, 238 / 255]);
+    expect(iconThemeColor(palette, 0.5, 8)).toEqual([
+      247 / 255,
+      223.5 / 255,
+      249.5 / 255,
+    ]);
+  });
+
+  it("wraps both calendar axes and interpolates between months", () => {
+    expect(iconThemeColor(palette, 1, 20)).toEqual(iconThemeColor(palette, 0, 8));
+    expect(iconThemeColor(palette, 0, 8.5)).toEqual([
+      236 / 255,
+      187 / 255,
+      142.5 / 255,
+    ]);
+  });
+});
