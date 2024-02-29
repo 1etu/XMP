@@ -24,3 +24,7 @@ const DIR = resolve(
 function load(id: string): Preset {
   return JSON.parse(readFileSync(join(DIR, `${id}.json`), "utf8")) as Preset;
 }
+
+function group(val: Record<string, number>, ints: string[] = []): Group {
+  return { val, ints };
+}
