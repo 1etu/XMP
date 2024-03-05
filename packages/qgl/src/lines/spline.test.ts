@@ -12,3 +12,13 @@ const BASE = resolve(
   dirname(fileURLToPath(import.meta.url)),
   "../../../../resources/qgl/presets/base.json",
 );
+
+const LATTICE = JSON.parse(
+  readFileSync(
+    resolve(
+      dirname(fileURLToPath(import.meta.url)),
+      "../../../../resources/qgl/wave-lattice.json",
+    ),
+    "utf8",
+  ),
+) as Lattice;
