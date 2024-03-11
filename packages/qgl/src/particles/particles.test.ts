@@ -10,3 +10,6 @@ import { MAX_PARTICLES, PARTICLE_FLOATS, Particles } from "./view.js";
 import { ParticleSimulation, STATE_FLOATS } from "./sim.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../resources/qgl");
+const preset = JSON.parse(
+  readFileSync(resolve(root, "presets/night.json"), "utf8"),
+) as Preset;
