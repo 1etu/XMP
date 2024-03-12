@@ -13,3 +13,18 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../resou
 const preset = JSON.parse(
   readFileSync(resolve(root, "presets/night.json"), "utf8"),
 ) as Preset;
+const still: Part = {
+  ...partOf(preset),
+  emitProb: 1,
+  emitPerFrame: 1,
+  emitConeAngle: 0,
+  emitNegProb: 0,
+  emitVelMin: 1,
+  emitVelMul: 0,
+  agingSpeed: 0.005,
+  agingVariance: 0,
+  friction: 0,
+  gravity: 0,
+  brownianScale: 0,
+  windScale: 0,
+};
