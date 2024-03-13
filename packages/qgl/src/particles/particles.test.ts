@@ -28,3 +28,4 @@ const still: Part = {
   brownianScale: 0,
   windScale: 0,
 };
+const step = 1000 / 60;
