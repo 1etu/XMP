@@ -14,3 +14,19 @@ export function backendIdOf(raw: string | null): BackendId | undefined {
 
   return undefined;
 }
+
+async function probe(): Promise<GPUDevice | undefined> {
+  const gpu = navigator.gpu as GPU | undefined;
+
+  if (gpu === undefined) {
+    return undefined;
+  }
+
+  try {
+    const adapter = await gpu.requestAdapter({ powerPreference: "high-performance" });
+
+    return adapter === null ? undefined : await adapter.requestDevice();
+  } catch {
+    return undefined;
+  }
+}
