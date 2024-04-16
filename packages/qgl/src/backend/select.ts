@@ -30,3 +30,29 @@ async function probe(): Promise<GPUDevice | undefined> {
     return undefined;
   }
 }
+
+export async function createBackend(
+  canvas: HTMLCanvasElement,
+  prefer?: BackendId,
+): Promise<QglBackend> {
+  if (prefer !== "webgl") {
+    const dev = await probe();
+
+    if (dev !== undefined) {
+      const gpu = new WebgpuBackend(dev);
+
+      try {
+        await gpu.initialize(canvas);
+
+        return gpu;
+      } catch {
+        dev.destroy();
+      }
+    }
+  }
+
+  const gl = new WebglBackend();
+  await gl.initialize(canvas);
+
+  return gl;
+}
