@@ -35,3 +35,23 @@ function shader(gl: Gl, type: number, src: string): WebGLShader {
 
   return sh;
 }
+
+export function program(gl: Gl, vsSrc: string, fsSrc: string): WebGLProgram {
+  const prog = gl.createProgram();
+  const vs = shader(gl, gl.VERTEX_SHADER, vsSrc);
+  const fs = shader(gl, gl.FRAGMENT_SHADER, fsSrc);
+
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  gl.deleteShader(vs);
+  gl.deleteShader(fs);
+
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    const log = gl.getProgramInfoLog(prog) ?? "";
+    gl.deleteProgram(prog);
+    throw new QglInitError("webgl", `link: ${log}`);
+  }
+
+  return prog;
+}
