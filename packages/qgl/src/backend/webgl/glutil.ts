@@ -55,3 +55,17 @@ export function program(gl: Gl, vsSrc: string, fsSrc: string): WebGLProgram {
 
   return prog;
 }
+
+export function uniforms(
+  gl: Gl,
+  prog: WebGLProgram,
+  names: readonly string[],
+): Uniforms {
+  const out: Record<string, WebGLUniformLocation | null> = {};
+
+  for (const n of names) {
+    out[n] = gl.getUniformLocation(prog, n);
+  }
+
+  return out;
+}
