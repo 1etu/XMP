@@ -69,3 +69,21 @@ export function uniforms(
 
   return out;
 }
+
+export function quad(gl: Gl): WebGLVertexArrayObject {
+  const vao = gl.createVertexArray();
+  const buf = gl.createBuffer();
+
+  gl.bindVertexArray(vao);
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+    gl.STATIC_DRAW,
+  );
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  gl.bindVertexArray(null);
+
+  return vao;
+}
