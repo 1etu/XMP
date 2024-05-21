@@ -87,3 +87,48 @@ export function quad(gl: Gl): WebGLVertexArrayObject {
 
   return vao;
 }
+
+export function grid(gl: Gl, rows: number, cols: number): Mesh {
+  const vao = gl.createVertexArray();
+  const buf = gl.createBuffer();
+  const ebo = gl.createBuffer();
+
+  const verts = new Float32Array(rows * cols * 2);
+  let p = 0;
+
+  for (let r = 0; r < rows; r += 1) {
+    for (let c = 0; c < cols; c += 1) {
+      verts[p] = c / Math.max(1, cols - 1);
+      verts[p + 1] = r / Math.max(1, rows - 1);
+      p += 2;
+    }
+  }
+
+  const idx = new Uint16Array((rows - 1) * (cols - 1) * 6);
+  let q = 0;
+
+  for (let r = 0; r < rows - 1; r += 1) {
+    for (let c = 0; c < cols - 1; c += 1) {
+      const a = r * cols + c;
+      const b = a + cols;
+      idx[q] = a;
+      idx[q + 1] = b;
+      idx[q + 2] = a + 1;
+      idx[q + 3] = a + 1;
+      idx[q + 4] = b;
+      idx[q + 5] = b + 1;
+      q += 6;
+    }
+  }
+
+  gl.bindVertexArray(vao);
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ebo);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, idx, gl.STATIC_DRAW);
+  gl.bindVertexArray(null);
+
+  return { vao, rows, cols, count: idx.length };
+}
