@@ -132,3 +132,22 @@ export function grid(gl: Gl, rows: number, cols: number): Mesh {
 
   return { vao, rows, cols, count: idx.length };
 }
+
+export function points(gl: Gl, n: number): WebGLVertexArrayObject {
+  const vao = gl.createVertexArray();
+  const buf = gl.createBuffer();
+
+  const ids = new Float32Array(n);
+  for (let i = 0; i < n; i += 1) {
+    ids[i] = i;
+  }
+
+  gl.bindVertexArray(vao);
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, ids, gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 1, gl.FLOAT, false, 0, 0);
+  gl.bindVertexArray(null);
+
+  return vao;
+}
