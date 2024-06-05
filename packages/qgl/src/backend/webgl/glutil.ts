@@ -185,3 +185,8 @@ export function target(gl: Gl, wid: number, hgt: number, unorm = false): Target 
 
   return { tex, fbo, wid, hgt };
 }
+
+export function dropTarget(gl: Gl, t: Target): void {
+  gl.deleteFramebuffer(t.fbo);
+  gl.deleteTexture(t.tex);
+}
