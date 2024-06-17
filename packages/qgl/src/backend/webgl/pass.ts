@@ -5,3 +5,9 @@ export interface Pass {
   readonly prog: WebGLProgram;
   readonly u: Uniforms;
 }
+
+export interface GlareLevel {
+  readonly source: Target;
+  readonly horizontal: Target;
+  readonly vertical: Target;
+}
