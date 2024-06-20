@@ -11,3 +11,9 @@ export interface GlareLevel {
   readonly horizontal: Target;
   readonly vertical: Target;
 }
+
+export function pass(gl: Gl, vs: string, fs: string, names: readonly string[]): Pass {
+  const prog = program(gl, vs, fs);
+
+  return { prog, u: uniforms(gl, prog, names) };
+}
