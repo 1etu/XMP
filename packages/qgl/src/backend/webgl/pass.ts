@@ -17,3 +17,9 @@ export function pass(gl: Gl, vs: string, fs: string, names: readonly string[]): 
 
   return { prog, u: uniforms(gl, prog, names) };
 }
+
+export function dropPass(gl: Gl, p: Pass | undefined): void {
+  if (p !== undefined) {
+    gl.deleteProgram(p.prog);
+  }
+}
