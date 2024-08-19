@@ -29,3 +29,14 @@ void main() {
     mix(value(max(lo.b, j + 1), 1), value(max(lo.b + 1, j + 1), 1), f.b), fract(m));
   oColor = clamp(vec4(display + dither(textureSize(uSrc, 0)), mask), 0.0, 1.0);
 }`;
+
+export const GLARE_FS = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 oColor;
+uniform sampler2D uSrc;
+uniform float uToneBefore;
+void main() {
+  vec4 c = texture(uSrc, vUv);
+  oColor = vec4(c.rgb * (uToneBefore > 0.5 ? c.a * 8.0 : 1.0), 1.0);
+}`;
