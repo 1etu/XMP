@@ -40,3 +40,19 @@ void main() {
   vec4 c = texture(uSrc, vUv);
   oColor = vec4(c.rgb * (uToneBefore > 0.5 ? c.a * 8.0 : 1.0), 1.0);
 }`;
+
+export const BLUR_FS = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 oColor;
+uniform sampler2D uSrc;
+uniform vec2 uDir;
+uniform vec4 uWeights[8];
+void main() {
+  vec3 sum = texture(uSrc, vUv).rgb * uWeights[0].rgb;
+  for (int i = 1; i < 8; i++) {
+    vec2 d = uDir * float(i);
+    sum += (texture(uSrc, vUv + d).rgb + texture(uSrc, vUv - d).rgb) * uWeights[i].rgb;
+  }
+  oColor = vec4(sum, 1.0);
+}`;
