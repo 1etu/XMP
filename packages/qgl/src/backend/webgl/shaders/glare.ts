@@ -56,3 +56,12 @@ void main() {
   }
   oColor = vec4(sum, 1.0);
 }`;
+
+export const ACC_FS = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 oColor;
+uniform sampler2D uSrc;
+uniform float uWeight;
+void main() { oColor = vec4(texture(uSrc, vUv).rgb * uWeight, 0.0); }
+`;
