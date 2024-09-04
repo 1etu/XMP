@@ -25,3 +25,24 @@ void main() {
   vLight = vHalo == 1 ? halo.rgb : light.rgb;
   vFocus = center.zw;
 }`;
+
+export const PART_FS = `#version 300 es
+precision highp float;
+in vec2 vUv;
+in vec3 vLight;
+in vec2 vFocus;
+flat in int vHalo;
+uniform vec2 uGlarePower;
+out vec4 oColor;
+void main() {
+  float r = length(vUv);
+  float profile;
+  if (vHalo == 1) {
+    profile = exp(-uGlarePower.y * pow(min(r, 1.0), uGlarePower.x)) * (1.0 - smoothstep(0.85, 1.0, r));
+  } else {
+    float edge = 0.05 + 0.6345 * vFocus.x;
+    float disk = 1.0 - smoothstep(0.5 - edge, 0.5 + edge, r);
+    profile = mix(disk, 1.0 - exp(-disk * vFocus.y), vFocus.x);
+  }
+  oColor = vec4(vLight * profile, 0.0);
+}`;
