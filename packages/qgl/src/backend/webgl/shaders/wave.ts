@@ -25,3 +25,22 @@ void main() {
   vX = p.x / p.w * 0.5 + 0.5;
   gl_Position = p;
 }`;
+
+export const WAVE_FS = `#version 300 es
+precision highp float;
+centroid in float vT;
+centroid in float vK;
+centroid in float vFade;
+out vec4 oColor;
+uniform sampler2D uFresLut;
+uniform float uFresnel;
+uniform float uBrightness;
+uniform float uGain;
+centroid in float vX;
+uniform vec3 uHGrad0;
+uniform vec3 uHGrad1;
+void main() {
+  float rim = texture(uFresLut, vec2(clamp(vT, 0.0, 1.0), 0.5)).r;
+  float a = clamp((rim * uFresnel + uBrightness * 0.4980392157) * vK * vFade, 0.0, 0.5) * uGain;
+  oColor = vec4(mix(uHGrad0, uHGrad1, clamp(vX, 0.0, 1.0)) * a, a);
+}`;
