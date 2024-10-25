@@ -16,3 +16,4 @@ import { MAX_PARTICLES, PARTICLE_FLOATS, Particles } from "../../particles.js";
 import { BG_WGSL, PART_WGSL, POST_WGSL, WAVE_WGSL } from "./shaders.js";
 
 const ROWS = measured(128);
+const COLS = measured(128);
