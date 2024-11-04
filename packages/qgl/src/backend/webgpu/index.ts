@@ -18,3 +18,4 @@ import { BG_WGSL, PART_WGSL, POST_WGSL, WAVE_WGSL } from "./shaders.js";
 const ROWS = measured(128);
 const COLS = measured(128);
 const WAVE_GAIN = design(1.6);
+const PARTICLE_REFERENCE_WIDTH = measured(1280);
