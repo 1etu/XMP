@@ -19,3 +19,4 @@ const ROWS = measured(128);
 const COLS = measured(128);
 const WAVE_GAIN = design(1.6);
 const PARTICLE_REFERENCE_WIDTH = measured(1280);
+const WAVE_WIDTH = measured(1440);
