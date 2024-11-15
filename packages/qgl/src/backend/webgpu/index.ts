@@ -21,3 +21,5 @@ const WAVE_GAIN = design(1.6);
 const PARTICLE_REFERENCE_WIDTH = measured(1280);
 const WAVE_WIDTH = measured(1440);
 const WAVE_HEIGHT = measured(592);
+
+const HDR_FORMAT: GPUTextureFormat = "rgba16float";
