@@ -23,3 +23,4 @@ const WAVE_WIDTH = measured(1440);
 const WAVE_HEIGHT = measured(592);
 
 const HDR_FORMAT: GPUTextureFormat = "rgba16float";
+const UBO_FLOATS = 48;
