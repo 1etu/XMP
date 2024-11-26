@@ -25,3 +25,8 @@ const WAVE_HEIGHT = measured(592);
 const HDR_FORMAT: GPUTextureFormat = "rgba16float";
 const UBO_FLOATS = 48;
 const UBO_BYTES = UBO_FLOATS * 4;
+
+const ADD: GPUBlendState = {
+  color: { srcFactor: "one", dstFactor: "one", operation: "add" },
+  alpha: { srcFactor: "one", dstFactor: "one", operation: "add" },
+};
