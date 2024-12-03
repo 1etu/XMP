@@ -30,3 +30,10 @@ const ADD: GPUBlendState = {
   color: { srcFactor: "one", dstFactor: "one", operation: "add" },
   alpha: { srcFactor: "one", dstFactor: "one", operation: "add" },
 };
+
+interface Surface {
+  readonly tex: GPUTexture;
+  readonly view: GPUTextureView;
+  readonly wid: number;
+  readonly hgt: number;
+}
