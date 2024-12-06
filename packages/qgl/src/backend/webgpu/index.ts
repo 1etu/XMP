@@ -37,3 +37,12 @@ interface Surface {
   readonly wid: number;
   readonly hgt: number;
 }
+
+interface GlareLevel {
+  readonly source: Surface;
+  readonly horizontal: Surface;
+  readonly vertical: Surface;
+  readonly blurH: Stage;
+  readonly blurV: Stage;
+  readonly acc: Stage;
+}
