@@ -46,3 +46,9 @@ interface GlareLevel {
   readonly blurV: Stage;
   readonly acc: Stage;
 }
+
+interface Stage {
+  readonly pipe: GPURenderPipeline;
+  readonly ubo: GPUBuffer;
+  readonly data: Float32Array<ArrayBuffer>;
+}
