@@ -52,3 +52,18 @@ interface Stage {
   readonly ubo: GPUBuffer;
   readonly data: Float32Array<ArrayBuffer>;
 }
+
+function surface(
+  dev: GPUDevice,
+  wid: number,
+  hgt: number,
+  format: GPUTextureFormat = HDR_FORMAT,
+): Surface {
+  const tex = dev.createTexture({
+    size: { width: wid, height: hgt },
+    format,
+    usage: GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING,
+  });
+
+  return { tex, view: tex.createView(), wid, hgt };
+}
