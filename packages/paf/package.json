@@ -1,0 +1,18 @@
+{
+  "name": "@vsh/paf",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "UI runtime primitives for the XMB shell",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --build"
+  },
+  "dependencies": {
+    "@vsh/resource": "workspace:*"
+  }
+}
