@@ -14,3 +14,5 @@ export interface Category {
   readonly title: string;
   readonly entries: readonly Entry[];
 }
+
+export const ACT_NONE = "none";
