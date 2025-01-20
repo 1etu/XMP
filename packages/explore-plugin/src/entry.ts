@@ -16,3 +16,7 @@ export interface Category {
 }
 
 export const ACT_NONE = "none";
+
+export function hasChildren(entry: Entry): boolean {
+  return entry.entries.length > 0;
+}
