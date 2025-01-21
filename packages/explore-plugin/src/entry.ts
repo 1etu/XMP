@@ -24,3 +24,11 @@ export function hasChildren(entry: Entry): boolean {
 export function isActionable(entry: Entry): boolean {
   return entry.action !== ACT_NONE || hasChildren(entry);
 }
+
+export function seed(childPos: number, n: number): number {
+  if (n === 0) {
+    return 0;
+  }
+
+  return Math.min(Math.max(childPos, 0), n - 1);
+}
