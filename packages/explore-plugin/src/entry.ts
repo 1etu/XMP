@@ -32,3 +32,14 @@ export function seed(childPos: number, n: number): number {
 
   return Math.min(Math.max(childPos, 0), n - 1);
 }
+
+export function walk(entries: readonly Entry[], visit: (entry: Entry, depth: number) => void): void {
+  const step = (list: readonly Entry[], depth: number): void => {
+    for (const e of list) {
+      visit(e, depth);
+      step(e.entries, depth + 1);
+    }
+  };
+
+  step(entries, 0);
+}
