@@ -43,3 +43,15 @@ export function walk(entries: readonly Entry[], visit: (entry: Entry, depth: num
 
   step(entries, 0);
 }
+
+export function find(entries: readonly Entry[], id: string): Entry | undefined {
+  let hit: Entry | undefined;
+
+  walk(entries, (entry) => {
+    if (hit === undefined && entry.id === id) {
+      hit = entry;
+    }
+  });
+
+  return hit;
+}
