@@ -65,3 +65,13 @@ export function count(entries: readonly Entry[]): number {
 
   return n;
 }
+
+export function depthOf(entries: readonly Entry[]): number {
+  let deepest = 0;
+
+  walk(entries, (_entry, depth) => {
+    deepest = Math.max(deepest, depth + 1);
+  });
+
+  return deepest;
+}
