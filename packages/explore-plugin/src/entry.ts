@@ -55,3 +55,13 @@ export function find(entries: readonly Entry[], id: string): Entry | undefined {
 
   return hit;
 }
+
+export function count(entries: readonly Entry[]): number {
+  let n = 0;
+
+  walk(entries, () => {
+    n += 1;
+  });
+
+  return n;
+}
