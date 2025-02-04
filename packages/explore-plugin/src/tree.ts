@@ -13,3 +13,10 @@ export interface RawEntry {
   readonly childPos: number;
   readonly items: readonly RawEntry[];
 }
+
+export interface RawCategory {
+  readonly id: string;
+  readonly icon: number;
+  readonly title: string;
+  readonly items: readonly RawEntry[];
+}
