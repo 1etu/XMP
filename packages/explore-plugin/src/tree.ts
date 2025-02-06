@@ -20,3 +20,7 @@ export interface RawCategory {
   readonly title: string;
   readonly items: readonly RawEntry[];
 }
+
+export interface TreeFile {
+  readonly categories: readonly RawCategory[];
+}
