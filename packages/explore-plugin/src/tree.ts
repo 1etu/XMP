@@ -24,3 +24,32 @@ export interface RawCategory {
 export interface TreeFile {
   readonly categories: readonly RawCategory[];
 }
+
+export function build(tree: TreeFile, file: StringsFile): Category[] {
+  if (tree.categories.length === 0) {
+    throw new TreeError("tree has no categories");
+  }
+
+  const str = strings(file);
+
+  const entry = (raw: RawEntry): Entry => {
+    const entries = raw.items.map(entry);
+
+    return {
+      id: raw.id,
+      icon: raw.icon,
+      title: str.of(raw.title),
+      info: str.of(raw.info),
+      action: raw.action,
+      childPos: seed(raw.childPos, entries.length),
+      entries,
+    };
+  };
+
+  return tree.categories.map((c) => ({
+    id: c.id,
+    icon: c.icon,
+    title: str.of(c.title),
+    entries: c.items.map(entry),
+  }));
+}
