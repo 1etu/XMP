@@ -53,3 +53,10 @@ export function build(tree: TreeFile, file: StringsFile): Category[] {
     entries: c.items.map(entry),
   }));
 }
+
+export function categoryOf(
+  cats: readonly Category[],
+  id: string,
+): Category | undefined {
+  return cats.find((c) => c.id === id);
+}
