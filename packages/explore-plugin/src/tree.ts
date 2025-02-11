@@ -60,3 +60,7 @@ export function categoryOf(
 ): Category | undefined {
   return cats.find((c) => c.id === id);
 }
+
+export function indexOf(cats: readonly Category[], id: string): number {
+  return cats.findIndex((c) => c.id === id);
+}
