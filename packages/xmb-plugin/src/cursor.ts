@@ -25,3 +25,7 @@ export function listAt(
 
   return list;
 }
+
+export function list(cats: readonly Category[], state: State): readonly Entry[] {
+  return listAt(cats, state, state.levels.length - 1);
+}
