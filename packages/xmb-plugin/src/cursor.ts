@@ -29,3 +29,7 @@ export function listAt(
 export function list(cats: readonly Category[], state: State): readonly Entry[] {
   return listAt(cats, state, state.levels.length - 1);
 }
+
+export function focused(cats: readonly Category[], state: State): Entry | undefined {
+  return list(cats, state)[cursorOf(state)];
+}
