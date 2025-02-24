@@ -42,3 +42,16 @@ export function parent(cats: readonly Category[], state: State): Entry | undefin
 
   return listAt(cats, state, depth - 1)[state.levels[depth - 1] ?? 0];
 }
+
+export function trail(cats: readonly Category[], state: State): readonly Entry[] {
+  const out: Entry[] = [];
+
+  for (let depth = 1; depth < state.levels.length; depth += 1) {
+    const hit = listAt(cats, state, depth - 1)[state.levels[depth - 1] ?? 0];
+    if (hit !== undefined) {
+      out.push(hit);
+    }
+  }
+
+  return out;
+}
