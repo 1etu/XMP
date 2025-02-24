@@ -33,3 +33,12 @@ export function list(cats: readonly Category[], state: State): readonly Entry[] 
 export function focused(cats: readonly Category[], state: State): Entry | undefined {
   return list(cats, state)[cursorOf(state)];
 }
+
+export function parent(cats: readonly Category[], state: State): Entry | undefined {
+  const depth = state.levels.length - 1;
+  if (depth < 1) {
+    return undefined;
+  }
+
+  return listAt(cats, state, depth - 1)[state.levels[depth - 1] ?? 0];
+}
