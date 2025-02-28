@@ -16,3 +16,12 @@ import type { State } from "./state.js";
 export const DIRS = ["up", "down", "left", "right"] as const;
 
 export type Dir = (typeof DIRS)[number];
+
+export const EFFECTS = [
+  "none",
+  "cursor",
+  "category",
+  "decide",
+  "cancel",
+  "reject",
+] as const;
