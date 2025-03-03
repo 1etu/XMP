@@ -25,3 +25,5 @@ export const EFFECTS = [
   "cancel",
   "reject",
 ] as const;
+
+export type Effect = (typeof EFFECTS)[number];
