@@ -27,3 +27,8 @@ export const EFFECTS = [
 ] as const;
 
 export type Effect = (typeof EFFECTS)[number];
+
+export interface Step {
+  readonly state: State;
+  readonly effect: Effect;
+}
