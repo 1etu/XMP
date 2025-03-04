@@ -32,3 +32,7 @@ export interface Step {
   readonly state: State;
   readonly effect: Effect;
 }
+
+function reject(state: State): Step {
+  return { state, effect: "reject" };
+}
