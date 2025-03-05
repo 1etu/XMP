@@ -36,3 +36,13 @@ export interface Step {
 function reject(state: State): Step {
   return { state, effect: "reject" };
 }
+
+export function push(cats: readonly Category[], state: State): Step {
+  const entry = focused(cats, state);
+
+  if (entry === undefined || !hasChildren(entry)) {
+    return reject(state);
+  }
+
+  return { state: pushed(state, entry.childPos), effect: "decide" };
+}
