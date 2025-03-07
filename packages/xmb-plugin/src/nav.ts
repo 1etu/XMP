@@ -46,3 +46,7 @@ export function push(cats: readonly Category[], state: State): Step {
 
   return { state: pushed(state, entry.childPos), effect: "decide" };
 }
+
+export function pop(state: State): Step {
+  return isRoot(state) ? reject(state) : { state: popped(state), effect: "cancel" };
+}
