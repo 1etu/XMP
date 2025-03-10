@@ -57,3 +57,11 @@ function scroll(cats: readonly Category[], state: State, by: number): Step {
 
   return next === at ? reject(state) : { state: withCursor(state, next), effect: "cursor" };
 }
+
+function sweep(cats: readonly Category[], state: State, by: number): Step {
+  const next = clamp(state.category + by, cats.length);
+
+  return next === state.category
+    ? reject(state)
+    : { state: withCategory(next), effect: "category" };
+}
