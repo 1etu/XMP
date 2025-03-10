@@ -50,3 +50,10 @@ export function push(cats: readonly Category[], state: State): Step {
 export function pop(state: State): Step {
   return isRoot(state) ? reject(state) : { state: popped(state), effect: "cancel" };
 }
+
+function scroll(cats: readonly Category[], state: State, by: number): Step {
+  const at = cursorOf(state);
+  const next = clamp(at + by, list(cats, state).length);
+
+  return next === at ? reject(state) : { state: withCursor(state, next), effect: "cursor" };
+}
