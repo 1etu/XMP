@@ -65,3 +65,18 @@ function sweep(cats: readonly Category[], state: State, by: number): Step {
     ? reject(state)
     : { state: withCategory(next), effect: "category" };
 }
+
+export function move(cats: readonly Category[], state: State, dir: Dir): Step {
+  if (dir === "up") {
+    return scroll(cats, state, -1);
+  }
+  if (dir === "down") {
+    return scroll(cats, state, 1);
+  }
+
+  if (!isRoot(state)) {
+    return dir === "left" ? pop(state) : push(cats, state);
+  }
+
+  return sweep(cats, state, dir === "right" ? 1 : -1);
+}
