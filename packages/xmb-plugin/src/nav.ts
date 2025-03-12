@@ -80,3 +80,13 @@ export function move(cats: readonly Category[], state: State, dir: Dir): Step {
 
   return sweep(cats, state, dir === "right" ? 1 : -1);
 }
+
+export function decide(cats: readonly Category[], state: State): Step {
+  const entry = focused(cats, state);
+
+  if (entry === undefined) {
+    return reject(state);
+  }
+
+  return hasChildren(entry) ? push(cats, state) : { state, effect: "decide" };
+}
