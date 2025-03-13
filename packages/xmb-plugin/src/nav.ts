@@ -90,3 +90,7 @@ export function decide(cats: readonly Category[], state: State): Step {
 
   return hasChildren(entry) ? push(cats, state) : { state, effect: "decide" };
 }
+
+export function cancel(state: State): Step {
+  return pop(state);
+}
