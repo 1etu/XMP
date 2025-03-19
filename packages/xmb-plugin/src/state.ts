@@ -8,3 +8,7 @@ export interface State {
 export function initial(): State {
   return { category: 0, levels: [0] };
 }
+
+export function depthOf(state: State): number {
+  return state.levels.length - ROOT_DEPTH;
+}
