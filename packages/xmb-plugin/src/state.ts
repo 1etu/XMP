@@ -12,3 +12,7 @@ export function initial(): State {
 export function depthOf(state: State): number {
   return state.levels.length - ROOT_DEPTH;
 }
+
+export function cursorOf(state: State): number {
+  return state.levels[state.levels.length - 1] ?? 0;
+}
