@@ -20,3 +20,10 @@ export function cursorOf(state: State): number {
 export function isRoot(state: State): boolean {
   return state.levels.length <= ROOT_DEPTH;
 }
+
+export function withCursor(state: State, index: number): State {
+  const levels = [...state.levels];
+  levels[levels.length - 1] = index;
+
+  return { category: state.category, levels };
+}
