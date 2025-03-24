@@ -16,3 +16,7 @@ export function depthOf(state: State): number {
 export function cursorOf(state: State): number {
   return state.levels[state.levels.length - 1] ?? 0;
 }
+
+export function isRoot(state: State): boolean {
+  return state.levels.length <= ROOT_DEPTH;
+}
