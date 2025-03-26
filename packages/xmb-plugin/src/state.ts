@@ -31,3 +31,7 @@ export function withCursor(state: State, index: number): State {
 export function withCategory(category: number): State {
   return { category, levels: [0] };
 }
+
+export function pushed(state: State, index: number): State {
+  return { category: state.category, levels: [...state.levels, index] };
+}
