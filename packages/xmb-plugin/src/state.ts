@@ -35,3 +35,7 @@ export function withCategory(category: number): State {
 export function pushed(state: State, index: number): State {
   return { category: state.category, levels: [...state.levels, index] };
 }
+
+export function popped(state: State): State {
+  return { category: state.category, levels: state.levels.slice(0, -1) };
+}
