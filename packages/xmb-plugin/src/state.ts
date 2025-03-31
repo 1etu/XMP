@@ -47,3 +47,11 @@ export function same(a: State, b: State): boolean {
     a.levels.every((v, i) => v === b.levels[i])
   );
 }
+
+export function clamp(v: number, n: number): number {
+  if (n === 0) {
+    return 0;
+  }
+
+  return v < 0 ? 0 : v > n - 1 ? n - 1 : v;
+}
