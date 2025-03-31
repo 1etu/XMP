@@ -39,3 +39,11 @@ export function pushed(state: State, index: number): State {
 export function popped(state: State): State {
   return { category: state.category, levels: state.levels.slice(0, -1) };
 }
+
+export function same(a: State, b: State): boolean {
+  return (
+    a.category === b.category &&
+    a.levels.length === b.levels.length &&
+    a.levels.every((v, i) => v === b.levels[i])
+  );
+}
