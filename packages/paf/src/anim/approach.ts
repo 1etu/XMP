@@ -3,3 +3,4 @@ import { verified } from "@vsh/resource";
 export const NATIVE_HZ = verified(60);
 
 const BOOST = verified(Math.fround(1.000001));
+const SHORT = [1, 0.96153849, 0.78125, 0.63694263, 0.52910054].map(verified);
