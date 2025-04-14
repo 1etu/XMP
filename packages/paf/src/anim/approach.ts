@@ -11,3 +11,11 @@ const MS_PER_S = verified(Math.fround(0.001));
 export function framesOf(durationMs: number): number {
   return Math.trunc(Math.fround(Math.fround(durationMs * MS_PER_S) * NATIVE_HZ));
 }
+
+export function gainOf(durationMs: number): number {
+  const frames = framesOf(durationMs);
+
+  return Math.fround(
+    SHORT[frames] ?? 1 / Math.fround((frames - 5) * SLOPE + INTERCEPT),
+  );
+}
