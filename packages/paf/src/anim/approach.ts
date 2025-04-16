@@ -19,3 +19,10 @@ export function gainOf(durationMs: number): number {
     SHORT[frames] ?? 1 / Math.fround((frames - 5) * SLOPE + INTERCEPT),
   );
 }
+
+export function step(value: number, gain: number): number {
+  return Math.min(
+    1,
+    Math.fround(Math.fround(Math.fround(1 - value) * gain + value) * BOOST),
+  );
+}
