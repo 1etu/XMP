@@ -12,3 +12,8 @@ export interface Track {
   readonly to: number;
   readonly spec: Spec;
 }
+
+export const STILL: Spec = {
+  durationMs: 0,
+  accelMode: AccelMode.Linear,
+};
