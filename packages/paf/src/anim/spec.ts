@@ -17,3 +17,8 @@ export const STILL: Spec = {
   durationMs: 0,
   accelMode: AccelMode.Linear,
 };
+
+export const CATEGORY_MOVE: Spec = {
+  durationMs: verified(200),
+  accelMode: AccelMode.Approach,
+};
