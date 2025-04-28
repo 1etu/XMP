@@ -22,3 +22,8 @@ export const CATEGORY_MOVE: Spec = {
   durationMs: verified(200),
   accelMode: AccelMode.Approach,
 };
+
+export const ITEM_MOVE: Spec = {
+  durationMs: verified(200),
+  accelMode: AccelMode.Approach,
+};
