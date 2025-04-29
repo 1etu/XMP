@@ -27,3 +27,8 @@ export const ITEM_MOVE: Spec = {
   durationMs: verified(200),
   accelMode: AccelMode.Approach,
 };
+
+export const LEVEL_PUSH: Spec = {
+  durationMs: design(220),
+  accelMode: AccelMode.Decelerate,
+};
