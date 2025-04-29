@@ -32,3 +32,8 @@ export const LEVEL_PUSH: Spec = {
   durationMs: design(220),
   accelMode: AccelMode.Decelerate,
 };
+
+export const FADE: Spec = {
+  durationMs: design(200),
+  accelMode: AccelMode.Linear,
+};
