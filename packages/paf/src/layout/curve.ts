@@ -11,3 +11,9 @@ export function spread(d: number, gap: number, pitch: number, gapUp = gap): numb
 export function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
+
+export function nearness(d: number): number {
+  const a = Math.abs(d);
+
+  return a >= 1 ? 0 : 1 - a;
+}
