@@ -7,3 +7,7 @@ export function spread(d: number, gap: number, pitch: number, gapUp = gap): numb
 
   return a <= 1 ? d * g : sign * (g + (a - 1) * pitch);
 }
+
+export function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * t;
+}
