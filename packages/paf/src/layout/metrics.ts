@@ -21,3 +21,15 @@ export interface Frac {
   readonly aboveLabelOffsetY?: number;
   readonly infoPanelY: number;
 }
+
+export interface Design {
+  readonly categoryIconSize: number;
+  readonly otherIconScale: number;
+  readonly categoryOtherIconScale?: number;
+  readonly focusLabelScale: number;
+  readonly otherLabelScale: number;
+  readonly focusAlpha: number;
+  readonly otherAlpha: number;
+  readonly otherIconAlpha?: number;
+  readonly railAlpha: number;
+}
