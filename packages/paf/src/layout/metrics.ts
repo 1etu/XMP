@@ -33,3 +33,9 @@ export interface Design {
   readonly otherIconAlpha?: number;
   readonly railAlpha: number;
 }
+
+export interface Metrics {
+  readonly logical: Logical;
+  readonly frac: Frac;
+  readonly design: Design;
+}
