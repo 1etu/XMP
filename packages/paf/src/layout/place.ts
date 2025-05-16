@@ -7,3 +7,4 @@ import type { Label, Slot, Snapshot, View } from "./slot.js";
 export const SUBMENU_PARENT_SHIFT = measured(0.13671875);
 
 const SUBMENU_GAP = measured(0.1833333333);
+const SUBMENU_ICON_SHIFT = measured(0.00625);
