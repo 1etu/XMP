@@ -8,3 +8,4 @@ export const SUBMENU_PARENT_SHIFT = measured(0.13671875);
 
 const SUBMENU_GAP = measured(0.1833333333);
 const SUBMENU_ICON_SHIFT = measured(0.00625);
+const SUBMENU_ICON_SCALE = measured(0.44);
