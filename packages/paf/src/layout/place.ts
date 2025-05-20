@@ -10,3 +10,4 @@ const SUBMENU_GAP = measured(0.1833333333);
 const SUBMENU_ICON_SHIFT = measured(0.00625);
 const SUBMENU_ICON_SCALE = measured(0.44);
 const SUBMENU_LABEL_X = measured(0.3385416667);
+const SUBMENU_DIM = verified(0.1);
