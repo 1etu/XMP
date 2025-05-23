@@ -12,3 +12,4 @@ const SUBMENU_ICON_SCALE = measured(0.44);
 const SUBMENU_LABEL_X = measured(0.3385416667);
 const SUBMENU_DIM = verified(0.1);
 const MEDIA_ICON_X = measured(0.3375);
+const MEDIA_LABEL_X = measured(0.443);
