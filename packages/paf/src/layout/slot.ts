@@ -7,3 +7,14 @@ export interface Slot {
   readonly alpha: number;
   readonly focused: boolean;
 }
+
+export interface Label {
+  readonly id: string;
+  readonly text: string;
+  readonly info: string;
+  readonly x: number;
+  readonly y: number;
+  readonly scale: number;
+  readonly alpha: number;
+  readonly focused: boolean;
+}
