@@ -36,3 +36,11 @@ export interface View {
   readonly itemAlpha?: number;
   readonly mediaFolder?: boolean;
 }
+
+export interface Snapshot {
+  readonly categories: readonly Slot[];
+  readonly categoryLabel: Label | undefined;
+  readonly categoryLabels: readonly Label[];
+  readonly items: readonly Slot[];
+  readonly labels: readonly Label[];
+}
