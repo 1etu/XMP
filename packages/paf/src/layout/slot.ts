@@ -25,3 +25,14 @@ export interface Item {
   readonly title: string;
   readonly info: string;
 }
+
+export interface View {
+  readonly categories: readonly Item[];
+  readonly categoryOffset: number;
+  readonly items: readonly Item[];
+  readonly itemOffset: number;
+  readonly depth: number;
+  readonly categoryIndex?: number;
+  readonly itemAlpha?: number;
+  readonly mediaFolder?: boolean;
+}
