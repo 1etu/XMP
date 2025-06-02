@@ -18,3 +18,10 @@ export interface Label {
   readonly alpha: number;
   readonly focused: boolean;
 }
+
+export interface Item {
+  readonly id: string;
+  readonly icon: number;
+  readonly title: string;
+  readonly info: string;
+}
