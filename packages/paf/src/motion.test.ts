@@ -41,3 +41,7 @@ const METRICS: Metrics = {
     railAlpha: 0.75,
   },
 };
+
+function item(id: string) {
+  return { id, icon: 0, title: id, info: "" };
+}
