@@ -29,3 +29,5 @@ const TREE = {
     { id: "network", icon: 7, title: "Network", items: [raw("browser")] },
   ],
 } as never;
+
+const CATS: Category[] = build(TREE, { text: {} });
