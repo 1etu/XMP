@@ -14,3 +14,8 @@ export type ContentAction =
   | { readonly kind: "video"; readonly id: string }
   | { readonly kind: "link"; readonly href: string }
   | { readonly kind: "choice"; readonly setting: ChoiceSetting };
+
+export interface ContentOption {
+  readonly label: string;
+  readonly action: ContentAction;
+}
