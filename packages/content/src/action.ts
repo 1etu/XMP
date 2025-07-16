@@ -19,3 +19,5 @@ export interface ContentOption {
   readonly label: string;
   readonly action: ContentAction;
 }
+
+export const CHOICE_IDS = ["background", "motion", "theme", "color", "font"] as const;
