@@ -21,3 +21,7 @@ export interface ContentOption {
 }
 
 export const CHOICE_IDS = ["background", "motion", "theme", "color", "font"] as const;
+
+export function isChoiceId(id: string): id is ChoiceSetting {
+  return (CHOICE_IDS as readonly string[]).includes(id);
+}
