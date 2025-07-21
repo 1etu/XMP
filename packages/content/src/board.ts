@@ -17,3 +17,5 @@ export const boardChannels = [
   { id: "tools", title: "Tools" },
   { id: "site", title: "This site" },
 ] as const;
+
+export type BoardChannel = (typeof boardChannels)[number]["id"];
