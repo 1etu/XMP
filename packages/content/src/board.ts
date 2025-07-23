@@ -19,3 +19,10 @@ export const boardChannels = [
 ] as const;
 
 export type BoardChannel = (typeof boardChannels)[number]["id"];
+
+const channels: Readonly<Record<string, BoardItem["channel"]>> = {
+  meltgl: "graphics",
+  "actual-fingerprints": "graphics",
+  nos4: "interfaces",
+  cohesi: "tools",
+};
