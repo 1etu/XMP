@@ -29,3 +29,22 @@ const INTERESTS: Information = {
   ],
   options: [],
 };
+
+const CONTROLS: Information = {
+  id: "controls",
+  title: "Controls",
+  subtitle: "Select, confirm, and return",
+  icon: "",
+  paragraphs: [
+    "Move between categories horizontally and select items vertically. Open an item to view its information. Use Options for related actions.",
+    "On a phone, swipe across the background to navigate. Tap a title to open it. Scroll text and media controls directly.",
+  ],
+  rows: [
+    ["Select", "Arrow keys / D-pad"],
+    ["Confirm", "Enter / Cross"],
+    ["Back", "Esc / Circle"],
+    ["Options", "T / Triangle"],
+    ["Pointer", "Select an icon or open a title"],
+  ],
+  options: [],
+};
