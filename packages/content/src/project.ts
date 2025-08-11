@@ -20,3 +20,18 @@ export interface Folder {
 }
 
 export const profile = catalog.profile;
+
+export const projectFolders: readonly Folder[] = [
+  { id: "fun", title: "Fun", projects: ["nos4", "cohesi", "gitdraw"] },
+  { id: "libraries", title: "Libraries", projects: ["meltgl", "actual-fingerprints"] },
+  {
+    id: "networking",
+    title: "Networking",
+    projects: ["turkeydpi", "easyupoo", "easyupoo-seed"],
+  },
+  {
+    id: "utilities",
+    title: "Utilities",
+    projects: ["toorker", "rest", "alfred", "osp-tools"],
+  },
+];
