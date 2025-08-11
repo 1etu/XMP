@@ -12,3 +12,9 @@ export interface Project {
   readonly video: string;
   readonly paragraphs: readonly string[];
 }
+
+export interface Folder {
+  readonly id: string;
+  readonly title: string;
+  readonly projects: readonly string[];
+}
