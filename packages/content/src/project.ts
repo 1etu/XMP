@@ -18,3 +18,5 @@ export interface Folder {
   readonly title: string;
   readonly projects: readonly string[];
 }
+
+export const profile = catalog.profile;
