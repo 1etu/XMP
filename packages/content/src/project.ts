@@ -35,3 +35,10 @@ export const projectFolders: readonly Folder[] = [
     projects: ["toorker", "rest", "alfred", "osp-tools"],
   },
 ];
+
+export const projects: readonly Project[] = projectFolders
+  .flatMap((folder) => folder.projects)
+  .flatMap((id) => {
+    const project = catalog.projects.find((item) => item.id === id);
+    return project === undefined ? [] : [project];
+  });
