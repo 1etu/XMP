@@ -42,3 +42,7 @@ export const projects: readonly Project[] = projectFolders
     const project = catalog.projects.find((item) => item.id === id);
     return project === undefined ? [] : [project];
   });
+
+export function projectOf(id: string): Project | undefined {
+  return projects.find((project) => project.id === id);
+}
