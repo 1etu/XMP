@@ -46,3 +46,7 @@ export const projects: readonly Project[] = projectFolders
 export function projectOf(id: string): Project | undefined {
   return projects.find((project) => project.id === id);
 }
+
+export function indexOfProject(id: string): number {
+  return projects.findIndex((project) => project.id === id);
+}
