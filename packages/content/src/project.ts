@@ -50,3 +50,7 @@ export function projectOf(id: string): Project | undefined {
 export function indexOfProject(id: string): number {
   return projects.findIndex((project) => project.id === id);
 }
+
+export function repoOf(project: Project): string {
+  return `1etu/${project.source.split("/").at(-1) ?? project.id}`;
+}
