@@ -5,3 +5,4 @@ import { indexOfProject, profile, projectFolders, projects } from "./project.js"
 const ICON_AVATAR = 100;
 const ICON_BOARD = 105;
 const ICON_WHATS_NEW = 106;
+const ICON_ORB = 71;
