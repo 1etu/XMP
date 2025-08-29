@@ -7,3 +7,4 @@ const ICON_BOARD = 105;
 const ICON_WHATS_NEW = 106;
 const ICON_ORB = 71;
 const ICON_FOLDER = 80;
+const ICON_PROJECT = 120;
