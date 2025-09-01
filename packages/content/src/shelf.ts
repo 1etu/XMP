@@ -12,3 +12,15 @@ const ICON_PROJECT = 120;
 function entry(id: string, title: string, info: string, icon: number): Entry {
   return { id, title, info, icon, action: id, childPos: 0, entries: [] };
 }
+
+function themeSettings(): Entry {
+  return {
+    ...entry("theme-settings", "Theme Settings", "Adjust the appearance of the XMB™ screen.", 24),
+    entries: [
+      entry("theme", "Theme", "Select a theme.", 23),
+      entry("color", "Colour", "Sets the color of the background and options menu.", 23),
+      entry("background", "Background", "Sets the background of the XMB™ screen.", 23),
+      entry("font", "Font", "Sets the font used on the XMB™ screen.", 23),
+    ],
+  };
+}
