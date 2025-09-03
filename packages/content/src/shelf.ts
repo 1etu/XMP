@@ -24,3 +24,22 @@ function themeSettings(): Entry {
     ],
   };
 }
+
+function projectShelf(): readonly Entry[] {
+  return projectFolders.map((folder) => ({
+    ...entry(
+      `folder-${folder.id}`,
+      folder.title,
+      `${String(folder.projects.length)} projects`,
+      ICON_FOLDER,
+    ),
+    entries: folder.projects.flatMap((id) => {
+      const index = indexOfProject(id);
+      const project = projects[index];
+
+      return project === undefined
+        ? []
+        : [entry(project.id, project.title, project.description, ICON_PROJECT + index)];
+    }),
+  }));
+}
