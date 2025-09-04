@@ -43,3 +43,44 @@ function projectShelf(): readonly Entry[] {
     }),
   }));
 }
+
+export function portfolioCategories(): readonly Category[] {
+  return [
+    {
+      id: "user",
+      title: "About Me",
+      icon: 1,
+      entries: [entry("profile", profile.handle, "", ICON_AVATAR)],
+    },
+    {
+      id: "settings",
+      title: "Settings",
+      icon: 2,
+      entries: [
+        themeSettings(),
+        entry("motion", "Motion", "Set the amount of animation.", 57),
+        entry("controls", "Controls", "View navigation controls.", 6),
+        entry("system-information", "System Information", "", 13),
+        entry("about-site", "About This Site", "", 13),
+      ],
+    },
+    { id: "works", title: "Projects", icon: 6, entries: projectShelf() },
+    {
+      id: "network",
+      title: "Network",
+      icon: 7,
+      entries: [
+        entry("information-board", "Information Board", "", ICON_BOARD),
+        entry("internet-browser", "Internet Browser", "", 7),
+        entry("github", "GitHub", "Repositories and source code.", 7),
+        entry("website", "dayetu.group", "Visit my website.", 7),
+      ],
+    },
+    {
+      id: "psn",
+      title: "What's New",
+      icon: ICON_ORB,
+      entries: [entry("whats-new", "What's New", "", ICON_WHATS_NEW)],
+    },
+  ];
+}
