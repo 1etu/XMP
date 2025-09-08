@@ -1,0 +1,14 @@
+export const THEME_COLORS = [
+  { value: "silver", label: "Silver", swatch: "#c0c3ca", month: 1 },
+  { value: "yellow", label: "Yellow", swatch: "#cfc620", month: 2 },
+  { value: "green", label: "Light Green", swatch: "#83b33b", month: 3 },
+  { value: "pink", label: "Pink", swatch: "#cf657f", month: 4 },
+  { value: "leaf", label: "Green", swatch: "#299825", month: 5 },
+  { value: "lavender", label: "Light Purple", swatch: "#9c75c5", month: 6 },
+  { value: "aqua", label: "Turquoise", swatch: "#1bb8ac", month: 7 },
+  { value: "blue", label: "Blue", swatch: "#003ac0", month: 8 },
+  { value: "purple", label: "Purple", swatch: "#8f3ca3", month: 9 },
+  { value: "orange", label: "Orange", swatch: "#d89a12", month: 10 },
+  { value: "brown", label: "Brown", swatch: "#8c641e", month: 11 },
+  { value: "red", label: "Red", swatch: "#bc3d2c", month: 12 },
+] as const;
