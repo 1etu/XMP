@@ -12,3 +12,5 @@ export const THEME_COLORS = [
   { value: "brown", label: "Brown", swatch: "#8c641e", month: 11 },
   { value: "red", label: "Red", swatch: "#bc3d2c", month: 12 },
 ] as const;
+
+export type ThemeColor = "original" | (typeof THEME_COLORS)[number]["value"];
