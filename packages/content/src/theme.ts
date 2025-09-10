@@ -14,3 +14,5 @@ export const THEME_COLORS = [
 ] as const;
 
 export type ThemeColor = "original" | (typeof THEME_COLORS)[number]["value"];
+export type ChoiceSetting =
+  "theme" | "color" | "background" | "brightness" | "font" | "motion";
