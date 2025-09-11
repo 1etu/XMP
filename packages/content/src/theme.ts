@@ -16,3 +16,13 @@ export const THEME_COLORS = [
 export type ThemeColor = "original" | (typeof THEME_COLORS)[number]["value"];
 export type ChoiceSetting =
   "theme" | "color" | "background" | "brightness" | "font" | "motion";
+
+export interface Preferences {
+  readonly theme: "original" | "classic";
+  readonly color: ThemeColor;
+  readonly background: "original" | "classic" | "wallpaper";
+  readonly brightness: number;
+  readonly font: "original" | "rounded" | "pop";
+  readonly motion: "system" | "reduced";
+  readonly wallpaper: string;
+}
