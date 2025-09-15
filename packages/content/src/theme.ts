@@ -33,3 +33,13 @@ export interface ThemeChoice {
   readonly swatch?: string;
   readonly setting?: ChoiceSetting;
 }
+
+export const DEFAULT_PREFERENCES: Preferences = {
+  theme: "original",
+  color: "original",
+  background: "original",
+  brightness: 0,
+  font: "original",
+  motion: "system",
+  wallpaper: "",
+};
