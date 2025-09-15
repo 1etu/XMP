@@ -26,3 +26,10 @@ export interface Preferences {
   readonly motion: "system" | "reduced";
   readonly wallpaper: string;
 }
+
+export interface ThemeChoice {
+  readonly value: string;
+  readonly label: string;
+  readonly swatch?: string;
+  readonly setting?: ChoiceSetting;
+}
