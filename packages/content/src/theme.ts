@@ -43,3 +43,12 @@ export const DEFAULT_PREFERENCES: Preferences = {
   motion: "system",
   wallpaper: "",
 };
+
+export const SETTING_LABELS: Readonly<Record<ChoiceSetting, string>> = {
+  theme: "Theme",
+  color: "Colour",
+  background: "Background",
+  brightness: "Brightness",
+  font: "Font",
+  motion: "Motion",
+};
