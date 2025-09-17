@@ -52,3 +52,30 @@ export const SETTING_LABELS: Readonly<Record<ChoiceSetting, string>> = {
   font: "Font",
   motion: "Motion",
 };
+
+export const THEME_CHOICES: Readonly<Record<ChoiceSetting, readonly ThemeChoice[]>> = {
+  theme: [
+    { value: "original", label: "Original" },
+    { value: "classic", label: "Classic" },
+  ],
+  color: [{ value: "original", label: "Original" }, ...THEME_COLORS],
+  background: [
+    { value: "brightness", label: "Brightness", setting: "brightness" },
+    { value: "original", label: "Original" },
+    { value: "classic", label: "Classic" },
+    { value: "wallpaper", label: "Wallpaper" },
+  ],
+  brightness: Array.from({ length: 11 }, (_, i) => ({
+    value: String(i - 5),
+    label: i > 5 ? `+${String(i - 5)}` : String(i - 5),
+  })),
+  font: [
+    { value: "original", label: "Original" },
+    { value: "rounded", label: "Rounded" },
+    { value: "pop", label: "Pop" },
+  ],
+  motion: [
+    { value: "system", label: "System" },
+    { value: "reduced", label: "Reduced" },
+  ],
+};
