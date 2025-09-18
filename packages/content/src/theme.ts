@@ -79,3 +79,14 @@ export const THEME_CHOICES: Readonly<Record<ChoiceSetting, readonly ThemeChoice[
     { value: "reduced", label: "Reduced" },
   ],
 };
+
+export function preferenceLabel(
+  preferences: Preferences,
+  setting: ChoiceSetting,
+): string {
+  return (
+    THEME_CHOICES[setting].find(
+      (choice) => choice.value === String(preferences[setting]),
+    )?.label ?? "Original"
+  );
+}
