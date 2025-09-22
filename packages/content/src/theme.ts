@@ -90,3 +90,49 @@ export function preferenceLabel(
     )?.label ?? "Original"
   );
 }
+
+export function changePreference(
+  preferences: Preferences,
+  setting: ChoiceSetting,
+  value: string,
+): Preferences {
+  if (
+    !THEME_CHOICES[setting].some(
+      (choice) => choice.value === value && choice.setting === undefined,
+    )
+  )
+    return preferences;
+  switch (setting) {
+    case "theme":
+      if (value !== "original" && value !== "classic") return preferences;
+      return {
+        ...preferences,
+        theme: value,
+        background: value,
+        color: "original",
+        font: "original",
+        brightness: 0,
+      };
+    case "background":
+      return value === "original" || value === "classic" || value === "wallpaper"
+        ? { ...preferences, background: value }
+        : preferences;
+    case "font":
+      return value === "original" || value === "rounded" || value === "pop"
+        ? { ...preferences, font: value }
+        : preferences;
+    case "motion":
+      return value === "system" || value === "reduced"
+        ? { ...preferences, motion: value }
+        : preferences;
+    case "color": {
+      const color =
+        value === "original"
+          ? "original"
+          : THEME_COLORS.find((color) => color.value === value)?.value;
+      return color === undefined ? preferences : { ...preferences, color };
+    }
+    case "brightness":
+      return { ...preferences, brightness: Number(value) };
+  }
+}
