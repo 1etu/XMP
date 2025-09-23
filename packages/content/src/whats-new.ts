@@ -9,3 +9,15 @@ export interface WhatsNewItem {
   readonly type: "web" | "video" | "project";
   readonly action: ContentAction;
 }
+
+const FEATURED = [
+  "nos4",
+  "meltgl",
+  "actual-fingerprints",
+  "cohesi",
+  "turkeydpi",
+  "gitdraw",
+  "alfred",
+  "rest",
+  "toorker",
+];
