@@ -14,3 +14,33 @@ export interface Mixer {
   setVolume(value: number): void;
   readonly volume: number;
 }
+
+export function mixer(ctx: AudioContext): Mixer {
+  const master = ctx.createGain();
+  master.connect(ctx.destination);
+
+  const buses = new Map<Bus, GainNode>();
+
+  for (const name of BUSES) {
+    const g = ctx.createGain();
+    g.gain.value = GAIN[name];
+    g.connect(master);
+    buses.set(name, g);
+  }
+
+  return {
+    master,
+
+    busOf(bus: Bus): GainNode | undefined {
+      return buses.get(bus);
+    },
+
+    setVolume(value: number): void {
+      master.gain.value = Math.min(Math.max(value, 0), 1);
+    },
+
+    get volume(): number {
+      return master.gain.value;
+    },
+  };
+}
