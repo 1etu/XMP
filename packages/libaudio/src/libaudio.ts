@@ -7,3 +7,5 @@ export interface AudioOpts {
   readonly base: string;
   readonly ids: readonly SoundId[];
 }
+
+const DEFAULT_BUS: Bus = "system";
