@@ -1,0 +1,8 @@
+export const SystemSound = {
+  Cursor: "snd_cursor",
+  Decide: "snd_decide",
+  Cancel: "snd_cancel",
+  CategoryDecide: "snd_category_decide",
+  Option: "snd_option",
+  Error: "snd_error",
+} as const;
