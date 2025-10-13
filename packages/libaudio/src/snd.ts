@@ -6,3 +6,5 @@ export const SystemSound = {
   Option: "snd_option",
   Error: "snd_error",
 } as const;
+
+export type SoundId = (typeof SystemSound)[keyof typeof SystemSound];
