@@ -8,3 +8,5 @@ export const SystemSound = {
 } as const;
 
 export type SoundId = (typeof SystemSound)[keyof typeof SystemSound];
+
+export const SOUND_IDS: readonly SoundId[] = Object.values(SystemSound);
