@@ -10,3 +10,7 @@ export const SystemSound = {
 export type SoundId = (typeof SystemSound)[keyof typeof SystemSound];
 
 export const SOUND_IDS: readonly SoundId[] = Object.values(SystemSound);
+
+export function isSoundId(v: string): v is SoundId {
+  return (SOUND_IDS as readonly string[]).includes(v);
+}
