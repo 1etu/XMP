@@ -9,3 +9,5 @@ export const COMMANDS = [
   "l1",
   "r1",
 ] as const;
+
+export type Command = (typeof COMMANDS)[number];
