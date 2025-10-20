@@ -13,3 +13,5 @@ export const COMMANDS = [
 export type Command = (typeof COMMANDS)[number];
 
 export const DEVICES = ["keyboard", "touch", "gamepad"] as const;
+
+export type InputDevice = (typeof DEVICES)[number];
