@@ -15,3 +15,10 @@ export type Command = (typeof COMMANDS)[number];
 export const DEVICES = ["keyboard", "touch", "gamepad"] as const;
 
 export type InputDevice = (typeof DEVICES)[number];
+
+export const REPEATABLE: ReadonlySet<Command> = new Set<Command>([
+  "up",
+  "down",
+  "left",
+  "right",
+]);
