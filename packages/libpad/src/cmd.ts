@@ -22,3 +22,7 @@ export const REPEATABLE: ReadonlySet<Command> = new Set<Command>([
   "left",
   "right",
 ]);
+
+export function isCommand(v: string): v is Command {
+  return (COMMANDS as readonly string[]).includes(v);
+}
