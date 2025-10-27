@@ -26,3 +26,7 @@ export const REPEATABLE: ReadonlySet<Command> = new Set<Command>([
 export function isCommand(v: string): v is Command {
   return (COMMANDS as readonly string[]).includes(v);
 }
+
+export function isRepeatable(cmd: Command): boolean {
+  return REPEATABLE.has(cmd);
+}
