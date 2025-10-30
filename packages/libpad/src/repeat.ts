@@ -9,3 +9,10 @@ export interface Repeat {
   readonly fastAfterMs: number;
   readonly fastRateMs: number;
 }
+
+export const REPEAT: Repeat = {
+  holdMs: design(400),
+  rateMs: design(120),
+  fastAfterMs: design(1600),
+  fastRateMs: design(60),
+};
