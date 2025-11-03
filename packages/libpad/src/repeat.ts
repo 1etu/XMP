@@ -16,3 +16,9 @@ export const REPEAT: Repeat = {
   fastAfterMs: design(1600),
   fastRateMs: design(60),
 };
+
+interface Held {
+  readonly cmd: Command;
+  heldMs: number;
+  nextMs: number;
+}
