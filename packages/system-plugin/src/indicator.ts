@@ -7,3 +7,7 @@ export interface Indicator {
   readonly date: string;
   readonly time: string;
 }
+
+function pad(v: number): string {
+  return String(v).padStart(2, "0");
+}
