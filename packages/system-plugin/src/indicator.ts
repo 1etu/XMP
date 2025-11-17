@@ -11,3 +11,12 @@ export interface Indicator {
 function pad(v: number): string {
   return String(v).padStart(2, "0");
 }
+
+export function indicate(rtc: Rtc): Indicator {
+  const hour = Math.floor(hourOf(rtc));
+
+  return {
+    date: `${String(monthOf(rtc))}/${String(dayOf(rtc))}`,
+    time: `${String(hour % NOON || NOON)}:${pad(minuteOf(rtc))} ${hour < NOON ? "AM" : "PM"}`,
+  };
+}
