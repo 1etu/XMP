@@ -20,3 +20,7 @@ export function indicate(rtc: Rtc): Indicator {
     time: `${String(hour % NOON || NOON)}:${pad(minuteOf(rtc))} ${hour < NOON ? "AM" : "PM"}`,
   };
 }
+
+export function sameMinute(a: Indicator, b: Indicator): boolean {
+  return a.date === b.date && a.time === b.time;
+}
