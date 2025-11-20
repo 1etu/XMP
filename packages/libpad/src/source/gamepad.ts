@@ -11,3 +11,5 @@ const BUTTONS: Readonly<Record<number, Command>> = {
   14: "left",
   15: "right",
 };
+
+const AXIS_DEAD = 0.55;
