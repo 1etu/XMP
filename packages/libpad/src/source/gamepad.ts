@@ -13,3 +13,4 @@ const BUTTONS: Readonly<Record<number, Command>> = {
 };
 
 const AXIS_DEAD = 0.55;
+const STANDARD = "standard";
