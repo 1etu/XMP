@@ -1,0 +1,20 @@
+import type { Command } from "../cmd.js";
+import type { PadSource } from "../source.js";
+
+const KEYS: Readonly<Record<string, Command>> = {
+  ArrowUp: "up",
+  ArrowDown: "down",
+  ArrowLeft: "left",
+  ArrowRight: "right",
+  KeyW: "up",
+  KeyS: "down",
+  KeyA: "left",
+  KeyD: "right",
+  Enter: "decide",
+  Space: "decide",
+  Escape: "cancel",
+  Backspace: "cancel",
+  KeyT: "options",
+  PageUp: "l1",
+  PageDown: "r1",
+};
