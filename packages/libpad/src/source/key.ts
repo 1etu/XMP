@@ -18,3 +18,5 @@ const KEYS: Readonly<Record<string, Command>> = {
   PageUp: "l1",
   PageDown: "r1",
 };
+
+const EDITABLE = 'input, textarea, select, [contenteditable="true"]';
