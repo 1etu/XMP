@@ -20,3 +20,4 @@ const KEYS: Readonly<Record<string, Command>> = {
 };
 
 const EDITABLE = 'input, textarea, select, [contenteditable="true"]';
+const NATIVE = "[data-native-input]";
