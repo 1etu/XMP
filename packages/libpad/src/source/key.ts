@@ -21,3 +21,5 @@ const KEYS: Readonly<Record<string, Command>> = {
 
 const EDITABLE = 'input, textarea, select, [contenteditable="true"]';
 const NATIVE = "[data-native-input]";
+const LINK =
+  'a:not([role="menuitem"]):not([data-shell-link]), button[data-native-input], [data-native-input] button';
