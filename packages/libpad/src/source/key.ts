@@ -41,3 +41,49 @@ function claimed(ev: KeyboardEvent): boolean {
     (ev.code === "Enter" || ev.code === "Space") && element.closest(LINK) !== null
   );
 }
+
+export function keyboard(target: EventTarget): PadSource {
+  return {
+    device: "keyboard",
+
+    attach(emit, pad) {
+      const down = (e: Event): void => {
+        const ev = e as KeyboardEvent;
+        if (ev.altKey || ev.ctrlKey || ev.metaKey || ev.repeat || claimed(ev)) {
+          return;
+        }
+
+        const cmd = KEYS[ev.code];
+        if (cmd === undefined) {
+          return;
+        }
+
+        ev.preventDefault();
+        for (const c of pad.press(cmd)) {
+          emit(c);
+        }
+      };
+
+      const up = (e: Event): void => {
+        const cmd = KEYS[(e as KeyboardEvent).code];
+        if (cmd !== undefined) {
+          pad.release(cmd);
+        }
+      };
+
+      const blur = (): void => {
+        pad.releaseAll();
+      };
+
+      target.addEventListener("keydown", down);
+      target.addEventListener("keyup", up);
+      globalThis.addEventListener("blur", blur);
+
+      return () => {
+        target.removeEventListener("keydown", down);
+        target.removeEventListener("keyup", up);
+        globalThis.removeEventListener("blur", blur);
+      };
+    },
+  };
+}
