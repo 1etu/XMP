@@ -23,3 +23,21 @@ const EDITABLE = 'input, textarea, select, [contenteditable="true"]';
 const NATIVE = "[data-native-input]";
 const LINK =
   'a:not([role="menuitem"]):not([data-shell-link]), button[data-native-input], [data-native-input] button';
+
+function claimed(ev: KeyboardEvent): boolean {
+  const element = ev.target;
+  if (!(element instanceof Element)) {
+    return false;
+  }
+
+  if (ev.code !== "Escape" && element.closest(EDITABLE) !== null) {
+    return true;
+  }
+  if (ev.shiftKey && element.closest(NATIVE) !== null) {
+    return true;
+  }
+
+  return (
+    (ev.code === "Enter" || ev.code === "Space") && element.closest(LINK) !== null
+  );
+}
