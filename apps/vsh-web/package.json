@@ -1,0 +1,33 @@
+{
+  "name": "vsh-web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The VSH web application shell",
+  "scripts": {
+    "start": "node --experimental-strip-types server/index.ts",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --build"
+  },
+  "dependencies": {
+    "@vsh/librtc": "workspace:*",
+    "@vsh/qgl": "workspace:*",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "@vsh/explore-plugin": "workspace:*",
+    "@vsh/xmb-plugin": "workspace:*",
+    "@vsh/paf": "workspace:*",
+    "@vsh/libpad": "workspace:*",
+    "@vsh/system-plugin": "workspace:*",
+    "@vsh/libaudio": "workspace:*",
+    "@vsh/resource": "workspace:*",
+    "@vsh/content": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1"
+  }
+}
