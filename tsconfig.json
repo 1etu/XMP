@@ -1,0 +1,38 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/paf"
+    },
+    {
+      "path": "./packages/qgl"
+    },
+    {
+      "path": "./packages/xmb-plugin"
+    },
+    {
+      "path": "./packages/explore-plugin"
+    },
+    {
+      "path": "./packages/system-plugin"
+    },
+    {
+      "path": "./packages/libpad"
+    },
+    {
+      "path": "./packages/libaudio"
+    },
+    {
+      "path": "./packages/librtc"
+    },
+    {
+      "path": "./packages/resource"
+    },
+    {
+      "path": "./packages/content"
+    },
+    {
+      "path": "./apps/vsh-web"
+    }
+  ]
+}
