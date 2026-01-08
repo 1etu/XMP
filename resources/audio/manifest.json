@@ -1,0 +1,47 @@
+{
+  "classification": "MEASURED",
+  "clips": {
+    "snd_cancel": {
+      "durationMs": 40,
+      "rate": 48000,
+      "samples": 1904
+    },
+    "snd_category_decide": {
+      "durationMs": 40,
+      "rate": 48000,
+      "samples": 1904
+    },
+    "snd_cursor": {
+      "durationMs": 40,
+      "rate": 48000,
+      "samples": 1904
+    },
+    "snd_decide": {
+      "durationMs": 40,
+      "rate": 48000,
+      "samples": 1904
+    },
+    "snd_error": {
+      "durationMs": 2,
+      "rate": 48000,
+      "samples": 112
+    },
+    "snd_option": {
+      "durationMs": 40,
+      "rate": 48000,
+      "samples": 1904
+    },
+    "snd_system_ng": {
+      "durationMs": 801,
+      "rate": 48000,
+      "samples": 38444
+    },
+    "snd_system_ok": {
+      "durationMs": 302,
+      "rate": 48000,
+      "samples": 14476
+    }
+  },
+  "source": "system_plugin.rco",
+  "sourceHash": "a52058c610ea9315"
+}
