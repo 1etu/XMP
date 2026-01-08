@@ -1,0 +1,42 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    "types": ["vite/client"]
+  },
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../packages/qgl"
+    },
+    {
+      "path": "../../packages/librtc"
+    },
+    {
+      "path": "../../packages/resource"
+    },
+    {
+      "path": "../../packages/explore-plugin"
+    },
+    {
+      "path": "../../packages/xmb-plugin"
+    },
+    {
+      "path": "../../packages/paf"
+    },
+    {
+      "path": "../../packages/libpad"
+    },
+    {
+      "path": "../../packages/system-plugin"
+    },
+    {
+      "path": "../../packages/libaudio"
+    },
+    {
+      "path": "../../packages/content"
+    }
+  ]
+}
