@@ -1,0 +1,24 @@
+{
+  "retrievedAt": "2026-09-19",
+  "assets": [
+    {
+      "file": "typescript.png",
+      "source": "https://www.typescriptlang.org/branding/typescript-design-assets.zip",
+      "member": "ts-logo-256.png",
+      "credit": "Microsoft and TypeScript contributors",
+      "guidance": "https://www.typescriptlang.org/branding/"
+    },
+    {
+      "file": "react.png",
+      "source": "https://raw.githubusercontent.com/reactjs/react.dev/main/public/android-chrome-512x512.png",
+      "credit": "Meta and React contributors",
+      "guidance": "https://github.com/reactjs/react.dev/blob/main/LICENSE-DOCS.md"
+    },
+    {
+      "file": "webgl.png",
+      "source": "https://registry.khronos.org/webgl/resources/WebGL-Logo.png",
+      "credit": "The Khronos Group",
+      "guidance": "https://www.khronos.org/legal/trademarks/"
+    }
+  ]
+}
