@@ -1,0 +1,103 @@
+{
+  "retrievedAt": "2026-09-17",
+  "profile": "https://api.github.com/users/1etu",
+  "repositories": [
+    "https://github.com/1etu/MeltGL",
+    "https://github.com/1etu/nos4",
+    "https://github.com/1etu/actual-fingerprints",
+    "https://github.com/1etu/gitdraw",
+    "https://github.com/1etu/turkeydpi",
+    "https://github.com/1etu/alfred",
+    "https://github.com/1etu/rest",
+    "https://github.com/1etu/toorker",
+    "https://github.com/1etu/easyupoo",
+    "https://github.com/1etu/cohesi",
+    "https://github.com/1etu/osp-tools",
+    "https://github.com/1etu/easyupoo-seed"
+  ],
+  "assets": [
+    {
+      "file": "portfolio/MeltGL/icon.png",
+      "url": "https://raw.githubusercontent.com/1etu/MeltGL/main/Website/logo.png"
+    },
+    {
+      "file": "portfolio/MeltGL/demo.mp4",
+      "url": "https://raw.githubusercontent.com/1etu/MeltGL/main/Website/demo-slime.mp4"
+    },
+    {
+      "file": "portfolio/nos4/intro.png",
+      "url": "https://raw.githubusercontent.com/1etu/nos4/main/nosmarketingassets/nos4-intro.png"
+    },
+    {
+      "file": "portfolio/nos4/apps.png",
+      "url": "https://raw.githubusercontent.com/1etu/nos4/main/nosmarketingassets/nos4-main.png"
+    },
+    {
+      "file": "portfolio/nos4/safari.png",
+      "url": "https://raw.githubusercontent.com/1etu/nos4/main/nosmarketingassets/nos4-safari.png"
+    },
+    {
+      "file": "portfolio/actual-fingerprints/icon.png",
+      "url": "https://raw.githubusercontent.com/1etu/actual-fingerprints/master/docs/icon.png"
+    },
+    {
+      "file": "portfolio/nos4/icon.png",
+      "url": "https://raw.githubusercontent.com/1etu/nos4/main/assets/brand/nos4-icon.png"
+    },
+    {
+      "file": "portfolio/alfred/icon.png",
+      "url": "https://raw.githubusercontent.com/1etu/alfred/main/assets/logo.png"
+    },
+    {
+      "file": "portfolio/actual-fingerprints/pipeline.png",
+      "url": "https://raw.githubusercontent.com/1etu/actual-fingerprints/master/docs/pipeline.png"
+    },
+    {
+      "file": "portfolio/actual-fingerprints/samples.png",
+      "url": "https://raw.githubusercontent.com/1etu/actual-fingerprints/master/docs/samples.png"
+    },
+    {
+      "file": "portfolio/rest/settings.png",
+      "url": "https://raw.githubusercontent.com/1etu/rest/main/docs/settings.png"
+    },
+    {
+      "file": "portfolio/rest/icon.png",
+      "url": "https://raw.githubusercontent.com/1etu/rest/main/assets/logo.png"
+    },
+    {
+      "file": "portfolio/rest/overlay.png",
+      "url": "https://raw.githubusercontent.com/1etu/rest/main/docs/overlay.png"
+    },
+    {
+      "file": "portfolio/toorker/preview.png",
+      "url": "https://github.com/user-attachments/assets/e7e32383-c471-4dea-a72b-978dcd6a6744"
+    },
+    {
+      "file": "portfolio/osp-tools/preview.png",
+      "url": "https://github.com/user-attachments/assets/67efff33-6890-462b-8564-b0b2f8e0bf7f"
+    },
+    {
+      "file": "portfolio/easyupoo/preview.png",
+      "url": "https://github.com/user-attachments/assets/8f2c548d-6c41-4652-accb-8e0dbe203577"
+    },
+    {
+      "file": "portfolio/gitdraw/preview.png",
+      "url": "https://github.com/user-attachments/assets/2e6c4adc-d5d1-4f7d-be95-ae4b2897d912"
+    },
+    {
+      "file": "portfolio/avatar.png",
+      "url": "https://avatars.githubusercontent.com/u/183089834?v=4"
+    },
+    {
+      "file": "portfolio/MeltGL/demo.png",
+      "url": "https://raw.githubusercontent.com/1etu/MeltGL/main/Website/demo-slime.mp4",
+      "derived": "Video frame at 2 seconds."
+    }
+  ],
+  "authoredAssets": [
+    {
+      "file": "portfolio/cohesi/icon.svg",
+      "description": "Two cars and a curved path through traffic. Original vector artwork."
+    }
+  ]
+}
