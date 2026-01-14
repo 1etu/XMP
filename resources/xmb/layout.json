@@ -1,0 +1,48 @@
+{
+  "classification": "MEASURED",
+  "design": {
+    "categoryIconSize": 0.15555555555555556,
+    "focusAlpha": 1,
+    "focusLabelScale": 1,
+    "otherAlpha": 0.375,
+    "otherIconScale": 0.4084967320261438,
+    "otherLabelScale": 1,
+    "railAlpha": 0.7,
+    "categoryOtherIconScale": 0.7142857142857143,
+    "otherIconAlpha": 0.8
+  },
+  "frac": {
+    "categoryIconY": 0.26944444444444443,
+    "categoryLabelY": 0.3263888888888889,
+    "categoryPitchX": 0.10416666666666667,
+    "focusGapAboveY": 0.35833333333333334,
+    "focusGapY": 0.15833333333333333,
+    "focusIconSize": 0.17,
+    "focusItemY": 0.46944444444444444,
+    "focusX": 0.29453125,
+    "infoPanelY": 0.06944444444444445,
+    "itemLabelX": 0.3546875,
+    "itemPitchY": 0.07407407407407408,
+    "categoryFocusGapX": 0.109375,
+    "categoryFocusRiseY": 0.008333333333333333,
+    "otherLabelOffsetX": 0.00020833333333333335,
+    "otherLabelOffsetY": 0.002777777777777778,
+    "aboveLabelOffsetY": 0.0008333333333333334
+  },
+  "logical": {
+    "hgt": 1080,
+    "wid": 1920
+  },
+  "method": "Measure the native 1280 x 720 frame at 18 seconds. Scale the complete 1920 x 1080 logical frame uniformly by viewport width on desktop.",
+  "notes": [
+    "The selected category rises 6 pixels above the category rail at 720p.",
+    "The selected category and item share the focus axis at x = 377 pixels.",
+    "Icon sizes include the transparent margins in the 128 x 128 normal maps.",
+    "The category texture measures 112 pixels at focus and 80 pixels elsewhere.",
+    "The selected item texture measures 122.4 pixels. Other item textures measure 50 pixels.",
+    "The title uses regular Rodin at 21.333 pixels, with a 12 pixel description.",
+    "The information panel measures 38 pixels tall, starting at y = 50 pixels.",
+    "Material and motion measurements remain separate from the layout."
+  ],
+  "source": "PS3 XMB Firmware 3.00, native frame at 18 seconds: https://www.youtube.com/watch?v=b5meKdtARNw"
+}
