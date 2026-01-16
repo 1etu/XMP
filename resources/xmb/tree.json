@@ -1,0 +1,471 @@
+{
+  "categories": [
+    {
+      "icon": 1,
+      "id": "user",
+      "items": [
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 55,
+          "id": "poweroff",
+          "info": "msg_poweroff_explanation",
+          "items": [],
+          "title": "msg_poweroff"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 42,
+          "id": "newuser",
+          "info": "msg_newuser_explanation",
+          "items": [],
+          "title": "msg_newuser"
+        }
+      ],
+      "title": "msg_category_user"
+    },
+    {
+      "icon": 2,
+      "id": "sysconf",
+      "items": [
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 9,
+          "id": "update",
+          "info": "msg_update_explanation",
+          "items": [],
+          "title": "msg_update"
+        },
+        {
+          "action": "none",
+          "childPos": 1,
+          "icon": 14,
+          "id": "game",
+          "info": "msg_game_setting_explanation",
+          "items": [
+            {
+              "action": "game_psemu_upcon",
+              "childPos": 0,
+              "icon": 23,
+              "id": "game_ps_emu_upcon",
+              "info": "msg_upconvert_explanation",
+              "items": [],
+              "title": "msg_ps_upconvert"
+            },
+            {
+              "action": "game_psemu_smooth",
+              "childPos": 0,
+              "icon": 23,
+              "id": "game_ps_emu_smooth",
+              "info": "msg_ps_ps2_smoothing_explanation",
+              "items": [],
+              "title": "msg_ps_smoothing"
+            }
+          ],
+          "title": "msg_game_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 10,
+          "id": "bd_dvd",
+          "info": "msg_video_setting_explanation",
+          "items": [],
+          "title": "msg_video_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 12,
+          "id": "music",
+          "info": "msg_music_setting_explanation",
+          "items": [],
+          "title": "msg_music_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 43,
+          "id": "chat",
+          "info": "msg_chat_setting_explanation",
+          "items": [],
+          "title": "msg_chat_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 13,
+          "id": "console",
+          "info": "msg_console_setting_explanation",
+          "items": [],
+          "title": "msg_console_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 24,
+          "id": "theme",
+          "info": "msg_theme_settings_explanation",
+          "items": [],
+          "title": "msg_theme_settings"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 15,
+          "id": "date_time",
+          "info": "msg_datetime_setting_explanation",
+          "items": [],
+          "title": "msg_datetime_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 57,
+          "id": "power",
+          "info": "msg_power_saving_setting_explanation",
+          "items": [],
+          "title": "msg_power_saving_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 1,
+          "icon": 16,
+          "id": "device",
+          "info": "msg_pd_setting_explanation",
+          "items": [
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_calibrate_motion_controller",
+              "info": "msg_calibrate_motion_controller_explanation",
+              "items": [],
+              "title": "msg_calibrate_motion_controller"
+            },
+            {
+              "action": "pad_assign",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_pad_assign",
+              "info": "msg_controller_assign2_explanation",
+              "items": [],
+              "title": "msg_controller_assign2"
+            },
+            {
+              "action": "pad_vibration",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_pad_vibration",
+              "info": "msg_controller_vibration_function2_explanation",
+              "items": [],
+              "title": "msg_controller_vibration_function2"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_bdremote_reg",
+              "info": "msg_bdremote_registration_explanation",
+              "items": [],
+              "title": "msg_bdremote_registration"
+            },
+            {
+              "action": "bt_device_utility",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_bt_utility",
+              "info": "msg_bt_device_utility_explanation",
+              "items": [],
+              "title": "msg_bt_device_utility"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_camera",
+              "info": "msg_camera_device_setting_explanation",
+              "items": [],
+              "title": "msg_camera_device_setting"
+            },
+            {
+              "action": "audio_setting",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_audio_setting",
+              "info": "msg_audio_device_setting_explanation",
+              "items": [],
+              "title": "msg_audio_device_setting"
+            },
+            {
+              "action": "usb_headset",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_usbhdset_setting",
+              "info": "msg_sce_wireless_stereo_headset_setting_explanation",
+              "items": [],
+              "title": "msg_sce_wireless_stereo_headset_setting"
+            },
+            {
+              "action": "voice_changer",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_voice_changer",
+              "info": "msg_voice_changer_explanation",
+              "items": [],
+              "title": "msg_voice_changer"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_keyboard_type",
+              "info": "msg_keyboardtype_explanation",
+              "items": [],
+              "title": "msg_keyboardtype"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_keyboard_input",
+              "info": "msg_keyboard_input_mode_explanation",
+              "items": [],
+              "title": "msg_keyboard_input_mode"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_keyboard_input",
+              "info": "msg_keyboard_input_mode_explanation",
+              "items": [],
+              "title": "msg_keyboard_input_mode"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_keybind",
+              "info": "msg_keybind_explanation",
+              "items": [],
+              "title": "msg_keybind"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_keyrepeat_start",
+              "info": "msg_keyrepeat_starttime_explanation",
+              "items": [],
+              "title": "msg_keyrepeat_starttime"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_keyrepeat_speed",
+              "info": "msg_keyboard_speed_explanation",
+              "items": [],
+              "title": "msg_keyboard_speed"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_mouse_type",
+              "info": "msg_mouse_type_explanation",
+              "items": [],
+              "title": "msg_mouse_type"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "pd_pointer_speed",
+              "info": "msg_pointer_speed_explanation",
+              "items": [],
+              "title": "msg_pointer_speed"
+            }
+          ],
+          "title": "msg_pd_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 11,
+          "id": "print",
+          "info": "msg_printer_settings_explanation",
+          "items": [],
+          "title": "msg_printer_settings"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 17,
+          "id": "display",
+          "info": "msg_display_setting_explanation",
+          "items": [],
+          "title": "msg_display_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 18,
+          "id": "sound",
+          "info": "msg_sound_setting_explanation",
+          "items": [],
+          "title": "msg_sound_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 19,
+          "id": "security",
+          "info": "msg_security_setting_explanation",
+          "items": [],
+          "title": "msg_security_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 21,
+          "id": "remote",
+          "info": "msg_remoteplay_setting_explanation",
+          "items": [],
+          "title": "msg_remoteplay_setting"
+        },
+        {
+          "action": "none",
+          "childPos": 1,
+          "icon": 20,
+          "id": "network",
+          "info": "msg_net_setting_explanation",
+          "items": [
+            {
+              "action": "net_netlist",
+              "childPos": 0,
+              "icon": 23,
+              "id": "net_netlist",
+              "info": "msg_netlist_current_explanation",
+              "items": [],
+              "title": "msg_netlist_current"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "net_internet",
+              "info": "msg_internet_connect_explanation",
+              "items": [],
+              "title": "msg_internet_connect"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "net_internet_setting",
+              "info": "msg_internet_connect_setting_with_wlan_explanation",
+              "items": [],
+              "title": "msg_internet_connect_setting"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "net_internet_test",
+              "info": "msg_internet_connect_test_explanation",
+              "items": [],
+              "title": "msg_internet_connect_test"
+            },
+            {
+              "action": "none",
+              "childPos": 0,
+              "icon": 23,
+              "id": "net_media_server",
+              "info": "msg_mediaserver_connection_explanation",
+              "items": [],
+              "title": "msg_mediaserver_connection"
+            }
+          ],
+          "title": "msg_net_setting"
+        }
+      ],
+      "title": "msg_category_sysconf"
+    },
+    {
+      "icon": 3,
+      "id": "photo",
+      "items": [],
+      "title": "msg_category_photo"
+    },
+    {
+      "icon": 4,
+      "id": "music",
+      "items": [],
+      "title": "msg_category_music"
+    },
+    {
+      "icon": 5,
+      "id": "video",
+      "items": [],
+      "title": "msg_category_video"
+    },
+    {
+      "icon": 6,
+      "id": "game",
+      "items": [],
+      "title": "msg_category_game"
+    },
+    {
+      "icon": 7,
+      "id": "network",
+      "items": [
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 31,
+          "id": "manual",
+          "info": "",
+          "items": [],
+          "title": "msg_onlinemanual"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 41,
+          "id": "browser",
+          "info": "",
+          "items": [],
+          "title": "msg_browser"
+        },
+        {
+          "action": "none",
+          "childPos": 0,
+          "icon": 36,
+          "id": "kensaku",
+          "info": "",
+          "items": [],
+          "title": "msg_internet_search"
+        }
+      ],
+      "title": "msg_category_network"
+    },
+    {
+      "icon": 71,
+      "id": "psn",
+      "items": [],
+      "title": "msg_category_psn"
+    },
+    {
+      "icon": 8,
+      "id": "friend",
+      "items": [],
+      "title": "msg_category_friend"
+    }
+  ],
+  "classification": "MEASURED",
+  "source": "explore/xmb/category_*.xml"
+}
