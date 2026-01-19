@@ -1,0 +1,39 @@
+{
+  "classification": "MEASURED",
+  "id": "base",
+  "ints": [
+    "ssMethod"
+  ],
+  "source": "icons.qrc",
+  "sourceHash": "29f98ce99c1361fa",
+  "val": {
+    "ambB": 0.9,
+    "ambG": 0.8,
+    "ambR": 0.74,
+    "attnDiff": 2,
+    "attnEnv": 0.74,
+    "attnSpec1": 2,
+    "attnSpec2": 2,
+    "expose": 0.82,
+    "lit1AngX": -32.4,
+    "lit1AngZ": 22.8,
+    "lit2AngX": 135,
+    "lit2AngZ": 60,
+    "mipBias": 0,
+    "multiRot": 30,
+    "multiSamp": 0.5,
+    "parScl": 0,
+    "refrB": -0.048,
+    "refrBlur": 0.12,
+    "refrG": -0.038,
+    "refrR": -0.032,
+    "refrScl": 10,
+    "refrTweak": 0.11,
+    "shadowStren": 0.02,
+    "shadowX": 0.07,
+    "shadowY": 0.047,
+    "spec1Pow": 100,
+    "spec2Pow": 30,
+    "ssMethod": 0
+  }
+}
