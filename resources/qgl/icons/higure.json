@@ -1,0 +1,41 @@
+{
+  "classification": "MEASURED",
+  "id": "higure",
+  "ints": [
+    "ssMethod"
+  ],
+  "source": "icons.qrc",
+  "sourceHash": "29f98ce99c1361fa",
+  "val": {
+    "ambB": 1.05025,
+    "ambG": 1.05025,
+    "ambR": 1.05025,
+    "attnDiff": 3.12367,
+    "attnEnv": 0.107345,
+    "attnSpec1": 0.484729,
+    "attnSpec2": 2.45394,
+    "expose": 1.1574,
+    "glass": 0.0952192,
+    "lit1AngX": 184.98,
+    "lit1AngZ": 22.4976,
+    "lit2AngX": 179.981,
+    "lit2AngZ": 282.47,
+    "mipBias": 0,
+    "multiRot": 30,
+    "multiSamp": 0.5,
+    "parScl": 0,
+    "refrB": -0.048,
+    "refrBlur": 0.12,
+    "refrG": -0.038,
+    "refrR": -0.032,
+    "refrScl": 11.5655,
+    "refrTweak": 0.0416622,
+    "shadowStren": 0,
+    "shadowX": 0.07,
+    "shadowY": 0.047,
+    "spec1Pow": 44.8563,
+    "spec2Pow": 74.1114,
+    "ssMethod": 0,
+    "timeColorMix": 0.555496
+  }
+}
