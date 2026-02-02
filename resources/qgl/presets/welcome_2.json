@@ -1,0 +1,175 @@
+{
+  "bg": {
+    "ints": [
+      "colourShader"
+    ],
+    "val": {
+      "colourShader": 1,
+      "day2nightBegin": 18.498,
+      "day2nightEnd": 20.3312,
+      "dayspread": 3,
+      "fovy": 81.2413,
+      "night2dayBegin": 0,
+      "night2dayEnd": 5.16611,
+      "nightBlend": 0.499947,
+      "nightWhitBias": 0.486059
+    }
+  },
+  "classification": "MEASURED",
+  "corners": [
+    [
+      0.123246,
+      6.23728,
+      8.92659
+    ],
+    [
+      0.262794,
+      10,
+      6.6364
+    ],
+    [
+      0.0594205,
+      3.92418,
+      10
+    ],
+    [
+      0.22837,
+      2.14287,
+      10
+    ]
+  ],
+  "hdr": {
+    "ints": [
+      "blur",
+      "enabled",
+      "glare",
+      "glareOnly",
+      "texMaxMip",
+      "texSize",
+      "tonebefore"
+    ],
+    "val": {
+      "blur": 1,
+      "dither": 0.00392157,
+      "enabled": 1,
+      "exposure": 3.40362,
+      "gaussianRadB": 2.9,
+      "gaussianRadG": 2.9,
+      "gaussianRadR": 2.9,
+      "glare": 1,
+      "glareLevel": 100,
+      "glareOnly": 0,
+      "glareSumPow": 100,
+      "glareThresh": 100,
+      "texMaxMip": 7,
+      "texSize": 7,
+      "tonebefore": 0,
+      "whiteLevel": 1000
+    }
+  },
+  "id": "welcome_2",
+  "line": {
+    "ints": [
+      "ffdShader",
+      "shader",
+      "showFfd",
+      "state"
+    ],
+    "val": {
+      "angRot": 18.1208,
+      "angX": -0.994157,
+      "angY": 0.0867576,
+      "angZ": 0.065364,
+      "brightness": 0.701917,
+      "damping": 0.0001,
+      "endX": 3,
+      "endY": 0.4,
+      "endZ": 0.2,
+      "falloff": 1.00318,
+      "ffdOffsetX": 0,
+      "ffdOffsetY": -0.469999,
+      "ffdOffsetZ": 0,
+      "ffdParam1": -1.33509,
+      "ffdScale1X": 5.67726,
+      "ffdScale1Y": 1.00077,
+      "ffdScale1Z": 1,
+      "ffdScale2X": 3.2,
+      "ffdScale2Y": 1.27579,
+      "ffdScale2Z": 2.88782,
+      "ffdShader": 1,
+      "fresnel": 0.638971,
+      "length": 0.306001,
+      "mipmapBias": 1.86707,
+      "perturbation": 0.0998587,
+      "posX": -8.2,
+      "posY": -1.08844,
+      "posZ": -6.40287,
+      "shader": 1,
+      "showFfd": 0,
+      "spacing": 407.658,
+      "state": 1,
+      "tension": 0.25,
+      "thinness": 1,
+      "timestep": 2
+    }
+  },
+  "part": {
+    "ints": [],
+    "val": {
+      "agingSpeed": 0.00101112,
+      "agingVariance": 0.5,
+      "brownianScale": 0.0794061,
+      "colorControl": 1,
+      "deltaTime": 0.0172207,
+      "emitConeAngle": 51.8695,
+      "emitNegProb": 0.173899,
+      "emitPerFrame": 70.5765,
+      "emitProb": 0.493003,
+      "emitVelMin": 0.131537,
+      "emitVelMul": 4.16622,
+      "emitVelVar": 0.282567,
+      "emitVelZscale": 0.208311,
+      "exposure": 0.0390458,
+      "farDarkness": 4.46526,
+      "farFocus": 7,
+      "farFocusDist": 6.31877,
+      "farFocusPow": 1.63882,
+      "fresnel": 1.33319,
+      "friction": 0.0619405,
+      "glare": 0.222198,
+      "glareP1": 1.6344,
+      "glareP2": 8.41834,
+      "glareScale": 6.22156,
+      "globalAlpha": 1,
+      "gravity": -0.000068,
+      "iridescentExp": 1,
+      "lambertCoeff": 8,
+      "nearAlign": 0.118043,
+      "nearDarkness": 5.49606,
+      "nearFocus": 6.12435,
+      "nearFocusDist": 1.59705,
+      "nearFocusPow": 2.22209,
+      "nearFuzziness": 3.79,
+      "sizeAlign": 14.1652,
+      "sizeFar": 0.00746469,
+      "sizeMiddle": 0.073865,
+      "sizeNear": 0.0143576,
+      "specularCoeff": 74.74,
+      "specularPower": 29.3486,
+      "spinTimeScale": 2.99327,
+      "spotAttnX": 1,
+      "spotAttnY": 0,
+      "spotAttnZ": 0,
+      "spotPosX": 4.16,
+      "spotPosY": 2.63,
+      "spotPosZ": -7.6,
+      "windDirX": 0.361019,
+      "windDirY": -0.0347719,
+      "windDirZ": 0.35,
+      "windScale": 0.000544572,
+      "windScale10": 0
+    }
+  },
+  "source": "lines.qrc",
+  "sourceHash": "dc6f6e303a930d03"
+}
