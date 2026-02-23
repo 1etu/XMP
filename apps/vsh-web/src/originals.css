@@ -1,0 +1,192 @@
+@font-face {
+  font-family: "SCE-PS3 Rodin LATIN";
+  src: url("/original/font/SCE-PS3-RD-L-LATIN.TTF") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SCE-PS3 Rodin LATIN";
+  src: url("/original/font/SCE-PS3-RD-R-LATIN.TTF") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SCE-PS3 Rodin LATIN";
+  src: url("/original/font/SCE-PS3-RD-B-LATIN.TTF") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --xmb-font: "SCE-PS3 Rodin LATIN", Arial, sans-serif;
+}
+
+.wn-backdrop {
+  background: url("/original/whats-new/tex_bg.png") center / cover;
+}
+.wn-card-surface {
+  background: none;
+  box-shadow: none;
+}
+.wn-card-surface::after {
+  content: "";
+  position: absolute;
+  inset: calc(-8 * var(--wn-unit));
+  border-image: url("/original/whats-new/tex_channel_base.png") 30 fill /
+    calc(22 * var(--wn-unit));
+  pointer-events: none;
+}
+.wn-card[aria-selected="true"] .wn-card-surface::after {
+  border-image-source: url("/original/whats-new/tex_channel_focus.png");
+}
+.wn-group {
+  border-image: url("/original/whats-new/tex_exbase_pickup.png") 30 fill /
+    calc(26 * var(--wn-unit));
+  background: none;
+}
+.wn-played {
+  border-image-source: url("/original/whats-new/tex_exbase_played.png");
+}
+.wn-caption {
+  border-image: url("/original/whats-new/tex_text_bg.png") 24 fill /
+    calc(25 * var(--wn-unit));
+  background: none;
+}
+.wn-new {
+  background: url("/original/whats-new/tex_new_ws.png") center / contain no-repeat;
+  color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.wn-action[data-type="web"],
+.wn-action[data-type="video"] {
+  background: url("/original/whats-new/tex_go_web.png") center / contain no-repeat;
+  box-shadow: none;
+}
+.wn-action[data-type="video"] {
+  background-image: url("/original/whats-new/tex_go_video.png");
+}
+.wn-action[data-type="web"] svg,
+.wn-action[data-type="video"] svg {
+  visibility: hidden;
+}
+.wn-spinner {
+  border: 0;
+  width: calc(90 * var(--wn-unit));
+  height: calc(90 * var(--wn-unit));
+  background: url("/original/whats-new/tex_loading_icon.png") center / contain no-repeat;
+}
+.wn-timeout {
+  background: url("/original/whats-new/tex_channel_timeout.png") center / cover;
+}
+
+.webview {
+  cursor:
+    url("/original/browser/pointer-arrow.png") 17 1,
+    default;
+}
+.webview button,
+.webview a {
+  cursor:
+    url("/original/browser/pointer-finger.png") 15 1,
+    pointer;
+}
+.webview-bar {
+  background-image: url("/original/browser/tex_topbar.png");
+  background-size: 100% 100%;
+}
+
+@font-face {
+  font-family: "SCE-PS3 Seurat LATIN";
+  src: url("/original/font/SCE-PS3-SR-R-LATIN.TTF") format("truetype");
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "SCE-PS3 VAGRundschrift LATIN";
+  src: url("/original/font/SCE-PS3-VR-R-LATIN.TTF") format("truetype");
+  font-weight: 400;
+  font-display: block;
+}
+
+.vsh-option-panel {
+  background: transparent;
+}
+
+.vsh-option-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 89.393939%;
+  background: #49494f;
+  mask: url("/original/system/optionmenu-bg.png") 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.xmb-back-arrow {
+  font-size: 0;
+  background: url("/original/system/arrow-left.png") center / contain no-repeat;
+}
+
+.xmb-indicator {
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+}
+
+.xmb-indicator::before {
+  content: "";
+  position: absolute;
+  inset: calc(-4.5 * var(--xmb-unit)) 0 calc(-4.5 * var(--xmb-unit))
+    calc(-4.5 * var(--xmb-unit));
+  border-image-source: url("/original/indicator/frame.png");
+  border-image-slice: 8 0 8 8 fill;
+  border-image-width: calc(9 * var(--xmb-unit)) 0 calc(9 * var(--xmb-unit))
+    calc(9 * var(--xmb-unit));
+  filter: blur(calc(1.05 * var(--xmb-unit)));
+  pointer-events: none;
+}
+
+.vsh-profile[data-original="true"] .vsh-profile-header,
+.vsh-profile[data-original="true"] .vsh-profile-detail {
+  box-shadow: none;
+  border-image: url("/original/profile/card-bg.png") 20 /
+    calc(13.5 * var(--profile-unit));
+}
+.vsh-profile[data-original="true"] .vsh-profile-presence {
+  background: url("/original/profile/presence.png") center / contain no-repeat;
+}
+.vsh-profile[data-original="true"] .vsh-profile-actions button {
+  border: 0;
+  box-shadow: none;
+  background: url("/original/profile/button.png") center / 100% 100% no-repeat;
+}
+.vsh-profile[data-original="true"] .vsh-profile-shoulder {
+  color: transparent;
+  background: center / contain no-repeat;
+}
+.vsh-profile[data-original="true"] .vsh-profile-shoulder[data-side="l1"] {
+  background-image: url("/original/profile/l1.png");
+}
+.vsh-profile[data-original="true"] .vsh-profile-shoulder[data-side="r1"] {
+  background-image: url("/original/profile/r1.png");
+}
+
+.vsh-profile[data-original="true"] .vsh-profile-balloon::before {
+  inset: 0;
+  background: transparent;
+  border-radius: 0;
+  border-image: url("/original/profile/balloon.png") 0 40 fill / 0
+    calc(26.666667 * var(--profile-unit));
+}
+.vsh-profile[data-original="true"] .vsh-profile-balloon::after {
+  display: none;
+}
+@media (max-aspect-ratio: 1/1) {
+  .vsh-profile[data-original="true"] .vsh-profile-balloon::before {
+    border-image-width: 0 24px;
+  }
+}
