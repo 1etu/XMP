@@ -1,0 +1,38 @@
+Use case: logo-brand / precise-object-edit.
+Asset: one finished raster logo for a console-style portfolio startup screen.
+
+REFERENCE ROLES
+Image 1 is the original PS3 startup logo on black. Use its composition, proportions, spacing, and main lettering as the visual standard.
+Image 2 is the original caption layer. Use its small caption typography and placement as the standard for the replacement caption.
+Create a new identity within this exact arrangement. Keep the three-part hierarchy: small symbol at left, large wordmark at right, small caption below the right wordmark.
+
+CANVAS AND PLACEMENT
+Keep the 2:1 canvas, generous black margins, and horizontal arrangement from the reference. Use a 700 by 350 coordinate system, scaled uniformly to the output resolution.
+Place the cup within x=24..152, y=122..222. Place the main wordmark within x=251..664, y=122..210.
+Center the small caption beneath the right wordmark at approximately x=458, with its visible letters between y=240 and y=268.
+Keep the large gap between the left symbol and right wordmark. Keep the original horizontal alignment. Do not stack the cup above the text.
+
+LEFT SYMBOL: TURKISH COFFEE CUP
+Replace the PlayStation symbol with a recognizable small Turkish porcelain coffee cup on its saucer.
+Show the actual cup shape in solid white: a compact demitasse body, gently flared lip, small loop handle, and shallow oval saucer.
+Use a slightly elevated front view so the dark opening of the cup remains visible.
+Make the cup body a broad, continuous white mass. Use black negative space only to define the opening, handle hole, and separation from the saucer.
+The cup must read immediately at small scale. Keep it within the footprint of the reference symbol.
+No outline drawing, wire shape, steam strokes, coffee beans, crescent, ornamental pattern, or oversized mug.
+
+MAIN WORDMARK
+Replace the large PS3 lettering with exactly "etu", all lowercase.
+Use the letter shapes from the reference: extended horizontal spans, open shapes, smooth rounded turns, flat terminals, and restrained white bands.
+Match the apparent stroke weight in the reference. Its horizontal bands are about 10 units thick against an 88-unit letter height.
+Preserve the different vertical and horizontal thicknesses in the reference where they help the shapes match. Keep the counters broad and open.
+Do not use heavy block letters or a generic futuristic font. The wordmark must remain light and wide, with clear e, t, and u shapes.
+
+CAPTION
+Render exactly "etu's Portfolio", with a straight apostrophe and an uppercase P. Add no other text.
+Match the caption letterforms, apparent weight, spacing, and scale in Image 2. Keep this caption much smaller than the main wordmark.
+Center it below the right wordmark only, not below the full cup-and-wordmark arrangement.
+
+FINISH
+Use clean white artwork on a uniform pure-black background. Keep edges smooth with normal antialiasing.
+Return one flat image. No mockup, alternatives, labels, paper, grain, shading, bevel, glow, blur, checkerboard, or scattered white pixels.
+Before finishing, check the solid cup silhouette, the thin wordmark, both text strings, and every alignment against the references.
