@@ -1,0 +1,11 @@
+Edit target: startup-logo.png.
+Tool: built-in imagegen.
+
+Remove the white coffee cup, handle, and saucer on the left.
+Remove the small caption below the large wordmark.
+Fill these areas with solid black.
+Preserve the large white lowercase etu wordmark.
+Keep its letter shapes, stroke weights, proportions, size, position, and sharpness.
+Do not redesign, move, center, or scale the wordmark.
+Keep the full canvas dimensions and black background.
+Add no effects, text, or other elements.
