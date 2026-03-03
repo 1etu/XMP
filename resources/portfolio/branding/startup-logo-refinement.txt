@@ -1,0 +1,15 @@
+Edit Image 1, the generated portfolio logo.
+Image 2 is the original PS3 logo. Use it as a reference for lettering weight only.
+Preserve the exact cup, saucer, black background, canvas, spacing, and size of the generated logo.
+Correct the typography only.
+
+The first large glyph currently reads as a numeral 2. Redraw it so it unmistakably reads as a lowercase e.
+Use a wide rounded open bowl, a horizontal middle crossbar, and a clearly open aperture on the right.
+Retain the thin horizontal bands and rounded geometric turns of the original PS3 wordmark.
+The complete main wordmark must read exactly "etu", lowercase, with no numeral.
+Keep the existing t and u and the full wordmark footprint.
+
+Set the small caption exactly "etu's Portfolio" in a light regular sans-serif weight.
+Match the restrained PlayStation startup caption. Avoid bold letters. Keep the existing center, baseline, and width.
+Return one clean white-on-black raster image with smooth edges.
+No added texture, shadows, glow, mockup, labels, extra text, or layout changes.
