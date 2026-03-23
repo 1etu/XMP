@@ -1,0 +1,5 @@
+import { boardChannels, boardItems } from "@vsh/content";
+import type { BoardChannel, BoardItem } from "@vsh/content";
+import { verified } from "@vsh/qgl";
+
+export const BOARD_EXPAND_MS = verified((8 * 1000) / 60);
