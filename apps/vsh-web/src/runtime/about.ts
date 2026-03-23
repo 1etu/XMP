@@ -10,3 +10,10 @@ export interface AboutRollOptions {
   readonly viewportHeight?: number;
   readonly reducedMotion?: boolean;
 }
+
+export interface AboutFrame {
+  readonly offset: number;
+  readonly top: number;
+  readonly paused: boolean;
+  readonly done: boolean;
+}
