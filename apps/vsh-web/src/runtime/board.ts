@@ -9,3 +9,4 @@ export const BOARD_ARTICLE_DELAY_MS = verified(3000);
 export const BOARD_ARTICLE_SPEED = verified(60);
 export const BOARD_ROW_HEIGHT = verified(64);
 export const BOARD_DISPLAY_KEY = "vsh.information-board.display";
+const TICKER_GAP = verified(11);
