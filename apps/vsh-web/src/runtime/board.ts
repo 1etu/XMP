@@ -11,3 +11,4 @@ export const BOARD_ROW_HEIGHT = verified(64);
 export const BOARD_DISPLAY_KEY = "vsh.information-board.display";
 const TICKER_GAP = verified(11);
 const VISIBLE_ROWS = verified(8);
+const TITLE_WIDTH = verified(326);
