@@ -12,3 +12,6 @@ export const BOARD_DISPLAY_KEY = "vsh.information-board.display";
 const TICKER_GAP = verified(11);
 const VISIBLE_ROWS = verified(8);
 const TITLE_WIDTH = verified(326);
+
+export type BoardCommand =
+  "up" | "down" | "left" | "right" | "decide" | "cancel" | "options";
