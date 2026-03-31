@@ -15,3 +15,5 @@ const TITLE_WIDTH = verified(326);
 
 export type BoardCommand =
   "up" | "down" | "left" | "right" | "decide" | "cancel" | "options";
+export type BoardEffect =
+  { readonly kind: "close" } | { readonly kind: "link"; readonly href: string };
