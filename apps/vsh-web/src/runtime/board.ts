@@ -18,3 +18,13 @@ export type BoardCommand =
 export type BoardEffect =
   { readonly kind: "close" } | { readonly kind: "link"; readonly href: string };
 export type BoardMode = "ticker" | "list" | "article" | "channels";
+
+export interface BoardSnapshot {
+  readonly enabled: boolean;
+  readonly mode: BoardMode;
+  readonly selected: number;
+  readonly channel: BoardChannel;
+  readonly channelSelected: number;
+  readonly ticker: number;
+  readonly items: readonly BoardItem[];
+}
