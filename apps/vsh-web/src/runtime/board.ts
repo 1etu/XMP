@@ -28,3 +28,11 @@ export interface BoardSnapshot {
   readonly ticker: number;
   readonly items: readonly BoardItem[];
 }
+
+export interface BoardFrame {
+  expansion: number;
+  tickerX: number;
+  titleX: number;
+  listY: number;
+  articleY: number;
+}
