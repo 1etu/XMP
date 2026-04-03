@@ -36,3 +36,8 @@ export interface BoardFrame {
   listY: number;
   articleY: number;
 }
+
+export interface BoardStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+}
