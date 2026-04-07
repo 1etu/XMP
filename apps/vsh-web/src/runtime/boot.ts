@@ -8,3 +8,9 @@ export interface BootSnapshot {
   readonly total: number;
   readonly detail: string;
 }
+
+export interface Stage {
+  readonly id: string;
+  readonly state: BootState;
+  run(): Promise<void>;
+}
