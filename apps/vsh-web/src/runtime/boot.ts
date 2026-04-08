@@ -14,3 +14,11 @@ export interface Stage {
   readonly state: BootState;
   run(): Promise<void>;
 }
+
+const COLD: BootSnapshot = {
+  state: "cold",
+  stage: "",
+  done: 0,
+  total: 0,
+  detail: "",
+};
