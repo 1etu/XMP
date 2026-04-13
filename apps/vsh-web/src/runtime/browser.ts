@@ -6,3 +6,4 @@ export const BROWSER_HOME = "xmb://home";
 const MAX_WINDOWS = design(6);
 const MAX_HISTORY = design(64);
 const PANEL_MOVE = { durationMs: design(300), accelMode: AccelMode.Decelerate };
+const STORAGE_KEY = "xmp.browser";
