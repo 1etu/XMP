@@ -23,3 +23,11 @@ export interface BrowserEntry {
   readonly href: string;
   readonly title: string;
 }
+export interface BrowserWindow {
+  readonly id: number;
+  readonly entries: readonly BrowserEntry[];
+  readonly position: number;
+  readonly revision: number;
+  readonly loading: boolean;
+  readonly failed: boolean;
+}
