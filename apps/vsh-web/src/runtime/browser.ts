@@ -19,3 +19,7 @@ export type BrowserPanel =
   | "address"
   | "search"
   | "information";
+export interface BrowserEntry {
+  readonly href: string;
+  readonly title: string;
+}
