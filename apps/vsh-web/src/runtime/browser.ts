@@ -31,3 +31,16 @@ export interface BrowserWindow {
   readonly loading: boolean;
   readonly failed: boolean;
 }
+export interface BrowserState {
+  readonly windows: readonly BrowserWindow[];
+  readonly active: number;
+  readonly panel: BrowserPanel | undefined;
+  readonly departing: BrowserPanel | undefined;
+  readonly selected: number;
+  readonly panelAlpha: number;
+  readonly maximum: boolean;
+  readonly zoom: number;
+  readonly home: string;
+  readonly bookmarks: readonly BrowserEntry[];
+  readonly history: readonly BrowserEntry[];
+}
