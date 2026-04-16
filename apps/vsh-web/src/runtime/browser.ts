@@ -52,3 +52,21 @@ export interface BrowserOption {
   readonly disabled?: boolean;
   readonly hint?: string;
 }
+
+export function browserUrl(value: string): string | undefined {
+  if (value === BROWSER_HOME) return value;
+  const text = value.trim();
+  if (text === "") return undefined;
+  try {
+    const url = new URL(/^[a-z][a-z\d+.-]*:/i.test(text) ? text : `https://${text}`);
+    if (
+      (url.protocol !== "https:" && url.protocol !== "http:") ||
+      url.username ||
+      url.password
+    )
+      return undefined;
+    return url.href;
+  } catch {
+    return undefined;
+  }
+}
