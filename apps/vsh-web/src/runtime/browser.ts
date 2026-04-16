@@ -44,3 +44,11 @@ export interface BrowserState {
   readonly bookmarks: readonly BrowserEntry[];
   readonly history: readonly BrowserEntry[];
 }
+export interface BrowserOption {
+  readonly id: string;
+  readonly label: string;
+  readonly icon?: string;
+  readonly child?: boolean;
+  readonly disabled?: boolean;
+  readonly hint?: string;
+}
