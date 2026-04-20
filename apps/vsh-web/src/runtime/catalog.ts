@@ -28,3 +28,17 @@ interface StartupAppearance {
 }
 
 const FRES_LUT = "textures/TGA/freslut1.tga";
+
+export interface LutFile {
+  readonly luts: Readonly<
+    Record<
+      string,
+      {
+        readonly width: number;
+        readonly r: readonly number[];
+        readonly g: readonly number[];
+        readonly b: readonly number[];
+      }
+    >
+  >;
+}
