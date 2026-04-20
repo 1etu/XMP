@@ -26,3 +26,5 @@ interface StartupAppearance {
     readonly background: readonly (readonly [number, number, number])[];
   }[];
 }
+
+const FRES_LUT = "textures/TGA/freslut1.tga";
