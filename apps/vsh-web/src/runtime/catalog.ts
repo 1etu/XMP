@@ -19,3 +19,10 @@ interface Appearance {
   readonly waveTint: readonly (readonly [number, number, number])[];
   readonly waveTransfer: readonly [number, number, number];
 }
+
+interface StartupAppearance {
+  readonly frames: readonly {
+    readonly timeMs: number;
+    readonly background: readonly (readonly [number, number, number])[];
+  }[];
+}
