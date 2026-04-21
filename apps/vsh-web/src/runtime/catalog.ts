@@ -42,3 +42,17 @@ export interface LutFile {
     >
   >;
 }
+
+export interface Resources {
+  readonly cat: Catalog;
+  readonly pal: PaletteFile;
+  readonly lut: Uint8Array<ArrayBuffer>;
+  readonly shell: readonly Category[];
+  readonly metrics: Metrics;
+  readonly lattice: Lattice;
+  readonly appearance: Appearance;
+  readonly startup: StartupAppearance;
+  readonly icons: Readonly<Record<number, string>>;
+  readonly iconTextures: IconTextures | undefined;
+  readonly iconPalette: IconAmbientPalette | undefined;
+}
