@@ -56,3 +56,13 @@ export interface Resources {
   readonly iconTextures: IconTextures | undefined;
   readonly iconPalette: IconAmbientPalette | undefined;
 }
+
+export class ResourceError extends Error {
+  readonly path: string;
+
+  constructor(path: string, detail: string) {
+    super(`${path}: ${detail}`);
+    this.name = "ResourceError";
+    this.path = path;
+  }
+}
