@@ -66,3 +66,14 @@ export class ResourceError extends Error {
     this.path = path;
   }
 }
+
+async function json<T>(path: string, signal: AbortSignal): Promise<T> {
+  const url = `${import.meta.env.BASE_URL}${path}`;
+  const res = await fetch(url, { signal });
+
+  if (!res.ok) {
+    throw new ResourceError(path, `http ${String(res.status)}`);
+  }
+
+  return (await res.json()) as T;
+}
