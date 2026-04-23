@@ -77,3 +77,25 @@ async function json<T>(path: string, signal: AbortSignal): Promise<T> {
 
   return (await res.json()) as T;
 }
+
+async function decodeImage(path: string, signal: AbortSignal): Promise<void> {
+  signal.throwIfAborted();
+  const image = new Image();
+  const cancel = (): void => {
+    image.src = "";
+  };
+  signal.addEventListener("abort", cancel, { once: true });
+  try {
+    image.src = path;
+    await image.decode();
+    signal.throwIfAborted();
+  } catch (error) {
+    signal.throwIfAborted();
+    throw new ResourceError(
+      path,
+      error instanceof Error ? error.message : "image decode failed",
+    );
+  } finally {
+    signal.removeEventListener("abort", cancel);
+  }
+}
