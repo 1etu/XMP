@@ -46,3 +46,9 @@ export class Chain {
     return this.#cur;
   }
 }
+
+export function ease(t: number): number {
+  const k = Math.min(Math.max(t, 0), 1);
+
+  return k * k * (3 - 2 * k);
+}
