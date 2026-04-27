@@ -6,3 +6,9 @@ export interface IconDraw {
   readonly material: IconMaterial;
   readonly crop?: readonly [number, number, number];
 }
+
+export interface IconBase {
+  readonly key: string;
+  readonly material: IconMaterial;
+  readonly crop: readonly [number, number, number];
+}
