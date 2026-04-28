@@ -12,3 +12,11 @@ export interface IconBase {
   readonly material: IconMaterial;
   readonly crop: readonly [number, number, number];
 }
+
+export interface IconShadeJob {
+  readonly type: "shade";
+  readonly id: number;
+  readonly draws: readonly IconDraw[];
+  readonly backdrop?: ImageBitmap;
+  readonly base?: IconBase;
+}
