@@ -20,3 +20,6 @@ export interface IconShadeJob {
   readonly backdrop?: ImageBitmap;
   readonly base?: IconBase;
 }
+
+export type IconWorkerInput =
+  { readonly type: "load"; readonly textures: IconTextures } | IconShadeJob;
