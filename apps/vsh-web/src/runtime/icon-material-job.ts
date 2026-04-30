@@ -23,3 +23,12 @@ export interface IconShadeJob {
 
 export type IconWorkerInput =
   { readonly type: "load"; readonly textures: IconTextures } | IconShadeJob;
+
+export type IconWorkerOutput =
+  | {
+      readonly type: "ready";
+      readonly id: number;
+      readonly icons: readonly { readonly id: string; readonly blob: Blob }[];
+      readonly base?: readonly { readonly id: string; readonly blob: Blob }[];
+    }
+  | { readonly type: "error"; readonly id: number; readonly message: string };
