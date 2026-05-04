@@ -20,3 +20,5 @@ const CAMERA_HEIGHT = verified(480);
 const EYE_OFFSET = verified(400);
 const EYE_DEPTH = verified(1200);
 const FOCUS_AXIS = verified(0.29453125);
+const PORTRAIT_WIDTH = design(720);
+const PORTRAIT_AXIS = design(0.24);
