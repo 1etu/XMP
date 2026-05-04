@@ -24,3 +24,6 @@ const PORTRAIT_WIDTH = design(720);
 const PORTRAIT_AXIS = design(0.24);
 const CROP_SIZE = verified(128);
 const CACHE_BATCHES = design(8);
+const CACHE_BASES = design(4);
+
+type Icons = Readonly<Record<string, string>>;
