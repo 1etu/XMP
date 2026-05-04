@@ -22,3 +22,5 @@ const EYE_DEPTH = verified(1200);
 const FOCUS_AXIS = verified(0.29453125);
 const PORTRAIT_WIDTH = design(720);
 const PORTRAIT_AXIS = design(0.24);
+const CROP_SIZE = verified(128);
+const CACHE_BATCHES = design(8);
