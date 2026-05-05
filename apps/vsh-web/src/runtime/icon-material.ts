@@ -27,3 +27,10 @@ const CACHE_BATCHES = design(8);
 const CACHE_BASES = design(4);
 
 type Icons = Readonly<Record<string, string>>;
+type ReadyIcons = Extract<IconWorkerOutput, { type: "ready" }>;
+
+interface DecodedBatch {
+  readonly icons: Icons;
+  readonly images: readonly HTMLImageElement[];
+  readonly urls: readonly string[];
+}
