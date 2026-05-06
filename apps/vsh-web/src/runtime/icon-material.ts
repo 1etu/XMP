@@ -54,3 +54,14 @@ function workerFor(textures: IconTextures): Worker {
   }
   return worker;
 }
+
+async function decodedImage(url: string): Promise<HTMLImageElement> {
+  const image = new Image();
+  image.src = url;
+  await image.decode();
+  return image;
+}
+
+function release(batch: DecodedBatch): void {
+  for (const url of batch.urls) URL.revokeObjectURL(url);
+}
