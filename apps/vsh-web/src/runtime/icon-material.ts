@@ -34,3 +34,23 @@ interface DecodedBatch {
   readonly images: readonly HTMLImageElement[];
   readonly urls: readonly string[];
 }
+
+interface PendingJob {
+  readonly key: string;
+  readonly baseKey: string;
+  readonly job: IconShadeJob;
+}
+
+function workerFor(textures: IconTextures): Worker {
+  const worker = new Worker(new URL("./icon-material.worker.ts", import.meta.url), {
+    type: "module",
+    name: "icon-material",
+  });
+  try {
+    worker.postMessage({ type: "load", textures });
+  } catch (error) {
+    worker.terminate();
+    throw error;
+  }
+  return worker;
+}
