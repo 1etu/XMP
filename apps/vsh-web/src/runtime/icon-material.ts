@@ -96,3 +96,75 @@ function dataUrl(blob: Blob): Promise<string> {
     reader.readAsDataURL(blob);
   });
 }
+
+async function prepareFallback(
+  textures: IconTextures,
+  signal: AbortSignal,
+): Promise<Readonly<Record<number, string>>> {
+  const icons: Record<number, string> = {};
+  for (const [key, normal] of Object.entries(textures.normals)) {
+    signal.throwIfAborted();
+    await new Promise<void>((resolve) => globalThis.setTimeout(resolve, 0));
+    const batch = shadeLoadedIcons({ ...textures, normals: { [key]: normal } });
+    await Promise.all(Object.values(batch).map(decodedImage));
+    Object.assign(icons, batch);
+  }
+  signal.throwIfAborted();
+  return icons;
+}
+
+export async function prepareIconImages(
+  textures: IconTextures,
+  signal: AbortSignal,
+): Promise<Readonly<Record<number, string>>> {
+  signal.throwIfAborted();
+  let worker: Worker | undefined;
+  let onAbort: (() => void) | undefined;
+  let response: ReadyIcons;
+  try {
+    worker = workerFor(textures);
+    response = await new Promise<ReadyIcons>((resolve, reject) => {
+      onAbort = () => {
+        reject(new DOMException("Icon preparation was aborted", "AbortError"));
+      };
+      signal.addEventListener("abort", onAbort, { once: true });
+      worker?.addEventListener(
+        "error",
+        (event) => {
+          reject(new Error(`Icon worker failed: ${event.message}`));
+        },
+        { once: true },
+      );
+      worker?.addEventListener(
+        "message",
+        (event: MessageEvent<IconWorkerOutput>) => {
+          if (event.data.type === "ready") resolve(event.data);
+          else reject(new Error(`Icon worker failed: ${event.data.message}`));
+        },
+        { once: true },
+      );
+      const draws = Object.keys(textures.normals).map((id) => ({
+        id,
+        icon: Number(id),
+        material: iconMaterialOf(),
+      }));
+      worker?.postMessage({ type: "shade", id: 0, draws });
+    });
+  } catch {
+    signal.throwIfAborted();
+    worker?.terminate();
+    return await prepareFallback(textures, signal);
+  } finally {
+    worker?.terminate();
+    if (onAbort !== undefined) signal.removeEventListener("abort", onAbort);
+  }
+  const entries = await Promise.all(
+    response.icons.map(async (icon) => {
+      const url = await dataUrl(icon.blob);
+      await decodedImage(url);
+      return [Number(icon.id), url] as const;
+    }),
+  );
+  signal.throwIfAborted();
+  return Object.fromEntries(entries);
+}
