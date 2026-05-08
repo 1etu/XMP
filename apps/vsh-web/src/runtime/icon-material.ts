@@ -65,3 +65,34 @@ async function decodedImage(url: string): Promise<HTMLImageElement> {
 function release(batch: DecodedBatch): void {
   for (const url of batch.urls) URL.revokeObjectURL(url);
 }
+
+async function decodeBatch(response: ReadyIcons): Promise<DecodedBatch> {
+  const urls = response.icons.map((icon) => URL.createObjectURL(icon.blob));
+  try {
+    const images = await Promise.all(urls.map(decodedImage));
+    return {
+      icons: Object.fromEntries(
+        response.icons.map((icon, index) => [icon.id, urls[index] ?? ""]),
+      ),
+      images,
+      urls,
+    };
+  } catch (error) {
+    for (const url of urls) URL.revokeObjectURL(url);
+    throw error;
+  }
+}
+
+function dataUrl(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") resolve(reader.result);
+      else reject(new Error("Icon PNG encoding returned no URL"));
+    };
+    reader.onerror = () => {
+      reject(reader.error ?? new Error("Icon PNG encoding failed"));
+    };
+    reader.readAsDataURL(blob);
+  });
+}
