@@ -8,3 +8,4 @@ import type {
 } from "./icon-material-job.js";
 
 const CROP_SIZE = verified(128);
+const CACHE_BASES = design(4);
