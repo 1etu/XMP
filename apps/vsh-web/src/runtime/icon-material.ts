@@ -256,3 +256,242 @@ function shellBase(
     ],
   };
 }
+
+export class IconMaterials {
+  readonly #textures: IconTextures;
+  readonly #palette: IconAmbientPalette;
+  readonly #publish: (icons: Icons) => void;
+  readonly #reportError: (error: Error) => void;
+  readonly #cache = new Map<string, DecodedBatch>();
+  readonly #bases = new Map<string, DecodedBatch>();
+  #retained = new Set<string>();
+  readonly #held = new Map<string, HTMLImageElement>();
+  #worker: Worker | undefined;
+  #pending: PendingJob | undefined;
+  #running: PendingJob | undefined;
+  #generation = 0;
+  #requestedKey: string | undefined;
+  #disposed = false;
+
+  constructor(
+    textures: IconTextures,
+    palette: IconAmbientPalette,
+    publish: (icons: Icons) => void,
+    reportError: (error: Error) => void,
+  ) {
+    this.#textures = textures;
+    this.#palette = palette;
+    this.#publish = publish;
+    this.#reportError = reportError;
+    try {
+      this.#worker = workerFor(textures);
+      this.#worker.addEventListener(
+        "message",
+        (event: MessageEvent<IconWorkerOutput>) => {
+          void this.#receive(event.data);
+        },
+      );
+      this.#worker.addEventListener("error", (event) => {
+        this.#fail(new Error(`Icon worker failed: ${event.message}`));
+      });
+    } catch (error) {
+      this.#fail(error instanceof Error ? error : new Error(String(error)));
+    }
+  }
+
+  get available(): boolean {
+    return !this.#disposed && this.#worker !== undefined;
+  }
+
+  request(
+    key: string,
+    snapshot: Snapshot,
+    preset: Preset,
+    dayFraction: number,
+    monthPosition: number,
+    canvas?: HTMLCanvasElement,
+  ): void {
+    const base = shellBase(this.#palette, preset, dayFraction, monthPosition, canvas);
+    key = `${key}:${base.key}:${String(canvas?.width ?? VIEW_WIDTH)}x${String(canvas?.height ?? VIEW_HEIGHT)}`;
+    if (this.#disposed || this.#worker === undefined || key === this.#requestedKey)
+      return;
+    this.invalidate();
+    this.#requestedKey = key;
+    const cached = this.#cache.get(key);
+    const cachedBase = this.#bases.get(base.key);
+    if (cached !== undefined && cachedBase !== undefined) {
+      this.#cache.delete(key);
+      this.#cache.set(key, cached);
+      this.#bases.delete(base.key);
+      this.#bases.set(base.key, cachedBase);
+      this.#publish({ ...cachedBase.icons, ...cached.icons });
+      return;
+    }
+    const id = this.#generation;
+    const draws = shellDraws(
+      this.#textures,
+      this.#palette,
+      snapshot,
+      preset,
+      dayFraction,
+      monthPosition,
+      canvas,
+    );
+    void this.#capture(key, id, draws, base, canvas);
+  }
+
+  async #capture(
+    key: string,
+    id: number,
+    draws: readonly IconDraw[],
+    base: IconBase,
+    canvas?: HTMLCanvasElement,
+  ): Promise<void> {
+    let backdrop: ImageBitmap | undefined;
+    try {
+      if (canvas !== undefined) backdrop = await createImageBitmap(canvas);
+      if (this.#disposed || id !== this.#generation) {
+        backdrop?.close();
+        return;
+      }
+      this.#pending = {
+        key,
+        baseKey: base.key,
+        job: {
+          type: "shade",
+          id,
+          draws,
+          ...(this.#bases.has(base.key) ? {} : { base }),
+          ...(backdrop === undefined ? {} : { backdrop }),
+        },
+      };
+      this.#flush();
+    } catch (error) {
+      backdrop?.close();
+      if (!this.#disposed && id === this.#generation)
+        this.#reportError(
+          new Error("Icon background capture failed", { cause: error }),
+        );
+    }
+  }
+
+  #flush(): void {
+    if (
+      this.#running !== undefined ||
+      this.#pending === undefined ||
+      this.#worker === undefined
+    )
+      return;
+    this.#running = this.#pending;
+    this.#pending = undefined;
+    const job = this.#running.job;
+    try {
+      this.#worker.postMessage(job, job.backdrop === undefined ? [] : [job.backdrop]);
+    } catch (error) {
+      job.backdrop?.close();
+      this.#running = undefined;
+      this.#fail(new Error("Icon worker submission failed", { cause: error }));
+    }
+  }
+
+  async #receive(response: IconWorkerOutput): Promise<void> {
+    const running = this.#running;
+    if (running === undefined || running.job.id !== response.id) return;
+    try {
+      if (response.type === "error") {
+        this.#fail(new Error(`Icon worker failed: ${response.message}`));
+        return;
+      }
+      if (!this.#current(response.id)) return;
+      let base = this.#bases.get(running.baseKey);
+      if (base === undefined) {
+        if (response.base === undefined)
+          throw new Error("The icon worker did not return the theme base images");
+        base = await decodeBatch({ ...response, icons: response.base });
+        if (!this.#current(response.id)) {
+          this.#release(base);
+          return;
+        }
+        this.#bases.set(running.baseKey, base);
+        while (this.#bases.size > CACHE_BASES) {
+          const oldest = this.#bases.entries().next().value;
+          if (oldest === undefined) break;
+          this.#bases.delete(oldest[0]);
+          this.#release(oldest[1]);
+        }
+      }
+      const batch = await decodeBatch(response);
+      if (!this.#current(response.id)) {
+        this.#release(batch);
+        return;
+      }
+      this.#cache.set(running.key, batch);
+      this.#publish({ ...base.icons, ...batch.icons });
+      while (this.#cache.size > CACHE_BATCHES) {
+        const oldest = this.#cache.entries().next().value;
+        if (oldest === undefined) break;
+        this.#cache.delete(oldest[0]);
+        this.#release(oldest[1]);
+      }
+    } catch (error) {
+      if (!this.#disposed)
+        this.#reportError(new Error("Icon image decode failed", { cause: error }));
+    } finally {
+      this.#running = undefined;
+      this.#flush();
+    }
+  }
+
+  invalidate(): void {
+    this.#generation += 1;
+    this.#requestedKey = undefined;
+    this.#pending?.job.backdrop?.close();
+    this.#pending = undefined;
+  }
+
+  retain(urls: Iterable<string>): void {
+    this.#retained = new Set(urls);
+    for (const [url] of this.#held) {
+      if (this.#retained.has(url)) continue;
+      this.#held.delete(url);
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  #release(batch: DecodedBatch): void {
+    for (let index = 0; index < batch.urls.length; index += 1) {
+      const url = batch.urls[index];
+      const image = batch.images[index];
+      if (url === undefined) continue;
+      if (this.#retained.has(url) && image !== undefined) this.#held.set(url, image);
+      else URL.revokeObjectURL(url);
+    }
+  }
+
+  #current(id: number): boolean {
+    return !this.#disposed && id === this.#generation;
+  }
+
+  #fail(error: Error): void {
+    if (this.#disposed) return;
+    this.invalidate();
+    this.#worker?.terminate();
+    this.#worker = undefined;
+    this.#reportError(error);
+  }
+
+  dispose(): void {
+    if (this.#disposed) return;
+    this.#disposed = true;
+    this.invalidate();
+    this.#worker?.terminate();
+    this.#worker = undefined;
+    for (const batch of this.#cache.values()) release(batch);
+    this.#cache.clear();
+    for (const batch of this.#bases.values()) release(batch);
+    this.#bases.clear();
+    for (const url of this.#held.keys()) URL.revokeObjectURL(url);
+    this.#held.clear();
+    this.#retained.clear();
+  }
+}
