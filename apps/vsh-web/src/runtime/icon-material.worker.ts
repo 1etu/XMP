@@ -1,0 +1,10 @@
+import { design, shadeIcon, verified } from "@vsh/qgl";
+import type { IconTextures } from "@vsh/qgl";
+import type {
+  IconShadeJob,
+  IconDraw,
+  IconWorkerInput,
+  IconWorkerOutput,
+} from "./icon-material-job.js";
+
+const CROP_SIZE = verified(128);
