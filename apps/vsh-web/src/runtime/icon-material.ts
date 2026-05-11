@@ -168,3 +168,91 @@ export async function prepareIconImages(
   signal.throwIfAborted();
   return Object.fromEntries(entries);
 }
+
+function shellDraws(
+  textures: IconTextures,
+  palette: IconAmbientPalette,
+  snapshot: Snapshot,
+  preset: Preset,
+  dayFraction: number,
+  monthPosition: number,
+  canvas?: HTMLCanvasElement,
+): readonly IconDraw[] {
+  const color = iconThemeColor(palette, dayFraction, monthPosition);
+  const width = Math.max(1, canvas?.clientWidth ?? VIEW_WIDTH);
+  const height = Math.max(1, canvas?.clientHeight ?? VIEW_HEIGHT);
+  const portrait = width <= height;
+  const pixelScale = width / (portrait ? PORTRAIT_WIDTH : VIEW_WIDTH);
+  const menuHeight = portrait ? height : VIEW_HEIGHT * pixelScale;
+  const axis = width * (portrait ? PORTRAIT_AXIS : FOCUS_AXIS);
+  const scale = height / CAMERA_HEIGHT;
+  const density = (canvas?.width ?? width) / width;
+  return [...snapshot.categories, ...snapshot.items]
+    .filter(
+      (draw) =>
+        draw.alpha > 0 &&
+        !draw.id.startsWith("outgoing-") &&
+        textures.normals[draw.icon] !== undefined,
+    )
+    .map((draw) => {
+      const x = axis + (draw.x - VIEW_WIDTH * FOCUS_AXIS) * pixelScale;
+      const y = (draw.y / VIEW_HEIGHT) * menuHeight;
+      const size = draw.size * pixelScale;
+      return {
+        id: draw.id,
+        icon: draw.icon,
+        crop: [
+          (Math.trunc(x) - CROP_SIZE / 2) * density,
+          (Math.trunc(y) - CROP_SIZE / 2) * density,
+          CROP_SIZE * density,
+        ] as const,
+        material: iconMaterialOf(preset.icons?.val, {
+          color,
+          eye: [
+            (width / 2 - x) / scale - EYE_OFFSET,
+            (y - height / 2) / scale,
+            EYE_DEPTH,
+            size / scale,
+          ],
+          pixelSize: [size, size],
+          screen: [
+            0.5 - size / (2 * CROP_SIZE),
+            0.5 - size / (2 * CROP_SIZE),
+            size / CROP_SIZE,
+            size / CROP_SIZE,
+          ],
+        }),
+      };
+    });
+}
+
+function shellBase(
+  palette: IconAmbientPalette,
+  preset: Preset,
+  dayFraction: number,
+  monthPosition: number,
+  canvas?: HTMLCanvasElement,
+): IconBase {
+  const color = iconThemeColor(palette, dayFraction, monthPosition);
+  const width = Math.max(1, canvas?.clientWidth ?? VIEW_WIDTH);
+  const height = Math.max(1, canvas?.clientHeight ?? VIEW_HEIGHT);
+  const density = (canvas?.width ?? width) / width;
+  return {
+    key: JSON.stringify([
+      preset.icons?.val,
+      color.map((channel) => Math.round(channel * 255)),
+      width,
+      height,
+    ]),
+    material: iconMaterialOf(preset.icons?.val, {
+      color,
+      eye: [-EYE_OFFSET, 0, EYE_DEPTH, (CROP_SIZE * CAMERA_HEIGHT) / height],
+      pixelSize: [CROP_SIZE, CROP_SIZE],
+    }),
+    crop: [
+      (width / 2 - CROP_SIZE / 2) * density,
+      (height / 2 - CROP_SIZE / 2) * density,
+      CROP_SIZE * density,
+    ],
+  };
+}
