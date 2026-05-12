@@ -9,3 +9,4 @@ import type {
 
 const CROP_SIZE = verified(128);
 const CACHE_BASES = design(4);
+let textures: IconTextures | undefined;
