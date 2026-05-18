@@ -31,3 +31,11 @@ export function readPreferences(): Preferences {
     return DEFAULT_PREFERENCES;
   }
 }
+
+export function savePreferences(value: Preferences): void {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(value));
+  } catch {
+    return;
+  }
+}
