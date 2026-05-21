@@ -35,3 +35,9 @@ export type Page =
       readonly selected: number;
     }
   | { readonly kind: "message"; readonly text: string };
+
+export interface PresentationSnapshot {
+  readonly pages: readonly Page[];
+  readonly departing: readonly Page[];
+  readonly preferences: Preferences;
+}
