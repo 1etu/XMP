@@ -43,3 +43,5 @@ export interface PresentationSnapshot {
 }
 
 export const CHOICES = THEME_CHOICES;
+
+const SCROLL_STEP = design(96);
