@@ -41,3 +41,5 @@ export interface PresentationSnapshot {
   readonly departing: readonly Page[];
   readonly preferences: Preferences;
 }
+
+export const CHOICES = THEME_CHOICES;
