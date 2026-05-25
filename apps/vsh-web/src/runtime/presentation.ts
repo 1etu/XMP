@@ -46,3 +46,12 @@ export const CHOICES = THEME_CHOICES;
 
 const SCROLL_STEP = design(96);
 const SEEK_SECONDS = design(5);
+
+interface Callbacks {
+  readonly change: () => void;
+  readonly route: (id: string | undefined) => void;
+  readonly preferences: (value: Preferences) => void;
+  readonly link: (href: string) => void;
+  readonly sound: (kind: "decide" | "cancel" | "cursor") => void;
+  readonly boardDisplay?: (enabled: boolean) => void;
+}
