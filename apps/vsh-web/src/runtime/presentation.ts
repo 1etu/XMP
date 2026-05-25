@@ -45,3 +45,4 @@ export interface PresentationSnapshot {
 export const CHOICES = THEME_CHOICES;
 
 const SCROLL_STEP = design(96);
+const SEEK_SECONDS = design(5);
