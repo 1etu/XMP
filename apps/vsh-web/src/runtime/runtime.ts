@@ -37,3 +37,4 @@ import type { StartupFrame } from "./startup.js";
 const TO_LIVE = design(1400);
 const BOOT_WAVE_FADE = verified(3000);
 const BOOT_LIVE_START = verified(4000);
+const BOOT_LIVE_FADE = verified(7500);
