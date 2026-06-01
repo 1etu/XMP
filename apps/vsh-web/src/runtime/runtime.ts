@@ -43,3 +43,4 @@ const MAX_DPR = design(2);
 const BRIGHTNESS_STEP = design(0.1);
 const ICON_PREPARE_LEAD = design(600);
 const PARTICLE_SOFTNESS = measured(0.9);
+const THEME_CHANGE = { durationMs: design(450), accelMode: AccelMode.Decelerate };
