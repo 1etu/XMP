@@ -40,3 +40,4 @@ const BOOT_LIVE_START = verified(4000);
 const BOOT_LIVE_FADE = verified(7500);
 
 const MAX_DPR = design(2);
+const BRIGHTNESS_STEP = design(0.1);
