@@ -44,3 +44,8 @@ const BRIGHTNESS_STEP = design(0.1);
 const ICON_PREPARE_LEAD = design(600);
 const PARTICLE_SOFTNESS = measured(0.9);
 const THEME_CHANGE = { durationMs: design(450), accelMode: AccelMode.Decelerate };
+const INFORMATION_WAVE_TINT = [
+  measured(1.095),
+  measured(1.08),
+  measured(1.31),
+] as const;
