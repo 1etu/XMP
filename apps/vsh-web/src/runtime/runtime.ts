@@ -62,3 +62,9 @@ export interface RuntimeOpts {
   readonly onStartup?: (frame: StartupFrame) => void;
   readonly onFocusLight?: (light: number) => void;
 }
+
+export interface Runtime {
+  readonly boot: Boot;
+  start(): void;
+  dispose(): void;
+}
