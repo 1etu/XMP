@@ -49,3 +49,16 @@ const INFORMATION_WAVE_TINT = [
   measured(1.08),
   measured(1.31),
 ] as const;
+
+export interface RuntimeOpts {
+  readonly canvas: HTMLCanvasElement;
+  readonly rtc?: Rtc;
+  readonly quality?: Quality;
+  readonly backend?: BackendId;
+  readonly appearance?: "reference" | "calendar";
+  readonly target?: EventTarget;
+  readonly onEffect?: (effect: Effect) => void;
+  readonly onShell?: (shell: XmbShell) => void;
+  readonly onStartup?: (frame: StartupFrame) => void;
+  readonly onFocusLight?: (light: number) => void;
+}
