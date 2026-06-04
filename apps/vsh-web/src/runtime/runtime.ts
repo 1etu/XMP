@@ -68,3 +68,7 @@ export interface Runtime {
   start(): void;
   dispose(): void;
 }
+
+function reducedMotion(): boolean {
+  return globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
