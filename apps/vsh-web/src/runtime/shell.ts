@@ -26,3 +26,4 @@ import { WHATS_NEW, WhatsNew } from "./whats-new.js";
 
 const PREVIEW_DELAY = design(650);
 const OPTION_MOVE = { durationMs: verified(300), accelMode: AccelMode.Decelerate };
+const MATERIAL_FADE = { durationMs: design(200), accelMode: AccelMode.Linear };
