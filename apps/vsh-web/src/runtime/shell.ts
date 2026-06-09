@@ -34,3 +34,12 @@ const DIRS: Readonly<Record<string, Dir>> = {
   left: "left",
   right: "right",
 };
+
+const SOUND: Readonly<Record<Effect, SoundId | undefined>> = {
+  none: undefined,
+  cursor: SystemSound.Cursor,
+  category: SystemSound.CategoryDecide,
+  decide: SystemSound.Decide,
+  cancel: SystemSound.Cancel,
+  reject: SystemSound.Error,
+};
