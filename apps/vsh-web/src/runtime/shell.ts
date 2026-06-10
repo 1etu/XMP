@@ -43,3 +43,5 @@ const SOUND: Readonly<Record<Effect, SoundId | undefined>> = {
   cancel: SystemSound.Cancel,
   reject: SystemSound.Error,
 };
+
+const SOUND_BASE = "/original/sound/";
