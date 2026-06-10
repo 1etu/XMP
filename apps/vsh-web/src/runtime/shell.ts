@@ -45,3 +45,11 @@ const SOUND: Readonly<Record<Effect, SoundId | undefined>> = {
 };
 
 const SOUND_BASE = "/original/sound/";
+
+const EMPTY: Snapshot = {
+  categories: [],
+  categoryLabel: undefined,
+  categoryLabels: [],
+  items: [],
+  labels: [],
+};
