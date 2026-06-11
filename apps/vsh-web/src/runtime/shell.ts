@@ -53,3 +53,16 @@ const EMPTY: Snapshot = {
   items: [],
   labels: [],
 };
+
+export interface Described {
+  readonly category: string;
+  readonly depth: number;
+  readonly categories: readonly { id: string; title: string; focused: boolean }[];
+  readonly items: readonly {
+    id: string;
+    title: string;
+    info: string;
+    focused: boolean;
+    folder: boolean;
+  }[];
+}
