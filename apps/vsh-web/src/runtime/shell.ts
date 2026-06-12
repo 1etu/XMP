@@ -76,3 +76,9 @@ export interface ShellOpts {
   readonly preferences: Preferences;
   readonly onPreferences: (value: Preferences) => void;
 }
+
+interface Column {
+  state: State;
+  offset: number;
+  readonly alpha: Scalar;
+}
