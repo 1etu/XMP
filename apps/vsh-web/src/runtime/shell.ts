@@ -66,3 +66,13 @@ export interface Described {
     folder: boolean;
   }[];
 }
+
+export interface ShellOpts {
+  readonly cats: readonly Category[];
+  readonly metrics: Metrics;
+  readonly icons: Readonly<Record<number, string>>;
+  readonly target: EventTarget;
+  readonly onEffect: (effect: Effect) => void;
+  readonly preferences: Preferences;
+  readonly onPreferences: (value: Preferences) => void;
+}
