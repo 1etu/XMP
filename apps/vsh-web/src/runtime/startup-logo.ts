@@ -7,3 +7,4 @@ const WORLD_HEIGHT = verified(1.28);
 const MATERIAL_GAIN = measured(0.262);
 const LIGHT_START_X = verified(-3);
 const LIGHT_START_Y = verified(0.5);
+const LIGHT_EXIT_X = verified(2.25);
