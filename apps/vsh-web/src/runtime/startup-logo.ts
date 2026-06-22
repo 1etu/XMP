@@ -8,3 +8,4 @@ const MATERIAL_GAIN = measured(0.262);
 const LIGHT_START_X = verified(-3);
 const LIGHT_START_Y = verified(0.5);
 const LIGHT_EXIT_X = verified(2.25);
+const LIGHT_EXIT_Y = verified(1.5);
