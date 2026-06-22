@@ -9,3 +9,4 @@ const LIGHT_START_X = verified(-3);
 const LIGHT_START_Y = verified(0.5);
 const LIGHT_EXIT_X = verified(2.25);
 const LIGHT_EXIT_Y = verified(1.5);
+const ATTENUATION_START = [verified(0), verified(1), verified(4)] as const;
