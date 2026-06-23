@@ -12,3 +12,4 @@ const LIGHT_EXIT_Y = verified(1.5);
 const ATTENUATION_START = [verified(0), verified(1), verified(4)] as const;
 const ATTENUATION_LIT = verified(0.1);
 const FOOTER_START = measured(222);
+const BLACK_LEVEL = design(8);
