@@ -14,3 +14,10 @@ const ATTENUATION_LIT = verified(0.1);
 const FOOTER_START = measured(222);
 const BLACK_LEVEL = design(8);
 const BLUR_RADIUS = design(3);
+
+interface LogoFrame {
+  readonly light: number;
+  readonly fade: number;
+  readonly blur: number;
+  readonly footer: number;
+}
