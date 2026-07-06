@@ -9,3 +9,4 @@ const LOGO_END = measured(5008);
 const LOGO_FADE = verified(1200);
 export const MENU_START = measured(8200);
 export const STARTUP_END = measured(11500);
+export const STARTUP_WAVE_DELAY = measured(1500);
