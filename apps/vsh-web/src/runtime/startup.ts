@@ -20,3 +20,13 @@ const MENU_ALPHA = [
   [measured(8800), measured(0.961)],
   [measured(8900), measured(1)],
 ] as const;
+const MENU_SCALE = [
+  [measured(8380), measured(1.088)],
+  [measured(8400), measured(1.0751)],
+  [measured(8500), measured(1.0401)],
+  [measured(8600), measured(1.0211)],
+  [measured(8700), measured(1.0109)],
+  [measured(8800), measured(1.0055)],
+  [measured(9000), measured(1.0013)],
+  [measured(9400), measured(1)],
+] as const;
