@@ -30,3 +30,12 @@ const MENU_SCALE = [
   [measured(9000), measured(1.0013)],
   [measured(9400), measured(1)],
 ] as const;
+const MENU_BLUR = [
+  [measured(8380), measured(5.55)],
+  [measured(8400), measured(3.6292)],
+  [measured(8500), measured(1.0086)],
+  [measured(8600), measured(0.6736)],
+  [measured(8700), measured(0.1122)],
+  [measured(8800), measured(0.0902)],
+  [measured(9000), measured(0)],
+] as const;
