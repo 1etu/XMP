@@ -39,3 +39,13 @@ const MENU_BLUR = [
   [measured(8800), measured(0.0902)],
   [measured(9000), measured(0)],
 ] as const;
+const WAVE_GAIN = [
+  [measured(0), measured(0.9)],
+  [measured(1500), measured(0.8)],
+  [measured(2500), measured(1.25)],
+  [measured(4000), measured(1.2)],
+  [measured(6000), measured(0.9)],
+  [measured(8500), measured(0.5)],
+  [measured(9000), measured(0.5)],
+  [measured(11500), measured(1.6)],
+] as const;
