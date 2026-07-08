@@ -49,3 +49,19 @@ const WAVE_GAIN = [
   [measured(9000), measured(0.5)],
   [measured(11500), measured(1.6)],
 ] as const;
+
+export interface StartupFrame {
+  readonly elapsedMs: number;
+  readonly logo: number;
+  readonly blur: number;
+  readonly footer: number;
+  readonly light: number;
+  readonly fade: number;
+  readonly menu: number;
+  readonly clock: number;
+  readonly menuScale: number;
+  readonly menuBlur: number;
+  readonly waveGain: number;
+  readonly appearance: number;
+  readonly done: boolean;
+}
