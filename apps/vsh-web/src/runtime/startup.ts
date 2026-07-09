@@ -69,3 +69,29 @@ export interface StartupFrame {
 function ramp(time: number, start: number, duration: number): number {
   return Math.min(1, Math.max(0, (time - start) / duration));
 }
+
+function sample(time: number, points: readonly (readonly [number, number])[]): number {
+  const index = points.findIndex(([at]) => at >= time);
+  if (index < 0) return points.at(-1)?.[1] ?? 0;
+  const b = points[index];
+  if (b === undefined) return 0;
+  if (index === 0) return b[1];
+  const a = points[index - 1] ?? b;
+  const before = points[index - 2] ?? a;
+  const after = points[index + 1] ?? b;
+  const duration = b[0] - a[0];
+  const slope = (b[1] - a[1]) / duration;
+  const tangent = (other: number): number =>
+    slope * other <= 0 ? 0 : (2 * slope * other) / (slope + other);
+  const m0 = tangent((a[1] - before[1]) / Math.max(1, a[0] - before[0])) * duration;
+  const m1 = tangent((after[1] - b[1]) / Math.max(1, after[0] - b[0])) * duration;
+  const k = (time - a[0]) / duration;
+  const k2 = k * k;
+  const k3 = k2 * k;
+  return (
+    (2 * k3 - 3 * k2 + 1) * a[1] +
+    (k3 - 2 * k2 + k) * m0 +
+    (-2 * k3 + 3 * k2) * b[1] +
+    (k3 - k2) * m1
+  );
+}
