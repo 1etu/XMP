@@ -65,3 +65,7 @@ export interface StartupFrame {
   readonly appearance: number;
   readonly done: boolean;
 }
+
+function ramp(time: number, start: number, duration: number): number {
+  return Math.min(1, Math.max(0, (time - start) / duration));
+}
