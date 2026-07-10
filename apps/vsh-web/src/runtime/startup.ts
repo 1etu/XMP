@@ -95,3 +95,17 @@ function sample(time: number, points: readonly (readonly [number, number])[]): n
     (k3 - k2) * m1
   );
 }
+
+function curve(t: number, x1: number, x2: number): number {
+  if (t <= 0 || t >= 1) return t;
+  let lo = 0;
+  let hi = 1;
+  for (let i = 0; i < 16; i += 1) {
+    const u = (lo + hi) * 0.5;
+    const x = 3 * (1 - u) * (1 - u) * u * x1 + 3 * (1 - u) * u * u * x2 + u * u * u;
+    if (x < t) lo = u;
+    else hi = u;
+  }
+  const u = (lo + hi) * 0.5;
+  return u * u * (3 - 2 * u);
+}
