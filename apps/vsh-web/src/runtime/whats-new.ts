@@ -26,3 +26,4 @@ export const WHATS_NEW = {
 } as const;
 
 const MOVE = { durationMs: WHATS_NEW.focusMs, accelMode: AccelMode.Decelerate };
+const HISTORY_KEY = "vsh.whats-new.visited";
