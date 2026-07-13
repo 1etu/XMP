@@ -24,3 +24,5 @@ export const WHATS_NEW = {
   titleDelayMs: measured(1000),
   titleSpeed: measured(45),
 } as const;
+
+const MOVE = { durationMs: WHATS_NEW.focusMs, accelMode: AccelMode.Decelerate };
