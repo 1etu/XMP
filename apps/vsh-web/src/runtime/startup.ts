@@ -109,3 +109,26 @@ function curve(t: number, x1: number, x2: number): number {
   const u = (lo + hi) * 0.5;
   return u * u * (3 - 2 * u);
 }
+
+export function startupAt(elapsedMs: number, reduced: boolean): StartupFrame {
+  const t = reduced ? STARTUP_END : elapsedMs;
+  const fade = curve(ramp(t, LOGO_END, LOGO_FADE), verified(0.8), verified(0.8));
+  return {
+    elapsedMs: t,
+    logo: ramp(t, LOGO_START, 100) * (1 - fade),
+    blur:
+      curve(ramp(t, BLUR_START, 500), 0.1, 0.1) *
+      (1 - curve(ramp(t, BLUR_END, 500), 0.1, 0.1)) *
+      (1 - fade),
+    footer: curve(ramp(t, FOOTER_START, 500), 0.1, 0.1) * (1 - fade),
+    light: ramp(t, LOGO_START, LOGO_LIGHT),
+    fade,
+    menu: sample(t, MENU_ALPHA),
+    clock: curve(ramp(t, MENU_START, 150), 0.1, 0.1),
+    menuScale: sample(t, MENU_SCALE),
+    menuBlur: sample(t, MENU_BLUR),
+    waveGain: sample(t, WAVE_GAIN),
+    appearance: curve(ramp(t, measured(9000), measured(2500)), 0.25, 0.75),
+    done: t >= STARTUP_END,
+  };
+}
