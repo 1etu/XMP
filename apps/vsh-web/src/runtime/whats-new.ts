@@ -28,3 +28,4 @@ export const WHATS_NEW = {
 const MOVE = { durationMs: WHATS_NEW.focusMs, accelMode: AccelMode.Decelerate };
 const HISTORY_KEY = "vsh.whats-new.visited";
 export type CardState = "loading" | "ready" | "failed";
+export type ImageLoader = (src: string, signal: AbortSignal) => Promise<void>;
