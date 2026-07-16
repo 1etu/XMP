@@ -33,3 +33,10 @@ interface Storage {
   getItem(key: string): string | null;
   setItem(key: string, value: string): void;
 }
+export interface WhatsNewSnapshot {
+  readonly items: readonly WhatsNewItem[];
+  readonly selected: number;
+  readonly states: readonly CardState[];
+  readonly seen: readonly string[];
+  readonly recentStart: number;
+}
