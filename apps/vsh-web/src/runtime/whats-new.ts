@@ -40,3 +40,37 @@ export interface WhatsNewSnapshot {
   readonly seen: readonly string[];
   readonly recentStart: number;
 }
+
+export function loadCardImage(src: string, signal: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const finish = (error?: unknown): void => {
+      clearTimeout(timer);
+      signal.removeEventListener("abort", abort);
+      if (error === undefined) resolve();
+      else
+        reject(
+          error instanceof Error
+            ? error
+            : new Error("The image could not load.", { cause: error }),
+        );
+    };
+    const abort = (): void => {
+      image.src = "";
+      finish(new DOMException("Image load cancelled", "AbortError"));
+    };
+    const timer = setTimeout(() => {
+      image.src = "";
+      finish(new Error("The image did not load."));
+    }, WHATS_NEW.loadTimeoutMs);
+    if (signal.aborted) {
+      abort();
+      return;
+    }
+    signal.addEventListener("abort", abort, { once: true });
+    image.src = src;
+    void image.decode().then(() => {
+      finish();
+    }, finish);
+  });
+}
