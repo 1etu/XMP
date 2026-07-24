@@ -10,3 +10,19 @@ interface BoardProps {
   readonly onClose: () => void;
   readonly onNavigate: (href: string) => void;
 }
+
+function BoardMark(): React.JSX.Element {
+  return (
+    <svg
+      className="vsh-board-mark"
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path d="M1 2h12v12H1zM23 2l7 12H16zM1 19l12 12M13 19 1 31" />
+      <circle cx="23" cy="25" r="6" />
+    </svg>
+  );
+}
