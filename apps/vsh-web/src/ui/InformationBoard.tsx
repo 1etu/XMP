@@ -324,3 +324,60 @@ export function InformationBoard({
     </section>
   );
 }
+
+export function BoardTicker({
+  board,
+  subscribe,
+  onOpen,
+}: {
+  readonly board: Board;
+  readonly subscribe: BoardProps["subscribe"];
+  readonly onOpen: () => void;
+}): React.JSX.Element | null {
+  const snapshot = useSyncExternalStore(
+    useCallback((listener: () => void) => board.subscribe(listener), [board]),
+    useCallback(() => board.snapshot, [board]),
+  );
+  const rootRef = useRef<HTMLButtonElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const headline = board.headline;
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    const text = textRef.current;
+    if (root === null || text === null || headline === undefined) return;
+    const measure = (): void => {
+      const scale = Number.parseFloat(getComputedStyle(text).fontSize) / 28;
+      board.measureTitle(headline.id, text.scrollWidth / scale);
+    };
+    const update = (): void => {
+      root.style.setProperty("--board-ticker-x", String(board.frame.tickerX));
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(root);
+    measure();
+    update();
+    const unsubscribe = subscribe(update);
+    return () => {
+      observer.disconnect();
+      unsubscribe();
+    };
+  }, [board, subscribe, headline, snapshot.enabled, snapshot.mode]);
+
+  if (!snapshot.enabled || snapshot.mode !== "ticker" || headline === undefined)
+    return null;
+  return (
+    <button
+      ref={rootRef}
+      className="vsh-board-ticker"
+      type="button"
+      onClick={onOpen}
+      aria-label={`Information Board: ${headline.title}`}
+    >
+      <BoardMark />
+      <span className="vsh-board-ticker-mask">
+        <span ref={textRef}>{headline.title}</span>
+      </span>
+    </button>
+  );
+}
