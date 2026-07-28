@@ -76,3 +76,37 @@ function Information({
     </section>
   );
 }
+
+function Document({
+  id,
+  shell,
+}: {
+  id: string;
+  shell: XmbShell;
+}): React.JSX.Element | null {
+  const info = informationOf(id);
+  if (info === undefined) return null;
+  return (
+    <section
+      className="vsh-information vsh-text-page"
+      aria-label={`${info.title} details`}
+    >
+      <UserBadge />
+      <h1 className="vsh-document-title" tabIndex={-1} data-focus-default>
+        {info.title}
+      </h1>
+      <div
+        className="vsh-document"
+        data-native-input="true"
+        tabIndex={0}
+        ref={(element) => {
+          shell.content.scroll = element;
+        }}
+      >
+        {info.paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+    </section>
+  );
+}
