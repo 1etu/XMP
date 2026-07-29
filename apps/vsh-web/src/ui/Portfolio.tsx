@@ -167,3 +167,64 @@ function Options({
     </section>
   );
 }
+
+function Choice({
+  page,
+  shell,
+}: {
+  page: Extract<Page, { kind: "choice" }>;
+  shell: XmbShell;
+}): React.JSX.Element {
+  const current = shell.content.snapshot().preferences[page.setting];
+  return (
+    <section
+      className="vsh-choice vsh-option-panel"
+      aria-label={`${SETTING_LABELS[page.setting]} settings`}
+    >
+      <div
+        className="vsh-option-list"
+        role="menu"
+        aria-label={SETTING_LABELS[page.setting]}
+      >
+        {CHOICES[page.setting].map((item, index) => (
+          <button
+            key={item.value}
+            type="button"
+            role="menuitemradio"
+            aria-checked={String(current) === item.value}
+            aria-label={item.label}
+            data-focus-default={index === page.selected ? true : undefined}
+            className={
+              index === page.selected ? "vsh-selection selected" : "vsh-selection"
+            }
+            onFocus={() => {
+              shell.content.select(index);
+            }}
+            onMouseEnter={() => {
+              shell.content.select(index);
+            }}
+            onClick={() => {
+              shell.content.select(index);
+              shell.content.confirm();
+            }}
+          >
+            {item.swatch === undefined ? (
+              item.label
+            ) : (
+              <span
+                className="vsh-color-swatch"
+                style={{ backgroundColor: item.swatch }}
+                aria-hidden="true"
+              />
+            )}
+          </button>
+        ))}
+      </div>
+      {page.selected < CHOICES[page.setting].length - 1 ? (
+        <span className="vsh-option-more" aria-hidden="true">
+          ▾
+        </span>
+      ) : null}
+    </section>
+  );
+}
