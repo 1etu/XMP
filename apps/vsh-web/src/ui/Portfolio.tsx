@@ -110,3 +110,60 @@ function Document({
     </section>
   );
 }
+
+function Options({
+  page,
+  shell,
+}: {
+  page: Extract<Page, { kind: "options" }>;
+  shell: XmbShell;
+}): React.JSX.Element {
+  return (
+    <section className="vsh-options vsh-option-panel" aria-label="Options">
+      <div className="vsh-option-list" role="menu" aria-label="Item options">
+        {optionsFor(page.id).map((option, index) => {
+          const props = {
+            className:
+              index === page.selected ? "vsh-selection selected" : "vsh-selection",
+            role: "menuitem",
+            "data-focus-default": index === page.selected ? true : undefined,
+            onFocus: (): void => {
+              shell.content.select(index);
+            },
+            onMouseEnter: (): void => {
+              shell.content.select(index);
+            },
+          };
+          return option.action.kind === "link" ? (
+            <a
+              key={option.label}
+              {...props}
+              href={option.action.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(event) => {
+                if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+                  return;
+                event.preventDefault();
+                shell.content.open(option.action);
+              }}
+            >
+              {option.label}
+            </a>
+          ) : (
+            <button
+              key={option.label}
+              {...props}
+              type="button"
+              onClick={() => {
+                shell.content.open(option.action);
+              }}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
