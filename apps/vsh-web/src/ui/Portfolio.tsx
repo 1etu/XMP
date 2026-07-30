@@ -228,3 +228,78 @@ function Choice({
     </section>
   );
 }
+
+function Gallery({
+  page,
+  shell,
+}: {
+  page: Extract<Page, { kind: "gallery" }>;
+  shell: XmbShell;
+}): React.JSX.Element {
+  const project = projectOf(page.id);
+  const photo = project?.images[page.index];
+  return (
+    <section className="vsh-media" aria-label={`${project?.title ?? "Project"} images`}>
+      <img
+        key={photo?.src}
+        src={photo?.src}
+        alt={photo?.title ?? "Project image"}
+        onError={() => {
+          shell.content.fail(
+            "The image could not load. Return to Information and try again.",
+          );
+        }}
+      />
+      <p className="vsh-media-caption" tabIndex={-1} data-focus-default>
+        {photo?.title}{" "}
+        <span>
+          {page.index + 1} / {project?.images.length ?? 0}
+        </span>
+      </p>
+      {page.controls ? (
+        <div className="vsh-media-controls" aria-label="Photo controls">
+          <button
+            aria-label="Previous"
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              shell.content.image(-1);
+            }}
+          >
+            ◁ <span>Previous</span>
+          </button>
+          <button
+            aria-label="Next"
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              shell.content.image(1);
+            }}
+          >
+            ▷ <span>Next</span>
+          </button>
+          <button
+            aria-label="Set as Wallpaper"
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              if (photo !== undefined) shell.content.setWallpaper(photo.src);
+            }}
+          >
+            ▧ <span>Set as Wallpaper</span>
+          </button>
+          <button
+            aria-label="Back to information"
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              shell.content.back();
+            }}
+          >
+            ○ <span>Back</span>
+          </button>
+        </div>
+      ) : null}
+    </section>
+  );
+}
