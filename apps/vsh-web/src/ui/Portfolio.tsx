@@ -424,3 +424,320 @@ function Video({
     </section>
   );
 }
+
+export function Portfolio({ shell }: { shell: XmbShell }): React.JSX.Element {
+  const device = useSyncExternalStore(shell.subscribe, shell.inputDevice);
+  const snapshot = useSyncExternalStore(shell.subscribe, shell.content.snapshot);
+  const described = useSyncExternalStore(shell.subscribe, shell.describe);
+  const preview = useSyncExternalStore(shell.subscribe, () => shell.preview);
+  const welcomePreview = useSyncExternalStore(
+    shell.subscribe,
+    () => shell.whatsNewPreview,
+  );
+  const surfaceRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const pages = snapshot.pages.length > 0 ? snapshot.pages : snapshot.departing;
+  const closing = snapshot.pages.length === 0 && pages.length > 0;
+  const top = pages.at(-1);
+  const pageKey =
+    top === undefined
+      ? "menu"
+      : `${top.kind}:${"id" in top ? top.id : top.kind === "choice" ? top.setting : "message"}`;
+  const selected =
+    top?.kind === "options" || top?.kind === "choice" || top?.kind === "profile"
+      ? top.selected
+      : -1;
+  const currentId =
+    top?.kind === "information"
+      ? top.id
+      : described.items.find((item) => item.focused)?.id;
+  const hasOptions =
+    top?.kind === "gallery" ||
+    top?.kind === "video" ||
+    top?.kind === "options" ||
+    ((top === undefined || top.kind === "information") &&
+      currentId !== undefined &&
+      optionsFor(currentId).length > 0);
+  useEffect(() => {
+    const update = (): void => {
+      const parent = surfaceRef.current?.parentElement;
+      parent?.style.setProperty("--content-alpha", String(shell.panelAlpha));
+      const state = shell.content.snapshot();
+      const pages = state.pages.length > 0 ? state.pages : state.departing;
+      parent?.style.setProperty(
+        "--whats-new-alpha",
+        String(
+          Math.max(
+            shell.whatsNewAlpha,
+            pages.at(-1)?.kind === "whats-new" ? shell.panelAlpha : 0,
+          ),
+        ),
+      );
+      parent?.style.setProperty(
+        "--board-shift",
+        String(pages.at(-1)?.kind === "board" ? shell.panelAlpha : 0),
+      );
+      if (parent !== null && parent !== undefined) {
+        parent.dataset["information"] = String(
+          pages.some((page) => page.kind === "information" || page.kind === "profile"),
+        );
+        parent.dataset["about"] = String(pages.some((page) => page.kind === "about"));
+        parent.dataset["system"] = String(pages.some((page) => page.kind === "system"));
+        parent.dataset["browser"] = String(
+          pages.some((page) => page.kind === "browser"),
+        );
+        parent.dataset["board"] = String(pages.at(-1)?.kind === "board");
+        parent.dataset["whatsNew"] = String(pages.at(-1)?.kind === "whats-new");
+        parent.dataset["whatsNewPreview"] = String(
+          shell.whatsNewAlpha > 0 && pages.at(-1)?.kind !== "whats-new",
+        );
+        parent.dataset["font"] = state.preferences.font;
+        parent.dataset["nested"] = String(shell.state.levels.length > 1);
+        parent.dataset["nestedSettings"] = String(
+          shell.state.levels.length > 1 && shell.describe().category === "Settings",
+        );
+        parent.dataset["sidePanel"] = String(
+          pages.at(-1)?.kind === "choice" ||
+            pages.at(-1)?.kind === "options" ||
+            pages.at(-1)?.kind === "board",
+        );
+      }
+      parent?.style.setProperty(
+        "--menu-dim",
+        pages.at(-1)?.kind === "whats-new"
+          ? "0"
+          : pages.at(-1)?.kind === "board"
+            ? "0.82"
+            : pages.length === 1 &&
+                (pages[0]?.kind === "options" || pages[0]?.kind === "choice")
+              ? "0.12"
+              : "1",
+      );
+      surfaceRef.current?.style.setProperty("--panel-alpha", String(shell.panelAlpha));
+      surfaceRef.current?.style.setProperty("--page-alpha", String(shell.pageAlpha));
+      surfaceRef.current?.style.setProperty(
+        "--option-offset",
+        String(shell.optionOffset),
+      );
+      previewRef.current?.style.setProperty("opacity", String(shell.previewAlpha));
+    };
+    update();
+    return shell.subscribe(update);
+  }, [shell]);
+  useEffect(() => {
+    if (top === undefined || closing) {
+      document
+        .querySelector<HTMLElement>(
+          `[data-entry-id="${CSS.escape(shell.describe().items.find((item) => item.focused)?.id ?? "")}"]`,
+        )
+        ?.focus({ preventScroll: true });
+    } else
+      surfaceRef.current
+        ?.querySelector<HTMLElement>("[data-top-layer] [data-focus-default]")
+        ?.focus({ preventScroll: true });
+  }, [pageKey, selected, shell, closing]);
+  const base = pages.find((page) => page.kind === "information");
+  return (
+    <>
+      <div className="wn-backdrop" aria-hidden="true" />
+      {welcomePreview ? <WhatsNewPreview shell={shell} /> : null}
+      {top === undefined ? (
+        <BoardTicker
+          board={shell.board}
+          subscribe={shell.subscribe}
+          onOpen={() => {
+            shell.content.open({ kind: "board" });
+          }}
+        />
+      ) : null}
+      {snapshot.preferences.wallpaper !== "" ? (
+        <img
+          className="vsh-wallpaper"
+          src={snapshot.preferences.wallpaper}
+          alt=""
+          aria-hidden="true"
+        />
+      ) : null}
+      <div
+        ref={previewRef}
+        className="vsh-preview"
+        aria-hidden="true"
+        hidden={preview === undefined || top !== undefined}
+      >
+        {preview === undefined ? null : (
+          <img
+            key={preview}
+            src={preview}
+            alt=""
+            onError={(event) => {
+              event.currentTarget.style.visibility = "hidden";
+            }}
+          />
+        )}
+      </div>
+      <div
+        ref={surfaceRef}
+        className="vsh-content"
+        data-open={top !== undefined}
+        inert={closing}
+        onKeyDown={(event) => {
+          if (event.key !== "Tab" || top === undefined) return;
+          const elements = surfaceRef.current?.querySelectorAll<HTMLElement>(
+            '[data-top-layer] button, [data-top-layer] a, [data-top-layer] input, [data-top-layer] [tabindex="0"]',
+          );
+          const first = elements?.[0];
+          const last = elements?.[elements.length - 1];
+          if (
+            event.shiftKey &&
+            (document.activeElement === first ||
+              document.activeElement?.hasAttribute("data-focus-default"))
+          ) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }}
+      >
+        {base === undefined ? null : (
+          <div
+            className="vsh-layer"
+            hidden={
+              top?.kind === "document" ||
+              top?.kind === "gallery" ||
+              top?.kind === "video" ||
+              top?.kind === "browser"
+            }
+            inert={top !== base}
+            data-top-layer={top === base ? true : undefined}
+          >
+            <Information id={base.id} shell={shell} />
+          </div>
+        )}
+        {top === undefined || top.kind === "information" ? null : (
+          <div className="vsh-layer" data-top-layer>
+            {top.kind === "options" ? <Options page={top} shell={shell} /> : null}
+            {top.kind === "choice" ? <Choice page={top} shell={shell} /> : null}
+            {top.kind === "gallery" ? <Gallery page={top} shell={shell} /> : null}
+            {top.kind === "video" ? <Video page={top} shell={shell} /> : null}
+            {top.kind === "document" ? <Document id={top.id} shell={shell} /> : null}
+            {top.kind === "about" ? <About shell={shell} /> : null}
+            {top.kind === "system" ? <SystemInformation shell={shell} /> : null}
+            {top.kind === "profile" ? <Profile page={top} shell={shell} /> : null}
+            {top.kind === "browser" ? (
+              <WebView browser={shell.content.browser} />
+            ) : null}
+            {top.kind === "whats-new" ? <WhatsNew shell={shell} /> : null}
+            {top.kind === "board" ? (
+              <InformationBoard
+                board={shell.board}
+                subscribe={shell.subscribe}
+                onCommand={(command) => {
+                  shell.boardCommand(command);
+                }}
+                onClose={() => {
+                  shell.content.back();
+                }}
+                onNavigate={(href) => {
+                  shell.content.open({ kind: "browser", href });
+                }}
+              />
+            ) : null}
+            {top.kind === "message" ? (
+              <section
+                className="vsh-message"
+                role="alertdialog"
+                aria-modal="true"
+                aria-label="Message"
+              >
+                <p>{top.text}</p>
+                <button
+                  type="button"
+                  data-native-input="true"
+                  data-focus-default
+                  onClick={() => {
+                    shell.content.back();
+                  }}
+                >
+                  OK
+                </button>
+              </section>
+            ) : null}
+          </div>
+        )}
+      </div>
+      <footer
+        className="vsh-controls"
+        aria-label="Navigation controls"
+        data-input-device={device}
+        data-information={
+          top?.kind === "information" ||
+          top?.kind === "document" ||
+          top?.kind === "system"
+        }
+        data-media={top?.kind === "gallery" || top?.kind === "video"}
+        data-closing={closing}
+        hidden={
+          (top === undefined &&
+            (described.depth === 0 || described.category !== "Settings")) ||
+          top?.kind === "about" ||
+          top?.kind === "browser" ||
+          top?.kind === "whats-new" ||
+          top?.kind === "board"
+        }
+      >
+        {top?.kind === "information" ||
+        top?.kind === "document" ||
+        top?.kind === "system" ? null : (
+          <button
+            type="button"
+            data-binding="decide"
+            data-native-input="true"
+            title={device === "keyboard" ? "Enter" : undefined}
+            aria-keyshortcuts={device === "keyboard" ? "Enter" : undefined}
+            onClick={() => {
+              shell.command("decide");
+            }}
+          >
+            <ControlGlyph binding="decide" />
+            <span>{top?.kind === "video" ? "Play / Pause" : "Enter"}</span>
+          </button>
+        )}
+        {top === undefined && described.depth === 0 ? null : (
+          <button
+            type="button"
+            data-binding="cancel"
+            data-native-input="true"
+            title={device === "keyboard" ? "Escape" : undefined}
+            aria-keyshortcuts={device === "keyboard" ? "Escape" : undefined}
+            onClick={() => {
+              shell.command("cancel");
+            }}
+          >
+            <ControlGlyph binding="cancel" /> <span>Back</span>
+          </button>
+        )}
+        {hasOptions && top?.kind !== "information" ? (
+          <button
+            type="button"
+            data-binding="options"
+            data-native-input="true"
+            title={device === "keyboard" ? "T" : undefined}
+            aria-keyshortcuts={device === "keyboard" ? "T" : undefined}
+            onClick={() => {
+              shell.command("options");
+            }}
+          >
+            <ControlGlyph binding="options" />
+            <span>
+              {top?.kind === "gallery" || top?.kind === "video"
+                ? "Control Panel"
+                : "Options"}
+            </span>
+          </button>
+        ) : null}
+      </footer>
+    </>
+  );
+}
