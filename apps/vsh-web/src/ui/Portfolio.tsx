@@ -308,3 +308,119 @@ function time(seconds: number): string {
   if (!Number.isFinite(seconds)) return "0:00";
   return `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
 }
+
+function Video({
+  page,
+  shell,
+}: {
+  page: Extract<Page, { kind: "video" }>;
+  shell: XmbShell;
+}): React.JSX.Element {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [position, setPosition] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const project = projectOf(page.id);
+  useEffect(() => {
+    const video = videoRef.current;
+    shell.content.video = video;
+    if (video !== null)
+      void video.play().catch(() => {
+        setPlaying(false);
+      });
+    return () => {
+      video?.pause();
+      shell.content.video = null;
+    };
+  }, [shell]);
+  return (
+    <section className="vsh-media" aria-label={`${project?.title ?? "Project"} video`}>
+      <video
+        ref={videoRef}
+        src={project?.video}
+        playsInline
+        preload="metadata"
+        onPlay={() => {
+          setPlaying(true);
+        }}
+        onPause={() => {
+          setPlaying(false);
+        }}
+        onTimeUpdate={(event) => {
+          setPosition(event.currentTarget.currentTime);
+        }}
+        onLoadedMetadata={(event) => {
+          setDuration(event.currentTarget.duration);
+        }}
+        onError={() => {
+          shell.content.fail(
+            "The video could not load. Return to Information and try again.",
+          );
+        }}
+      />
+      <p className="vsh-media-caption" tabIndex={-1} data-focus-default>
+        {project?.title}
+      </p>
+      {page.controls ? (
+        <div className="vsh-media-controls" aria-label="Video controls">
+          <button
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              shell.content.seek(-1);
+            }}
+            aria-label="Rewind"
+          >
+            ◁◁ <span>Rewind</span>
+          </button>
+          <button
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              shell.content.toggleVideo();
+            }}
+            aria-label={playing ? "Pause" : "Play"}
+          >
+            {playing ? "Ⅱ" : "▷"} <span>{playing ? "Pause" : "Play"}</span>
+          </button>
+          <button
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              shell.content.seek(1);
+            }}
+            aria-label="Forward"
+          >
+            ▷▷ <span>Forward</span>
+          </button>
+          <label className="vsh-seek">
+            <span>
+              {time(position)} / {time(duration)}
+            </span>
+            <input
+              aria-label="Video position"
+              type="range"
+              min={0}
+              max={duration || 1}
+              step={0.1}
+              value={position}
+              onChange={(event) => {
+                if (videoRef.current !== null)
+                  videoRef.current.currentTime = Number(event.target.value);
+              }}
+            />
+          </label>
+          <button
+            type="button"
+            data-native-input="true"
+            onClick={() => {
+              shell.content.back();
+            }}
+          >
+            ○ <span>Back</span>
+          </button>
+        </div>
+      ) : null}
+    </section>
+  );
+}
