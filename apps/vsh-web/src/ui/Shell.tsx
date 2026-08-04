@@ -20,3 +20,20 @@ const IDLE: BootSnapshot = {
   total: 0,
   detail: "",
 };
+
+function label(snap: BootSnapshot): string {
+  if (snap.state === "failed") {
+    return `Cannot start the graphics runtime. ${snap.detail}`;
+  }
+  if (snap.state === "ready") {
+    return "Ready.";
+  }
+  if (snap.state === "starting") {
+    return "Starting.";
+  }
+  if (snap.stage === "") {
+    return "Starting.";
+  }
+
+  return `Loading ${snap.stage}, step ${String(snap.done + 1)} of ${String(snap.total)}.`;
+}
