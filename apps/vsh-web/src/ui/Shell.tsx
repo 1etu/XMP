@@ -37,3 +37,13 @@ function label(snap: BootSnapshot): string {
 
   return `Loading ${snap.stage}, step ${String(snap.done + 1)} of ${String(snap.total)}.`;
 }
+
+function BootStatus({ boot }: { boot: Boot }): React.JSX.Element {
+  const snap = useSyncExternalStore(boot.subscribe, boot.snapshot, () => IDLE);
+
+  return (
+    <p className="vsh-status" role="status" aria-live="polite">
+      {label(snap)}
+    </p>
+  );
+}
