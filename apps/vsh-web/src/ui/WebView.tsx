@@ -28,3 +28,21 @@ const ICON_PATHS: Readonly<Record<string, string>> = {
   topbaricon:
     "M16 3a13 13 0 1 0 0 26 13 13 0 0 0 0-26 M3 16h26M16 3c-8 8-8 18 0 26m0-26c8 8 8 18 0 26M5 9h22M5 23h22",
 };
+
+function BrowserIcon({ name }: { name: string }): React.JSX.Element {
+  return import.meta.env.DEV ? (
+    <img className="webview-icon" src={`/original/browser/tex_${name}.png`} alt="" />
+  ) : (
+    <svg
+      className="webview-icon"
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d={ICON_PATHS[name] ?? ICON_PATHS["topbaricon"]} />
+    </svg>
+  );
+}
