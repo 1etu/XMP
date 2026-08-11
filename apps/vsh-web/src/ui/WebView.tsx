@@ -46,3 +46,289 @@ function BrowserIcon({ name }: { name: string }): React.JSX.Element {
     </svg>
   );
 }
+
+export function WebView({ browser }: { browser: WebBrowser }): React.JSX.Element {
+  const state = useSyncExternalStore(browser.subscribe, browser.snapshot);
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  const rootRef = useRef<HTMLElement>(null);
+  const addressRef = useRef<HTMLInputElement>(null);
+  const [address, setAddress] = useState("");
+  const [invalid, setInvalid] = useState(false);
+  const win = browser.window;
+  const entry = browser.entry;
+  const shownPanel = state.panel ?? state.departing;
+  const form = shownPanel === "address" || shownPanel === "search";
+  const home = entry.href === BROWSER_HOME;
+
+  useLayoutEffect(() => {
+    if (state.panel !== undefined && !form && state.panel !== "information")
+      rootRef.current
+        ?.querySelector<HTMLElement>('[role="menuitem"][data-selected="true"]')
+        ?.focus({ preventScroll: true });
+  }, [state.panel, state.selected, form]);
+
+  useEffect(() => {
+    if (state.panel === "address" || state.panel === "search") {
+      setAddress(state.panel === "address" && !home ? entry.href : "");
+      setInvalid(false);
+      addressRef.current?.focus();
+    }
+  }, [state.panel, entry.href, home]);
+
+  useEffect(() => {
+    const key = (event: KeyboardEvent): void => {
+      if (event.ctrlKey && event.key.toLowerCase() === "l") {
+        event.preventDefault();
+        browser.panel("address");
+      } else if (event.ctrlKey && event.key.toLowerCase() === "r") {
+        event.preventDefault();
+        browser.action("refresh");
+      } else if (event.altKey && event.key === "ArrowLeft") {
+        event.preventDefault();
+        browser.history(-1);
+      } else if (event.altKey && event.key === "ArrowRight") {
+        event.preventDefault();
+        browser.history(1);
+      }
+    };
+    globalThis.addEventListener("keydown", key);
+    return () => {
+      globalThis.removeEventListener("keydown", key);
+    };
+  }, [browser]);
+
+  const submit = (event: SubmitEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    const href =
+      state.panel === "search"
+        ? `https://www.google.com/search?q=${encodeURIComponent(address)}`
+        : address;
+    if (!browser.open(href)) setInvalid(true);
+  };
+
+  const loaded = (): void => {
+    if (win === undefined) return;
+    browser.loaded(win.id, win.revision);
+    try {
+      const doc = frameRef.current?.contentDocument;
+      if (doc === null || doc === undefined) return;
+      const style = doc.createElement("style");
+      style.textContent = import.meta.env.DEV
+        ? `html,body{cursor:url('/original/browser/pointer-arrow.png') 17 1,default}a,button{cursor:url('/original/browser/pointer-finger.png') 15 1,pointer}`
+        : "html,body{cursor:url('/portfolio/cursor.svg') 2 1,default}a,button{cursor:pointer}";
+      doc.head.append(style);
+      doc.addEventListener("click", (event) => {
+        const element = event.target;
+        if (element === null || !("closest" in element)) return;
+        const link = (element as Element).closest<HTMLAnchorElement>("a[href]");
+        if (link === null || link.href.startsWith("javascript:")) return;
+        if (link.target === "_blank" || event.ctrlKey || event.metaKey) return;
+        event.preventDefault();
+        browser.open(link.href, link.textContent.trim() || link.href);
+      });
+    } catch {
+      return;
+    }
+  };
+
+  return (
+    <section
+      ref={rootRef}
+      className="webview"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Internet Browser"
+      data-maximum={state.maximum}
+      style={{ "--browser-panel-alpha": state.panelAlpha } as CSSProperties}
+    >
+      <header className="webview-bar webview-topbar">
+        <button
+          type="button"
+          className="webview-menu-toggle"
+          data-native-input
+          data-focus-default
+          aria-label="Browser menu"
+          onClick={() => {
+            browser.panel(state.panel === undefined ? "menu" : undefined);
+          }}
+        >
+          <BrowserIcon name="topbaricon" />
+        </button>
+        <button
+          type="button"
+          className="webview-address"
+          data-native-input
+          aria-label="Enter address"
+          onClick={() => {
+            browser.panel("address");
+          }}
+        >
+          <span>{entry.title}</span>
+          <span>{home ? "" : entry.href}</span>
+        </button>
+        {win?.loading && !browser.blocked ? (
+          <span className="webview-busy" role="status" aria-label="Loading page" />
+        ) : null}
+      </header>
+      <div
+        className="webview-page"
+        style={{ "--browser-zoom": state.zoom } as CSSProperties}
+      >
+        {home ? (
+          <article className="webview-home">
+            <h1>{profile.handle}</h1>
+            <p>{profile.biography[0]}</p>
+            <ul>
+              {projects
+                .filter((project) => project.website !== "")
+                .map((project) => (
+                  <li key={project.id}>
+                    <button
+                      type="button"
+                      data-native-input
+                      onClick={() => browser.open(project.website, project.title)}
+                    >
+                      {project.title}
+                    </button>
+                    <p>{project.description}</p>
+                  </li>
+                ))}
+            </ul>
+            <button
+              type="button"
+              data-native-input
+              onClick={() => browser.open(profile.website, "dayetu.group")}
+            >
+              dayetu.group
+            </button>
+          </article>
+        ) : browser.blocked || win?.failed ? (
+          <article className="webview-error" role="status">
+            <p>This page cannot be displayed here.</p>
+            <a href={entry.href} target="_blank" rel="noopener noreferrer">
+              Open in New Tab
+            </a>
+          </article>
+        ) : win === undefined ? null : (
+          <iframe
+            key={`${String(win.id)}:${String(win.revision)}`}
+            ref={frameRef}
+            title={entry.title}
+            src={entry.href}
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allow="fullscreen"
+            onLoad={loaded}
+            onError={() => {
+              browser.loaded(win.id, win.revision, true);
+            }}
+          />
+        )}
+      </div>
+      <footer className="webview-bar webview-statusbar">
+        <button
+          type="button"
+          data-native-input
+          onClick={() => {
+            browser.panel(state.panel === undefined ? "menu" : undefined);
+          }}
+        >
+          <ControlGlyph binding="options" /> Menu
+        </button>
+        {home ? null : (
+          <a href={entry.href} target="_blank" rel="noopener noreferrer">
+            Open in New Tab
+          </a>
+        )}
+        <button
+          type="button"
+          data-native-input
+          onClick={() => {
+            browser.action("exit");
+          }}
+        >
+          <ControlGlyph binding="cancel" /> Back
+        </button>
+      </footer>
+      {shownPanel === undefined ? null : (
+        <aside
+          className="webview-options"
+          aria-label="Browser options"
+          inert={state.panel === undefined}
+        >
+          {form ? (
+            <form onSubmit={submit} className="webview-form" data-native-input>
+              <label htmlFor="webview-url">
+                {shownPanel === "search" ? "Search" : "Address Entry"}
+              </label>
+              <input
+                ref={addressRef}
+                id="webview-url"
+                autoComplete="off"
+                spellCheck={false}
+                type={shownPanel === "search" ? "search" : "text"}
+                value={address}
+                onChange={(event) => {
+                  setAddress(event.target.value);
+                }}
+              />
+              <button type="submit">Enter</button>
+              {invalid ? <p role="alert">Enter an http or https address.</p> : null}
+            </form>
+          ) : shownPanel === "information" ? (
+            <dl className="webview-page-info">
+              <dt>Title</dt>
+              <dd>{entry.title}</dd>
+              <dt>Address</dt>
+              <dd>{entry.href}</dd>
+            </dl>
+          ) : (
+            <div
+              role="menu"
+              aria-label={shownPanel === "menu" ? "Browser menu" : shownPanel}
+            >
+              {browser.options().map((option, index) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  role="menuitem"
+                  aria-disabled={option.disabled}
+                  data-selected={state.selected === index}
+                  data-browser-item={option.id}
+                  onPointerEnter={() => {
+                    browser.select(index);
+                  }}
+                  onFocus={() => {
+                    browser.select(index);
+                  }}
+                  onClick={() => {
+                    browser.action(option.id);
+                  }}
+                >
+                  {option.icon === undefined ? null : (
+                    <BrowserIcon name={option.icon} />
+                  )}
+                  <span>{option.label}</span>
+                  {option.hint === undefined ? null : <small>{option.hint}</small>}
+                  {option.child ? <b aria-hidden="true">▸</b> : null}
+                </button>
+              ))}
+            </div>
+          )}
+          {shownPanel === "menu" ? null : (
+            <button
+              className="webview-panel-back"
+              type="button"
+              data-native-input
+              onClick={() => {
+                browser.panel("menu");
+              }}
+            >
+              ◂ Back
+            </button>
+          )}
+        </aside>
+      )}
+    </section>
+  );
+}
