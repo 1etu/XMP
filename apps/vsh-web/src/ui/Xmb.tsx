@@ -15,3 +15,5 @@ const EMPTY: Snapshot = {
   items: [],
   labels: [],
 };
+
+const LOGICAL_W = 1920;
