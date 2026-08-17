@@ -18,3 +18,4 @@ const EMPTY: Snapshot = {
 
 const LOGICAL_W = 1920;
 const LOGICAL_H = 1080;
+const PICTURE_SCALE = design(0.56);
