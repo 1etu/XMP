@@ -22,3 +22,7 @@ const PICTURE_SCALE = design(0.56);
 function pc(v: number, of: number): string {
   return `${String((v / of) * 100)}%`;
 }
+
+function x(v: number): string {
+  return `calc(var(--xmb-axis) + ${String(v - LOGICAL_W * 0.29453125)} * var(--xmb-unit))`;
+}
