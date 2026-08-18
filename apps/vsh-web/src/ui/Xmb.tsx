@@ -26,3 +26,7 @@ function pc(v: number, of: number): string {
 function x(v: number): string {
   return `calc(var(--xmb-axis) + ${String(v - LOGICAL_W * 0.29453125)} * var(--xmb-unit))`;
 }
+
+function size(v: number): string {
+  return `calc(${String(v)} * var(--xmb-unit))`;
+}
