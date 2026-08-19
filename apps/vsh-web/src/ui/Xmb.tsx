@@ -30,3 +30,37 @@ function x(v: number): string {
 function size(v: number): string {
   return `calc(${String(v)} * var(--xmb-unit))`;
 }
+
+function Material({
+  shell,
+  id,
+  icon,
+}: {
+  shell: XmbShell;
+  id: string;
+  icon: number;
+}): React.JSX.Element {
+  const { current, previous, blend } = shell.iconMaterial(id, icon);
+  const url = current ?? fallbackIcon(icon);
+  const changing = previous !== undefined && previous !== url && blend < 1;
+  return (
+    <>
+      {changing ? (
+        <span
+          className="xmb-material-layer"
+          style={{
+            backgroundImage: `url(${JSON.stringify(previous)})`,
+            opacity: 1 - blend,
+          }}
+        />
+      ) : null}
+      <span
+        className="xmb-material-layer"
+        style={{
+          backgroundImage: `url(${JSON.stringify(url)})`,
+          opacity: changing ? blend : 1,
+        }}
+      />
+    </>
+  );
+}
