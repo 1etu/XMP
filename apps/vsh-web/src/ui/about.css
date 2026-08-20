@@ -1,0 +1,122 @@
+.vsh-about {
+  --about-unit: var(--xmb-unit);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  touch-action: none;
+  isolation: isolate;
+}
+
+.vsh-about-strip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: calc(1270 * var(--about-unit));
+  margin-left: calc(-635 * var(--about-unit));
+  font: 400 calc(23 * var(--about-unit)) / calc(34 * var(--about-unit))
+    var(--xmb-font, Arial, sans-serif);
+  letter-spacing: 0;
+  text-shadow: none;
+  will-change: transform;
+}
+
+.vsh-about-strip p {
+  margin: 0;
+}
+
+.vsh-about-strip .vsh-about-intro {
+  margin-bottom: calc(1080 * var(--about-unit));
+}
+
+.vsh-about-strip .vsh-about-block + .vsh-about-block {
+  margin-top: calc(180 * var(--about-unit));
+}
+
+.vsh-about .vsh-about-strip h2 {
+  margin: 0 0 calc(34 * var(--about-unit));
+  font: inherit;
+  text-align: center;
+}
+
+.vsh-about-centered {
+  text-align: center;
+}
+
+.vsh-about-technology img {
+  display: block;
+  width: calc(180 * var(--about-unit));
+  height: calc(180 * var(--about-unit));
+  margin: 0 auto calc(26 * var(--about-unit));
+  object-fit: contain;
+}
+.vsh-about-strip a {
+  color: inherit;
+  text-decoration: none;
+}
+.vsh-about-strip a:hover {
+  text-decoration: underline;
+}
+.vsh-about-technology:has(img[src$="webgl.png"]) img {
+  width: calc(360 * var(--about-unit));
+}
+
+.vsh-about-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.vsh-about-controls {
+  position: absolute;
+  right: max(24px, calc(80 * var(--about-unit)));
+  bottom: max(20px, calc(45 * var(--about-unit)));
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  background: #000;
+  font: 400 16px / 1.5 var(--xmb-font, Arial, sans-serif);
+}
+
+.vsh-about-controls:hover,
+.vsh-about-controls:focus-within {
+  opacity: 1;
+}
+
+.vsh-about-controls button {
+  min-width: 72px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.vsh-about-controls button:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .vsh-about {
+    --about-unit: calc(16px / 23);
+  }
+
+  .vsh-about-strip {
+    left: 24px;
+    width: calc(100% - 48px);
+    margin-left: 0;
+  }
+}
+
+@media (pointer: coarse) {
+  .vsh-about-controls {
+    opacity: 1;
+  }
+}
