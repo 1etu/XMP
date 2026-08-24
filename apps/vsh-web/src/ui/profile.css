@@ -1,0 +1,374 @@
+.vsh-profile {
+  --profile-unit: calc(1.5 * var(--xmb-unit));
+  --profile-text-size: calc(14 * var(--profile-unit));
+  --profile-name-size: calc(18 * var(--profile-unit));
+  --profile-field-size: calc(16 * var(--profile-unit));
+  position: absolute;
+  top: calc(161 * var(--profile-unit));
+  left: 50%;
+  width: calc(534 * var(--profile-unit));
+  height: calc(390 * var(--profile-unit));
+  font: 400 var(--profile-text-size)/1.2 var(--xmb-font, Arial, sans-serif);
+  color: #eee;
+  transform: translateX(-50%);
+  opacity: var(--page-alpha, 1);
+}
+.vsh-profile-header,
+.vsh-profile-detail {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  box-shadow: inset 0 0 0 calc(5.5 * var(--profile-unit)) #ababab;
+  border-radius: calc(12 * var(--profile-unit));
+}
+.vsh-profile-header {
+  top: 0;
+  height: calc(118 * var(--profile-unit));
+  background: linear-gradient(#c4c4c4, #969696);
+}
+.vsh-profile-avatar {
+  position: absolute;
+  top: 50%;
+  left: calc(5.5 * var(--profile-unit));
+  width: calc(107 * var(--profile-unit));
+  height: calc(107 * var(--profile-unit));
+  transform: translateY(-50%);
+  overflow: hidden;
+  border-radius: calc(7 * var(--profile-unit));
+  background: #8d8d8d;
+}
+.vsh-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.vsh-profile-status {
+  position: absolute;
+  inset: 0 0 0 calc(123.5 * var(--profile-unit));
+}
+.vsh-profile-balloon {
+  position: absolute;
+  top: calc(12 * var(--profile-unit));
+  left: calc(1.5 * var(--profile-unit));
+  width: calc(400 * var(--profile-unit));
+  height: calc(44 * var(--profile-unit));
+  color: #000;
+  font-size: var(--profile-text-size);
+  line-height: 1.1;
+}
+.vsh-profile-balloon::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 calc(12 * var(--profile-unit));
+  background: white;
+  border-radius: calc(5 * var(--profile-unit));
+}
+.vsh-profile-balloon::after {
+  content: "";
+  position: absolute;
+  left: calc(9 * var(--profile-unit));
+  top: calc(31 * var(--profile-unit));
+  width: calc(15 * var(--profile-unit));
+  height: calc(11 * var(--profile-unit));
+  background: white;
+  clip-path: polygon(8% 0, 100% 0, 0 100%);
+}
+.vsh-profile-balloon p {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: calc(378 * var(--profile-unit));
+  height: calc(32 * var(--profile-unit));
+  margin: 0 0 0 calc(8 * var(--profile-unit));
+}
+.vsh-profile .vsh-profile-status h1 {
+  position: absolute;
+  top: calc(59 * var(--profile-unit));
+  left: calc(24.5 * var(--profile-unit));
+  font-size: var(--profile-name-size);
+  line-height: 1;
+  color: white;
+  text-shadow: 0 calc(1 * var(--profile-unit)) calc(2 * var(--profile-unit)) #555;
+}
+.vsh-profile-presence {
+  position: absolute;
+  left: calc(-24.5 * var(--profile-unit));
+  top: calc(-0.5 * var(--profile-unit));
+  width: calc(19 * var(--profile-unit));
+  height: calc(19 * var(--profile-unit));
+  background: radial-gradient(circle, #b7b7b7 0 30%, #747474 34% 46%, transparent 50%);
+}
+.vsh-profile-location {
+  position: absolute;
+  top: calc(81.5 * var(--profile-unit));
+  left: calc(24.5 * var(--profile-unit));
+  margin: 0;
+}
+.vsh-profile-detail {
+  top: calc(112 * var(--profile-unit));
+  height: calc(202 * var(--profile-unit));
+  background: linear-gradient(150deg, #363636, #111);
+}
+.vsh-profile-tabs {
+  position: absolute;
+  top: calc(6.5 * var(--profile-unit));
+  left: calc(5.5 * var(--profile-unit));
+  right: calc(5.5 * var(--profile-unit));
+  height: calc(20 * var(--profile-unit));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(4 * var(--profile-unit));
+}
+.vsh-profile-tabs > button {
+  display: flex;
+  align-items: center;
+  gap: calc(5 * var(--profile-unit));
+  padding: 0;
+  font-size: calc(8 * var(--profile-unit));
+}
+.vsh-profile-shoulder {
+  display: inline-grid;
+  place-items: center;
+  width: calc(20 * var(--profile-unit));
+  height: calc(10 * var(--profile-unit));
+  font-size: calc(8 * var(--profile-unit));
+}
+.vsh-profile-tab-dots {
+  display: flex;
+  gap: calc(6 * var(--profile-unit));
+}
+.vsh-profile .vsh-profile-tab-dots button {
+  width: calc(6 * var(--profile-unit));
+  height: calc(6 * var(--profile-unit));
+  padding: 0;
+  border-radius: 50%;
+  background: #606060;
+}
+.vsh-profile .vsh-profile-tab-dots button[aria-current] {
+  background: #b9d8e8;
+  box-shadow: 0 0 calc(3 * var(--profile-unit)) #d6eeff;
+}
+.vsh-profile-fields {
+  position: absolute;
+  top: calc(24.5 * var(--profile-unit));
+  left: calc(5.5 * var(--profile-unit));
+  right: calc(5.5 * var(--profile-unit));
+  bottom: calc(5.5 * var(--profile-unit));
+  margin: 0;
+  overflow: auto;
+}
+.vsh-profile-fields > div {
+  margin: 0;
+}
+.vsh-profile-fields dt {
+  padding: calc(3 * var(--profile-unit)) calc(17 * var(--profile-unit));
+  font-size: var(--profile-field-size);
+  line-height: calc(16 * var(--profile-unit));
+  background: linear-gradient(#828282, #585858);
+}
+.vsh-profile-fields dd {
+  margin: 0;
+  padding: calc(3 * var(--profile-unit)) calc(17 * var(--profile-unit));
+  font-size: var(--profile-field-size);
+  line-height: calc(16 * var(--profile-unit));
+}
+.vsh-profile-actions {
+  position: absolute;
+  top: calc(327 * var(--profile-unit));
+  left: 50%;
+  display: flex;
+  gap: calc(7 * var(--profile-unit));
+  transform: translateX(-50%);
+}
+.vsh-profile .vsh-profile-actions button {
+  width: calc(60 * var(--profile-unit));
+  height: calc(40 * var(--profile-unit));
+  padding: calc(7 * var(--profile-unit)) calc(14 * var(--profile-unit));
+  border: calc(1 * var(--profile-unit)) solid #aaa;
+  border-radius: calc(6 * var(--profile-unit));
+  background: linear-gradient(#4d4d4d 45%, #151515 50%, #333);
+  box-shadow: inset 0 0 calc(3 * var(--profile-unit)) #bbb;
+}
+.vsh-profile-actions button.selected {
+  filter: brightness(1.5);
+}
+.vsh-profile-actions svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.vsh-profile-action-label {
+  position: absolute;
+  top: calc(45 * var(--profile-unit));
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: var(--profile-text-size);
+}
+.vsh-profile button:focus-visible {
+  outline: calc(1 * var(--profile-unit)) solid white;
+  outline-offset: calc(2 * var(--profile-unit));
+}
+@media (min-width: 1800px) and (min-aspect-ratio: 1/1) {
+  .vsh-profile {
+    --profile-text-size: calc(19 * var(--xmb-unit));
+    --profile-name-size: calc(26 * var(--xmb-unit));
+    --profile-field-size: calc(23 * var(--xmb-unit));
+    top: calc(241 * var(--xmb-unit));
+    width: calc(800 * var(--xmb-unit));
+  }
+  .vsh-profile-header,
+  .vsh-profile-detail {
+    box-shadow: inset 0 0 0 calc(8 * var(--xmb-unit)) #ababab;
+  }
+  .vsh-profile-header {
+    height: calc(176 * var(--xmb-unit));
+  }
+  .vsh-profile-avatar {
+    left: calc(8 * var(--xmb-unit));
+    width: calc(160 * var(--xmb-unit));
+    height: calc(160 * var(--xmb-unit));
+  }
+  .vsh-profile-status {
+    left: calc(184 * var(--xmb-unit));
+  }
+  .vsh-profile-balloon {
+    top: calc(18 * var(--xmb-unit));
+    left: calc(2 * var(--xmb-unit));
+  }
+  .vsh-profile-balloon p {
+    margin-left: calc(13 * var(--xmb-unit));
+  }
+  .vsh-profile .vsh-profile-status h1,
+  .vsh-profile-location {
+    left: calc(38 * var(--xmb-unit));
+  }
+  .vsh-profile .vsh-profile-status h1 {
+    top: calc(88 * var(--xmb-unit));
+  }
+  .vsh-profile-presence {
+    left: calc(-37 * var(--xmb-unit));
+    top: calc(-1 * var(--xmb-unit));
+    width: calc(28 * var(--xmb-unit));
+    height: calc(28 * var(--xmb-unit));
+  }
+  .vsh-profile-detail {
+    top: calc(168 * var(--xmb-unit));
+    height: calc(302 * var(--xmb-unit));
+  }
+  .vsh-profile-actions {
+    top: calc(490 * var(--xmb-unit));
+  }
+  .vsh-profile-fields {
+    left: calc(8 * var(--xmb-unit));
+    right: calc(8 * var(--xmb-unit));
+  }
+  .vsh-profile-fields dt,
+  .vsh-profile-fields dd {
+    padding: calc(4 * var(--xmb-unit)) calc(26 * var(--xmb-unit));
+    line-height: calc(24 * var(--xmb-unit));
+  }
+}
+@media (max-aspect-ratio: 1/1) {
+  .vsh-profile {
+    --profile-unit: calc(90vw / 534);
+    top: calc(43% - 190px);
+    height: 440px;
+    font-size: 14px;
+  }
+  .vsh-profile-header {
+    top: 0;
+    height: 112px;
+  }
+  .vsh-profile-avatar {
+    width: 92px;
+    height: 92px;
+  }
+  .vsh-profile-status {
+    left: 101px;
+  }
+  .vsh-profile-balloon {
+    top: 7px;
+    width: calc(100% - 5px);
+    height: 50px;
+    font-size: 11px;
+  }
+  .vsh-profile-balloon::before {
+    bottom: 8px;
+  }
+  .vsh-profile-balloon::after {
+    top: 41px;
+    height: 8px;
+  }
+  .vsh-profile-balloon p {
+    width: calc(100% - 12px);
+    height: 42px;
+    margin-left: 6px;
+  }
+  .vsh-profile .vsh-profile-status h1 {
+    top: 62px;
+    font-size: 17px;
+  }
+  .vsh-profile-location {
+    top: 86px;
+    font-size: 10px;
+  }
+  .vsh-profile-detail {
+    top: 116px;
+    height: 245px;
+  }
+  .vsh-profile-fields {
+    top: 46px;
+  }
+  .vsh-profile-fields dt,
+  .vsh-profile-fields dd {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 4px 12px;
+  }
+  .vsh-profile-tabs {
+    height: 44px;
+  }
+  .vsh-profile-tabs > button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .vsh-profile .vsh-profile-tab-dots button,
+  .vsh-profile .vsh-profile-tab-dots button[aria-current] {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .vsh-profile-tab-dots button::after {
+    content: "";
+    position: absolute;
+    inset: 19px;
+    border-radius: 50%;
+    background: #606060;
+  }
+  .vsh-profile-tab-dots button[aria-current]::after {
+    background: #b9d8e8;
+    box-shadow: 0 0 3px #d6eeff;
+  }
+  .vsh-profile-shoulder {
+    width: 24px;
+    height: 14px;
+  }
+  .vsh-profile-actions {
+    top: 380px;
+    gap: 8px;
+  }
+  .vsh-profile .vsh-profile-actions button {
+    width: 60px;
+    height: 44px;
+    padding: 8px 14px;
+  }
+  .vsh-profile-action-label {
+    top: 49px;
+    font-size: 14px;
+  }
+}
