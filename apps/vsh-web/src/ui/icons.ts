@@ -10,3 +10,5 @@ const PATHS: Readonly<Record<number, string>> = {
   42: "M5 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0 M3 22v-2q6-7 12 0v2 M18 4v6 M15 7h6",
   55: "M12 3v10 M7 6a8 8 0 1 0 10 0",
 };
+
+const DOCUMENT = "M6 3h8l4 4v14H6Z M14 3v5h4 M9 12h6 M9 16h6";
