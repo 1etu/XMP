@@ -12,3 +12,9 @@ const PATHS: Readonly<Record<number, string>> = {
 };
 
 const DOCUMENT = "M6 3h8l4 4v14H6Z M14 3v5h4 M9 12h6 M9 16h6";
+
+export function fallbackIcon(id: number): string {
+  const path = PATHS[id] ?? DOCUMENT;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g transform="translate(4 4)" fill="none" stroke="#b7b7b7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="${path}"/></g></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
