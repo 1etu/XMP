@@ -1,0 +1,191 @@
+.vsh-shell[data-font="rounded"] {
+  --xmb-font:
+    "SCE-PS3 VAGRundschrift LATIN", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+}
+
+.vsh-shell[data-font="pop"] {
+  --xmb-font: "SCE-PS3 Seurat LATIN", "Trebuchet MS", sans-serif;
+}
+
+.vsh-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+  opacity: calc(1 - var(--scene-alpha, 1));
+}
+
+.vsh-menu,
+.vsh-startup,
+.vsh-content,
+.vsh-controls,
+.vsh-preview {
+  z-index: 1;
+}
+
+.vsh-shell[data-side-panel="true"] .vsh-content {
+  background: transparent;
+}
+
+.vsh-shell[data-side-panel="true"] .xmb-setting-value {
+  visibility: hidden;
+}
+
+.vsh-shell[data-about="true"] .xmb-indicator {
+  visibility: hidden;
+}
+
+.vsh-shell[data-information="true"] .vsh-wallpaper,
+.vsh-shell[data-about="true"] .vsh-wallpaper {
+  opacity: calc(1 - var(--content-alpha));
+}
+
+.vsh-shell[data-nested-settings="true"] .xmb-indicator {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.vsh-shell[data-nested-settings="true"] .xmb-indicator::before,
+.vsh-shell[data-nested-settings="true"] .xmb-clock,
+.vsh-shell[data-nested-settings="true"] .xmb-indicator-identity {
+  display: none;
+}
+
+.xmb-back-arrow {
+  position: absolute;
+  translate: -50% -50%;
+  width: calc(42 * var(--xmb-unit));
+  height: calc(42 * var(--xmb-unit));
+  border: 0;
+  padding: 0;
+  color: #eee;
+  background: transparent;
+  font-size: calc(27 * var(--xmb-unit));
+  text-shadow: calc(5 * var(--xmb-unit)) 0 calc(8 * var(--xmb-unit)) #fff8;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.xmb-setting-value {
+  position: absolute;
+  translate: 0 -0.6em;
+  font-size: calc(24 * var(--xmb-unit));
+  line-height: 1.2;
+  filter: blur(calc(0.6 * var(--xmb-unit)));
+}
+
+.vsh-option-panel {
+  position: absolute;
+  inset: 0 auto 0 68.75%;
+  width: 30.9375%;
+  padding: 0;
+  font-size: calc(24 * var(--xmb-unit));
+  font-weight: 400;
+  line-height: 1;
+  background: linear-gradient(
+    90deg,
+    #434347d9,
+    #343437b8 25%,
+    #1313157a 58%,
+    transparent 92%
+  );
+  box-shadow: none;
+  border-left: calc(1.5 * var(--xmb-unit)) solid #ffffff35;
+  overflow: hidden;
+}
+
+.vsh-layer[data-top-layer] > .vsh-option-panel {
+  opacity: var(--panel-alpha);
+  transform: translateX(calc((1 - var(--panel-alpha)) * 100%));
+}
+
+.vsh-option-list {
+  position: absolute;
+  top: 46.944444%;
+  left: calc(18 * var(--xmb-unit));
+  right: calc(20 * var(--xmb-unit));
+  transform: translateY(
+    calc((var(--option-offset, 0) * -39.6 - 19.8) * var(--xmb-unit))
+  );
+}
+
+.vsh-option-panel .vsh-selection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(39.6 * var(--xmb-unit));
+  padding: 0;
+  border: 0 !important;
+  background: transparent;
+  color: #bfc0c5;
+  font: inherit;
+  text-shadow: 0 0 calc(1.2 * var(--xmb-unit)) #ffffff60;
+  white-space: nowrap;
+  filter: blur(calc(0.6 * var(--xmb-unit)));
+}
+
+.vsh-option-panel .vsh-selection.selected {
+  color: #f4f4f4;
+  text-shadow: 0 0 calc(9 * var(--xmb-unit)) #ffffffcc;
+}
+
+.vsh-color-swatch {
+  display: block;
+  width: calc(28.5 * var(--xmb-unit));
+  height: calc(28.5 * var(--xmb-unit));
+  border: calc(1 * var(--xmb-unit)) solid #0008;
+  box-shadow: calc(2 * var(--xmb-unit)) calc(3 * var(--xmb-unit))
+    calc(3 * var(--xmb-unit)) #0008;
+}
+
+.selected .vsh-color-swatch {
+  outline: calc(1.5 * var(--xmb-unit)) solid #ffffffb0;
+  box-shadow: 0 0 calc(10 * var(--xmb-unit)) #ffffff70;
+}
+
+.vsh-option-more {
+  position: absolute;
+  left: calc(20 * var(--xmb-unit));
+  bottom: 7%;
+  font-size: calc(20 * var(--xmb-unit));
+  text-shadow: 0 calc(2 * var(--xmb-unit)) calc(4 * var(--xmb-unit)) #000;
+}
+
+.vsh-controls[hidden] {
+  display: none;
+}
+
+@media (min-width: 1800px) and (min-aspect-ratio: 1/1) {
+  .vsh-controls {
+    font-size: calc(21 * var(--xmb-unit));
+  }
+  .vsh-option-panel {
+    font-size: calc(23 * var(--xmb-unit));
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .vsh-option-panel {
+    left: 52%;
+    width: 48%;
+    font-size: 16px;
+  }
+  .vsh-option-list {
+    left: 12px;
+    right: 8px;
+  }
+  .vsh-option-panel .vsh-selection {
+    min-height: 28px;
+  }
+  .xmb[data-depth="1"] .xmb-label {
+    max-width: 40vw;
+    font-size: 17px !important;
+  }
+  .xmb-setting-value {
+    font-size: 14px;
+  }
+}
