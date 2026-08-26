@@ -1,0 +1,67 @@
+.vsh-shell[data-system="true"] .xmb-indicator {
+  visibility: hidden;
+}
+.vsh-shell[data-system="true"] .vsh-content {
+  background: transparent;
+  backdrop-filter: blur(calc(12 * var(--xmb-unit) * var(--content-alpha)));
+}
+.vsh-system-information {
+  opacity: var(--page-alpha, 1);
+}
+.vsh-content .vsh-system-title {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: calc(12 * var(--xmb-unit));
+  left: calc(108 * var(--xmb-unit));
+  top: calc(50% - 386 * var(--xmb-unit));
+  height: calc(40 * var(--xmb-unit));
+  font: inherit;
+  outline: none;
+}
+.vsh-system-icon {
+  width: calc(44 * var(--xmb-unit));
+  height: calc(44 * var(--xmb-unit));
+  background: url("/portfolio/system.svg") center / contain no-repeat;
+}
+.vsh-system-fields {
+  position: absolute;
+  left: calc(50% - 300 * var(--xmb-unit));
+  right: 10%;
+  top: calc(50% - 80 * var(--xmb-unit));
+  margin: 0;
+}
+.vsh-system-fields > div {
+  display: grid;
+  grid-template-columns: calc(280 * var(--xmb-unit)) 1fr;
+  gap: calc(36 * var(--xmb-unit));
+  min-height: calc(40 * var(--xmb-unit));
+}
+.vsh-system-fields dt {
+  text-align: right;
+}
+.vsh-system-fields dd {
+  margin: 0;
+}
+@media (max-aspect-ratio: 1/1) {
+  .vsh-content .vsh-system-title {
+    left: 7%;
+    top: 16%;
+    height: 32px;
+    gap: 10px;
+  }
+  .vsh-system-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .vsh-system-fields {
+    left: 5%;
+    right: 5%;
+    top: 42%;
+  }
+  .vsh-system-fields > div {
+    grid-template-columns: 43% 1fr;
+    gap: 16px;
+    min-height: 40px;
+  }
+}
