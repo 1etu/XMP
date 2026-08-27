@@ -1,0 +1,269 @@
+.webview {
+  --browser-unit: calc(100vw / 1280);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: auto;
+  color: #e3e3e3;
+  font: 400 calc(16 * var(--browser-unit)) / 1.4 var(--xmb-font, Arial, sans-serif);
+  cursor:
+    url("/portfolio/cursor.svg") 2 1,
+    default;
+}
+.webview button,
+.webview a {
+  cursor: pointer;
+}
+.webview button {
+  color: inherit;
+  font: inherit;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 0;
+}
+.webview-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  height: calc(48 * var(--browser-unit));
+  display: flex;
+  align-items: center;
+  gap: calc(14 * var(--browser-unit));
+  background: linear-gradient(#303030, #3f3f3f 70%, #252525);
+}
+.webview-topbar {
+  top: 0;
+  border-bottom: 1px solid #777;
+  padding: 0 calc(40 * var(--browser-unit));
+}
+.webview-icon {
+  width: calc(32 * var(--browser-unit));
+  height: calc(32 * var(--browser-unit));
+  object-fit: contain;
+  flex: none;
+}
+.webview-menu-toggle {
+  display: grid;
+  place-items: center;
+  width: calc(25 * var(--browser-unit));
+}
+.webview-menu-toggle .webview-icon {
+  width: calc(25 * var(--browser-unit));
+  height: calc(25 * var(--browser-unit));
+}
+.webview-address {
+  display: flex;
+  gap: calc(12 * var(--browser-unit));
+  min-width: 0;
+  width: calc(1050 * var(--browser-unit));
+  font-size: calc(14 * var(--browser-unit)) !important;
+}
+.webview-address span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.webview-page {
+  position: absolute;
+  top: calc(48 * var(--browser-unit));
+  bottom: calc(48 * var(--browser-unit));
+  width: calc(720 * var(--browser-unit));
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e4e4e4;
+  color: #333;
+  overflow: auto;
+  border-right: calc(9 * var(--browser-unit)) solid #aaa;
+  box-shadow: calc(3 * var(--browser-unit)) 0 calc(3 * var(--browser-unit)) #0009;
+}
+.webview[data-maximum="true"] .webview-page {
+  width: 100%;
+}
+.webview-page iframe {
+  width: calc(100% / var(--browser-zoom));
+  height: calc(100% / var(--browser-zoom));
+  transform: scale(var(--browser-zoom));
+  transform-origin: top left;
+  border: 0;
+  display: block;
+  background: #e4e4e4;
+}
+.webview-home,
+.webview-error {
+  padding: calc(16 * var(--browser-unit));
+  font:
+    400 calc(14 * var(--browser-unit)) / 1.5 Arial,
+    sans-serif;
+}
+.webview-home h1 {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin: 0 0 1em;
+}
+.webview-home ul {
+  padding-left: 1.5em;
+  margin-top: 2em;
+}
+.webview-home li {
+  margin-bottom: 1.5em;
+}
+.webview-home p {
+  margin: 0.4em 0;
+}
+.webview-home button,
+.webview-error a {
+  color: #225493;
+  text-decoration: underline;
+}
+.webview-statusbar {
+  bottom: 0;
+  border-top: 1px solid #777;
+  padding: 0 calc(42 * var(--browser-unit));
+  justify-content: flex-end;
+  font-size: calc(13 * var(--browser-unit));
+  gap: calc(24 * var(--browser-unit));
+}
+.webview-statusbar a {
+  color: inherit;
+  text-decoration: none;
+}
+.webview-statusbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6 * var(--browser-unit));
+}
+.webview-statusbar .vsh-control-glyph {
+  width: calc(18 * var(--browser-unit));
+  height: calc(18 * var(--browser-unit));
+}
+.webview-statusbar button:first-child {
+  margin-right: auto;
+}
+.webview-options {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: calc(280 * var(--browser-unit));
+  padding: calc(104 * var(--browser-unit)) calc(16 * var(--browser-unit))
+    calc(32 * var(--browser-unit));
+  background: linear-gradient(90deg, #72727885, #33333be8 25%, #08080bdd);
+  border-left: 1px solid #aaa4;
+  opacity: var(--browser-panel-alpha);
+  transform: translateX(calc((1 - var(--browser-panel-alpha)) * 100%));
+  overflow-y: auto;
+}
+.webview-options [role="menuitem"] {
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--browser-unit));
+  width: 100%;
+  min-height: calc(40 * var(--browser-unit));
+  white-space: nowrap;
+  text-shadow: 1px 1px 3px #000;
+}
+.webview-options [role="menuitem"][data-browser-item="search"] {
+  margin-top: calc(36 * var(--browser-unit));
+}
+.webview-options [role="menuitem"][data-selected="true"] > span {
+  color: white;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 9px #fff8;
+}
+.webview-options [role="menuitem"]:focus-visible,
+.webview-menu-toggle:focus-visible {
+  outline: 0;
+  filter: drop-shadow(0 0 3px #ffffff85);
+}
+.webview-options [role="menuitem"][aria-disabled="true"] {
+  opacity: 0.38;
+}
+.webview-options [role="menuitem"] > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.webview-options small {
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  font: inherit;
+  font-size: 0.6em;
+  line-height: 1.1;
+  padding: 0 0.2em;
+}
+.webview-options b {
+  font-weight: 400;
+  margin-left: auto;
+}
+.webview-form {
+  display: grid;
+  gap: 1em;
+}
+.webview-form input {
+  width: 100%;
+  padding: 0.4em;
+  color: #111;
+  background: #eee;
+  border: 1px solid #bbb;
+  font: inherit;
+}
+.webview-form button {
+  justify-self: end;
+}
+.webview-page-info {
+  overflow-wrap: anywhere;
+}
+.webview-page-info dd {
+  margin: 0 0 1em;
+}
+.webview-panel-back {
+  margin-top: 2em;
+}
+.webview-busy {
+  width: 1em;
+  height: 1em;
+  border: 2px dotted #ddd;
+  border-radius: 50%;
+}
+.vsh-shell[data-browser="true"] .vsh-menu {
+  opacity: 0;
+}
+.vsh-shell[data-browser="true"] .vsh-content {
+  background: transparent;
+}
+@media (orientation: portrait) {
+  .webview {
+    --browser-unit: max(1px, calc(100vw / 720));
+  }
+  .webview-page {
+    width: 100%;
+  }
+  .webview-topbar {
+    padding-inline: 12px;
+  }
+  .webview-address span + span {
+    display: none;
+  }
+  .webview-options {
+    width: min(85%, 320px);
+    padding-top: 60px;
+    background: linear-gradient(90deg, #515159f5, #1a1a1ff5);
+  }
+  .webview-options [role="menuitem"] {
+    min-height: 44px;
+  }
+  .webview-statusbar {
+    padding-inline: 12px;
+    gap: 16px;
+  }
+  .webview-statusbar button,
+  .webview-statusbar a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
