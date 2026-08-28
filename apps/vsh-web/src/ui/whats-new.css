@@ -1,0 +1,315 @@
+.wn-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 59% 99%,
+    #b3e5e7 0,
+    #67afc0 27%,
+    #386477 74%,
+    #2b4855 100%
+  );
+  opacity: var(--whats-new-alpha, 0);
+  filter: brightness(0.74);
+}
+.vsh-shell[data-whats-new="true"] .vsh-menu,
+.vsh-shell[data-whats-new-preview="true"] .vsh-menu {
+  z-index: 1;
+}
+.vsh-shell[data-whats-new="true"] .vsh-content {
+  z-index: 2;
+  background: transparent;
+}
+.vsh-shell[data-whats-new="true"] .xmb {
+  translate: calc(-270 * var(--whats-new-alpha, 0) * var(--xmb-unit)) 0;
+}
+.vsh-shell[data-whats-new="true"] .xmb-label,
+.vsh-shell[data-whats-new="true"] .xmb-cat-label,
+.vsh-shell[data-whats-new="true"] .xmb-indicator {
+  visibility: hidden;
+}
+.vsh-shell[data-whats-new="true"]
+  .xmb-icon:not([aria-current="true"]):not([data-icon-entry="whats-new"]) {
+  visibility: hidden;
+}
+.vsh-shell[data-whats-new="true"] [data-icon-entry="whats-new"] {
+  opacity: calc(1 - 0.35 * var(--content-alpha)) !important;
+}
+.whats-new {
+  --wn-unit: calc(100vw / 1920);
+  --wn-row: 1;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  outline: none;
+  font: 400 calc(24 * var(--wn-unit))/1.1 var(--xmb-font, Arial, sans-serif);
+  color: #f5f8f7;
+  text-shadow: 0 calc(1 * var(--wn-unit)) calc(2 * var(--wn-unit)) #283f4566;
+  touch-action: none;
+}
+.wn-scene {
+  position: absolute;
+  width: calc(1920 * var(--wn-unit));
+  height: calc(1080 * var(--wn-unit));
+  top: 0;
+  left: 0;
+}
+.wn-grid {
+  position: absolute;
+  inset: 0;
+}
+.wn-card {
+  position: absolute;
+  left: calc((695 + var(--wn-card-column) * 430) * var(--wn-unit));
+  top: calc((507 + (var(--wn-card-row) - var(--wn-row)) * 370) * var(--wn-unit));
+  width: calc(502 * var(--wn-unit));
+  height: calc(421 * var(--wn-unit));
+  translate: -50% -50%;
+  transform: scale(var(--wn-scale, 0.67));
+}
+.whats-new .wn-card-button {
+  position: absolute;
+  inset: 0;
+  display: block;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font: inherit;
+}
+.wn-card-surface {
+  position: absolute;
+  inset: calc(8 * var(--wn-unit));
+  border-radius: calc(8 * var(--wn-unit));
+  background: #70a6b018;
+  box-shadow:
+    0 0 calc(3 * var(--wn-unit)) #203f5299,
+    inset 0 0 calc(4 * var(--wn-unit)) #e0f8ff99;
+}
+.wn-card-surface::after {
+  content: "";
+  position: absolute;
+  inset: calc(-8 * var(--wn-unit));
+  border: calc(5 * var(--wn-unit)) solid #d8ecec9e;
+  border-radius: calc(15 * var(--wn-unit));
+  pointer-events: none;
+}
+.wn-card[aria-selected="true"] .wn-card-surface::after {
+  border-color: #f4ffff;
+}
+.wn-card[aria-selected="true"] .wn-card-surface {
+  border-color: #f4ffff;
+  box-shadow:
+    0 0 calc(8 * var(--wn-unit)) #fff9,
+    inset 0 0 calc(4 * var(--wn-unit)) #fff;
+}
+.wn-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(8 * var(--wn-unit));
+  object-fit: contain;
+  background: #fff;
+  opacity: var(--wn-image-alpha, 0);
+}
+.wn-art[data-artwork="true"] {
+  object-fit: contain;
+  padding: calc(42 * var(--wn-unit));
+}
+.wn-new {
+  position: absolute;
+  left: calc(-15 * var(--wn-unit));
+  top: calc(-15 * var(--wn-unit));
+  width: calc(74 * var(--wn-unit));
+  height: calc(74 * var(--wn-unit));
+  display: grid;
+  place-items: center;
+  border: calc(3 * var(--wn-unit)) solid #fff9;
+  border-radius: 50%;
+  background: linear-gradient(#ffbb59, #ff8300 80%);
+  box-shadow: 0 0 calc(3 * var(--wn-unit)) #fff9;
+  color: #fff;
+  font-size: calc(23 * var(--wn-unit));
+  font-weight: 700;
+  text-shadow: none;
+}
+.wn-caption {
+  position: absolute;
+  left: 0;
+  top: calc(423 * var(--wn-unit));
+  width: calc(502 * var(--wn-unit));
+  height: calc(74 * var(--wn-unit));
+  padding: calc(24 * var(--wn-unit)) calc(24 * var(--wn-unit));
+  border-radius: calc(20 * var(--wn-unit));
+  border: calc(2 * var(--wn-unit)) solid #c7e3e4b3;
+  background: linear-gradient(#bddcdfab, #6595a5cf 55%, #426778c9);
+  text-align: left;
+  opacity: var(--wn-focus, 0);
+  pointer-events: none;
+}
+.wn-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.wn-busy {
+  position: absolute;
+  top: calc(85 * var(--wn-unit));
+  right: calc(115 * var(--wn-unit));
+  width: calc(34 * var(--wn-unit));
+  height: calc(34 * var(--wn-unit));
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.5;
+  filter: blur(calc(0.5 * var(--wn-unit)));
+  transform: rotate(var(--wn-turn, 0deg));
+}
+.wn-caption-clip {
+  display: block;
+  overflow: hidden;
+}
+.wn-caption-text {
+  display: block;
+  white-space: nowrap;
+  transform: translateX(calc(var(--wn-title-x, 0) * var(--wn-unit)));
+}
+.wn-action {
+  position: absolute;
+  bottom: calc(11 * var(--wn-unit));
+  right: calc(11 * var(--wn-unit));
+  width: calc(84 * var(--wn-unit));
+  height: calc(49 * var(--wn-unit));
+  border-radius: calc(4 * var(--wn-unit));
+  background: linear-gradient(#e8ecefbf, #343942de);
+  box-shadow: 0 0 calc(4 * var(--wn-unit)) #fff;
+}
+.wn-action svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+}
+.wn-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(65 * var(--wn-unit));
+  height: calc(65 * var(--wn-unit));
+  translate: -50% -50%;
+  border: calc(7 * var(--wn-unit)) solid #d5faff24;
+  border-top-color: #dcffff99;
+  border-right-color: #dcffff80;
+  border-radius: 50%;
+  transform: rotate(var(--wn-turn, 0deg));
+}
+.wn-timeout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: calc(12 * var(--wn-unit));
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#568598, #396371);
+  font-size: calc(23 * var(--wn-unit));
+}
+.wn-group {
+  position: absolute;
+  left: calc(505 * var(--wn-unit));
+  top: calc(
+    (507 - 171.5 + (var(--wn-group-row) - var(--wn-row)) * 370) * var(--wn-unit)
+  );
+  width: calc(1260 * var(--wn-unit));
+  height: calc(343 * var(--wn-unit));
+  border: calc(2 * var(--wn-unit)) solid #e4d37090;
+  border-radius: calc(18 * var(--wn-unit));
+  background: linear-gradient(#e2d58c08, #eacd29ce 88%, #e1b700de);
+}
+.wn-group span {
+  position: absolute;
+  right: calc(17 * var(--wn-unit));
+  bottom: calc(10 * var(--wn-unit));
+}
+.wn-played {
+  background: linear-gradient(#9fcbef0d, #78a9d7a6);
+  border-color: #b9d6eb88;
+}
+.whats-new .wn-back,
+.whats-new .wn-scroll {
+  position: absolute;
+  left: calc(409 * var(--wn-unit));
+  top: calc(488 * var(--wn-unit));
+  padding: 0;
+  width: calc(34 * var(--wn-unit));
+  height: calc(38 * var(--wn-unit));
+  filter: drop-shadow(0 0 calc(5 * var(--wn-unit)) #fff9);
+  font-size: calc(23 * var(--wn-unit));
+}
+.whats-new .wn-back,
+.whats-new .wn-scroll {
+  z-index: 5;
+}
+.whats-new .wn-scroll {
+  left: calc(452 * var(--wn-unit));
+  font-size: calc(15 * var(--wn-unit));
+}
+.whats-new .wn-up {
+  top: calc(102 * var(--wn-unit));
+}
+.whats-new .wn-down {
+  top: calc(970 * var(--wn-unit));
+}
+.whats-new .wn-scroll:disabled {
+  visibility: hidden;
+}
+.wn-card-button:focus-visible .wn-card-surface {
+  outline: calc(2 * var(--wn-unit)) solid #fff;
+  outline-offset: calc(5 * var(--wn-unit));
+}
+.wn-preview {
+  position: absolute;
+  left: 43%;
+  top: calc(535 * var(--xmb-unit));
+  display: flex;
+  gap: calc(40 * var(--xmb-unit));
+  opacity: calc(var(--whats-new-alpha, 0) * 0.46);
+  perspective: calc(1200 * var(--xmb-unit));
+  pointer-events: none;
+}
+.wn-preview-card {
+  width: calc(230 * var(--xmb-unit));
+  height: calc(280 * var(--xmb-unit));
+  background: #20516655;
+  border: calc(1 * var(--xmb-unit)) solid #b9e8e433;
+  transform: rotateY(calc(-32deg + var(--wn-preview-turn, 0deg)))
+    rotateZ(calc(-7.2deg + var(--wn-preview-index) * 1deg));
+  box-shadow: calc(20 * var(--xmb-unit)) calc(24 * var(--xmb-unit))
+    calc(28 * var(--xmb-unit)) #a4f0ee50;
+}
+.wn-preview-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+}
+@media (max-width: 700px) {
+  .whats-new {
+    --wn-unit: calc(100vw / 720);
+  }
+  .wn-scene {
+    left: calc((-335 - var(--wn-column, 0) * 430) * var(--wn-unit));
+  }
+  .vsh-shell[data-whats-new="true"] .xmb {
+    visibility: hidden;
+  }
+  .whats-new .wn-back {
+    position: absolute;
+    left: calc((350 + var(--wn-column, 0) * 430) * var(--wn-unit));
+    width: 44px;
+    height: 44px;
+  }
+}
