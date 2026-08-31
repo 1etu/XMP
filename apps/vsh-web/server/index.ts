@@ -6,3 +6,4 @@ import { fileURLToPath } from "node:url";
 import { createPresence } from "./presence.ts";
 
 const root = fileURLToPath(new URL("../dist/", import.meta.url));
+const presence = createPresence();
