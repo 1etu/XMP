@@ -5,3 +5,4 @@ import { afterEach, beforeEach, expect, it } from "vitest";
 import { createPresence } from "./presence.ts";
 
 let service: ReturnType<typeof createPresence>;
+let server: ReturnType<typeof createServer>;
