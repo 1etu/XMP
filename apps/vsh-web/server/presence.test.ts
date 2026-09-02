@@ -6,3 +6,4 @@ import { createPresence } from "./presence.ts";
 
 let service: ReturnType<typeof createPresence>;
 let server: ReturnType<typeof createServer>;
+let base: string;
