@@ -28,3 +28,13 @@ afterEach(async () => {
   server.closeAllConnections();
   await once(server, "close");
 });
+
+async function connect(id: string) {
+  const response = await fetch(`${base}/api/presence?visitor=${id}`);
+  expect(response.status).toBe(200);
+  expect(response.headers.get("content-type")).toBe("text/event-stream");
+  const reader = response.body?.getReader();
+  if (reader === undefined) throw new Error("Missing event stream");
+  streams.push(reader);
+  return reader;
+}
