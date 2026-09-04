@@ -38,3 +38,53 @@ async function connect(id: string) {
   streams.push(reader);
   return reader;
 }
+
+async function count(
+  reader: ReadableStreamDefaultReader<Uint8Array>,
+  expected: number,
+) {
+  const decoder = new TextDecoder();
+  let buffer = "";
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) throw new Error("Event stream ended before the count changed");
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+    if (lines.includes(`data: {"count":${expected}}`)) return;
+  }
+}
+
+it("counts browsers once across tabs and updates after the last tab leaves", async () => {
+  const visitor = randomUUID();
+  const first = await connect(visitor);
+  await count(first, 1);
+  const duplicate = await connect(visitor);
+  await count(duplicate, 1);
+  const second = await connect(randomUUID());
+  await count(second, 2);
+  await count(first, 2);
+  await duplicate.cancel();
+  await count(first, 2);
+  await second.cancel();
+  await count(first, 1);
+});
+
+it("rejects invalid visitors and cross-site subscriptions", async () => {
+  expect((await fetch(`${base}/api/presence?visitor=invalid`)).status).toBe(400);
+  expect(
+    (
+      await fetch(`${base}/api/presence?visitor=${randomUUID()}`, {
+        headers: { "Sec-Fetch-Site": "cross-site" },
+      })
+    ).status,
+  ).toBe(403);
+  expect(
+    (
+      await fetch(`${base}/api/presence?visitor=${randomUUID()}`, {
+        method: "POST",
+      })
+    ).status,
+  ).toBe(400);
+  expect((await fetch(`${base}/other`)).status).toBe(404);
+});
