@@ -15,3 +15,9 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
 });
+
+function setup() {
+  const external = vi.fn();
+  const exit = vi.fn();
+  return { browser: new WebBrowser(external, exit), external, exit };
+}
