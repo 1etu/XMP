@@ -32,3 +32,18 @@ class MaterialWorker extends EventTarget {
     this.dispatchEvent(new MessageEvent("message", { data }));
   }
 }
+
+class MaterialImage {
+  static pending: (() => void)[] = [];
+  src = "";
+
+  decode(): Promise<void> {
+    return new Promise((resolve) => {
+      MaterialImage.pending.push(resolve);
+    });
+  }
+
+  static finish(): void {
+    for (const resolve of MaterialImage.pending.splice(0)) resolve();
+  }
+}
