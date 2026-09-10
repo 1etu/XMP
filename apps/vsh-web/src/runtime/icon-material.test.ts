@@ -47,3 +47,9 @@ class MaterialImage {
     for (const resolve of MaterialImage.pending.splice(0)) resolve();
   }
 }
+
+const textures: IconTextures = {
+  normals: {},
+  diffuse: undefined,
+  environment: undefined,
+};
