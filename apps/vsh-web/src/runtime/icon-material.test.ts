@@ -53,3 +53,4 @@ const textures: IconTextures = {
   diffuse: undefined,
   environment: undefined,
 };
+const palette = { width: 1, height: 1, rgb: [[255, 255, 255] as const] };
