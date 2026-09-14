@@ -61,3 +61,4 @@ const snapshot: Snapshot = {
   categoryLabels: [],
   categoryLabel: undefined,
 };
+const preset = { id: "night" } as Preset;
