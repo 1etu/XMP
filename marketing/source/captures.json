@@ -1,0 +1,36 @@
+{
+  "recorded": "2026-09-19",
+  "source": "Pages production build",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "gif": {
+    "width": 800,
+    "fps": 15
+  },
+  "clock": "2026-09-19T21:00:00+03:00",
+  "note": "The clock is fixed for the capture. Animations run at normal speed. MP4 files have no audio.",
+  "clips": [
+    {
+      "name": "01-startup",
+      "start": 0,
+      "duration": 13.6
+    },
+    {
+      "name": "02-navigation",
+      "start": 13.65,
+      "duration": 10
+    },
+    {
+      "name": "03-themes",
+      "start": 25.639,
+      "duration": 8.5
+    },
+    {
+      "name": "04-whats-new",
+      "start": 35.718,
+      "duration": 7.8
+    }
+  ]
+}
