@@ -17,13 +17,7 @@ export function Indicator({ rtc }: { rtc?: Rtc }): React.JSX.Element {
   return (
     <div className="xmb-indicator">
       <div className="xmb-indicator-identity">
-        <img
-          className="xmb-indicator-plus"
-          src={
-            import.meta.env.DEV ? "/original/indicator/plus.png" : "/portfolio/plus.svg"
-          }
-          alt=""
-        />
+        <img className="xmb-indicator-plus" src="/xmb/icons/plus.png" alt="" />
         <img
           className="xmb-indicator-avatar"
           src={profile.avatar}
@@ -38,14 +32,7 @@ export function Indicator({ rtc }: { rtc?: Rtc }): React.JSX.Element {
               : `${visitors} ${visitors === 1 ? "visitor" : "visitors"} here now`
           }
         >
-          <img
-            src={
-              import.meta.env.DEV
-                ? "/original/indicator/friend.png"
-                : "/portfolio/friend.svg"
-            }
-            alt=""
-          />
+          <img src="/xmb/icons/friend.png" alt="" />
           <span aria-hidden="true">{visitors ?? "—"}</span>
         </span>
       </div>

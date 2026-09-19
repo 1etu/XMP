@@ -88,10 +88,10 @@ export function portfolioCategories(): readonly Category[] {
 export function portfolioIcons(): Readonly<Record<number, string>> {
   const entries: [number, string][] = [
     [ICON_AVATAR, profile.avatar],
-    [ICON_BOARD, "/portfolio/information-board.svg"],
-    [ICON_WHATS_NEW, "/portfolio/whats-new.svg"],
-    [ICON_ORB, "/portfolio/network-orb.svg"],
-    [ICON_FOLDER, "/portfolio/folder.svg"],
+    [ICON_BOARD, "/xmb/icons/information-board.png"],
+    [ICON_WHATS_NEW, "/xmb/icons/whats-new.png"],
+    [ICON_ORB, "/xmb/icons/network.png"],
+    [ICON_FOLDER, "/xmb/icons/folder.png"],
     ...projects.map((p, i): [number, string] => [ICON_PROJECT + i, p.icon]),
   ];
 

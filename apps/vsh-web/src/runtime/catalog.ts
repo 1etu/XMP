@@ -104,10 +104,8 @@ export async function loadResources(signal: AbortSignal): Promise<Resources> {
   const presets = await Promise.all(
     PRESET_IDS.map(async (id) => {
       const p = await json<Preset>(`qgl/presets/${id}.json`, signal);
-      const icons = import.meta.env.DEV
-        ? await json<Group>(`qgl/icons/${id}.json`, signal)
-        : undefined;
-      return [id, icons === undefined ? p : { ...p, icons }] as const;
+      const icons = await json<Group>(`qgl/icons/${id}.json`, signal);
+      return [id, { ...p, icons }] as const;
     }),
   );
 
@@ -144,18 +142,16 @@ export async function loadResources(signal: AbortSignal): Promise<Resources> {
     }
   };
   for (const category of shell) collect(category.entries);
-  const iconTextures = import.meta.env.DEV
-    ? await loadIconTextures(
-        [...ids].filter((id) => id <= 70),
-        "/original/icon/",
-        signal,
-      )
-    : undefined;
-  const iconPalette = import.meta.env.DEV
-    ? await json<IconAmbientPalette>("qgl/icons/ambient-palette.json", signal)
-    : undefined;
-  const icons =
-    iconTextures === undefined ? {} : await prepareIconImages(iconTextures, signal);
+  const iconTextures = await loadIconTextures(
+    [...ids].filter((id) => id <= 70),
+    "/xmb/icons/",
+    signal,
+  );
+  const iconPalette = await json<IconAmbientPalette>(
+    "qgl/icons/ambient-palette.json",
+    signal,
+  );
+  const icons = await prepareIconImages(iconTextures, signal);
   const portfolioImages = new Set(Object.values(portfolioIcons()));
   await Promise.all(
     [...portfolioImages].map((path) =>
@@ -253,14 +249,6 @@ export async function loadResources(signal: AbortSignal): Promise<Resources> {
     icons: {
       ...icons,
       ...portfolioIcons(),
-      ...(import.meta.env.DEV
-        ? {
-            80: "/original/icon/folder.png",
-            105: "/original/icon/information-board.png",
-            106: "/original/whats-new/icon.png",
-            71: "/original/whats-new/network.png",
-          }
-        : {}),
     },
     iconTextures,
     iconPalette,
