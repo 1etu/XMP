@@ -1,3 +1,4 @@
+import { appPath, appUrl } from "./path.js";
 import type { Category, Entry } from "@vsh/explore-plugin";
 import { actionFor, projectOf } from "@vsh/content";
 import type { Preferences } from "@vsh/content";
@@ -418,27 +419,27 @@ export class XmbShell {
           : undefined;
     if (id !== undefined && path === undefined) return;
     if (path === undefined) {
-      if (globalThis.location.pathname === "/") return;
+      if (appPath() === "/") return;
       if (this.#history().xmp) globalThis.history.back();
       else
         globalThis.history.replaceState(
           { focus: this.#state },
           "",
-          `/${globalThis.location.search}`,
+          `${appUrl("/")}${globalThis.location.search}`,
         );
       return;
     }
-    if (globalThis.location.pathname === path) return;
+    if (appPath() === path) return;
     globalThis.history.replaceState({ ...this.#history(), focus: this.#state }, "");
     globalThis.history.pushState(
       { xmp: true, content: id, focus: this.#state },
       "",
-      `${path}${globalThis.location.search}`,
+      `${appUrl(path)}${globalThis.location.search}`,
     );
   }
 
   readonly #restore = (): void => {
-    const path = globalThis.location.pathname;
+    const path = appPath();
     const stored = this.#history();
     let id =
       path === "/user"

@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import type { CSSProperties } from "react";
 import { WHATS_NEW } from "../runtime/whats-new.js";
@@ -28,7 +29,9 @@ export function WhatsNewPreview({ shell }: { shell: XmbShell }): React.JSX.Eleme
           key={item.id}
           style={{ "--wn-preview-index": index } as CSSProperties}
         >
-          {snapshot.states[index] === "ready" ? <img src={item.image} alt="" /> : null}
+          {snapshot.states[index] === "ready" ? (
+            <img src={appUrl(item.image)} alt="" />
+          ) : null}
         </div>
       ))}
     </div>
@@ -179,7 +182,7 @@ export function WhatsNew({ shell }: { shell: XmbShell }): React.JSX.Element {
                         {state === "ready" ? (
                           <img
                             className="wn-art"
-                            src={item.image}
+                            src={appUrl(item.image)}
                             data-artwork={item.artwork}
                             alt=""
                             draggable={false}

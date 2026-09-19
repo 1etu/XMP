@@ -3,6 +3,7 @@ import type { Category, Entry } from "@vsh/explore-plugin";
 import type { Metrics } from "@vsh/paf";
 import { LUT_W, PRESET_IDS, loadIconTextures } from "@vsh/qgl";
 import { prepareIconImages } from "./icon-material.js";
+import { appUrl } from "./path.js";
 import type {
   Catalog,
   Group,
@@ -86,7 +87,7 @@ async function decodeImage(path: string, signal: AbortSignal): Promise<void> {
   };
   signal.addEventListener("abort", cancel, { once: true });
   try {
-    image.src = path;
+    image.src = appUrl(path);
     await image.decode();
     signal.throwIfAborted();
   } catch (error) {
@@ -144,7 +145,7 @@ export async function loadResources(signal: AbortSignal): Promise<Resources> {
   for (const category of shell) collect(category.entries);
   const iconTextures = await loadIconTextures(
     [...ids].filter((id) => id <= 70),
-    "/xmb/icons/",
+    appUrl("/xmb/icons/"),
     signal,
   );
   const iconPalette = await json<IconAmbientPalette>(
@@ -248,7 +249,9 @@ export async function loadResources(signal: AbortSignal): Promise<Resources> {
     startup,
     icons: {
       ...icons,
-      ...portfolioIcons(),
+      ...Object.fromEntries(
+        Object.entries(portfolioIcons()).map(([id, path]) => [id, appUrl(path)]),
+      ),
     },
     iconTextures,
     iconPalette,

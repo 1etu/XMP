@@ -1,3 +1,4 @@
+import { appUrl } from "./path.js";
 import { whatsNewItems } from "@vsh/content";
 import type { ContentAction, WhatsNewItem } from "@vsh/content";
 import type { Command } from "@vsh/libpad";
@@ -68,7 +69,7 @@ export function loadCardImage(src: string, signal: AbortSignal): Promise<void> {
       return;
     }
     signal.addEventListener("abort", abort, { once: true });
-    image.src = src;
+    image.src = appUrl(src);
     void image.decode().then(() => {
       finish();
     }, finish);

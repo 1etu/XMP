@@ -10,6 +10,7 @@
     "start": "pnpm --filter vsh-web start",
     "dev": "pnpm --filter vsh-web dev",
     "build": "pnpm -r build",
+    "build:pages": "pnpm --filter vsh-web exec vite build --base=/xmb-test-portfolio/ --mode pages",
     "typecheck": "tsc --build && tsc --noEmit -p tools/resource-compiler && tsc --noEmit -p apps/vsh-web/server",
     "lint": "eslint .",
     "format": "prettier --write .",

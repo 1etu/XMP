@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   informationOf,
@@ -22,7 +23,7 @@ function UserBadge(): React.JSX.Element {
   return (
     <div className="vsh-user-badge" aria-label={`User: ${profile.handle}`}>
       <div className="vsh-user-badge-face">
-        <img src={profile.avatar} alt="" />
+        <img src={appUrl(profile.avatar)} alt="" />
         <span>{profile.handle}</span>
       </div>
     </div>
@@ -42,7 +43,7 @@ function Information({
     <section className="vsh-information" aria-label={`${info.title} information`}>
       <UserBadge />
       {info.icon === "" ? null : (
-        <img className="vsh-info-art" src={info.icon} alt="" />
+        <img className="vsh-info-art" src={appUrl(info.icon)} alt="" />
       )}
       <div
         className="vsh-info-fields"
@@ -242,7 +243,7 @@ function Gallery({
     <section className="vsh-media" aria-label={`${project?.title ?? "Project"} images`}>
       <img
         key={photo?.src}
-        src={photo?.src}
+        src={photo === undefined ? undefined : appUrl(photo.src)}
         alt={photo?.title ?? "Project image"}
         onError={() => {
           shell.content.fail(
@@ -337,7 +338,7 @@ function Video({
     <section className="vsh-media" aria-label={`${project?.title ?? "Project"} video`}>
       <video
         ref={videoRef}
-        src={project?.video}
+        src={project === undefined ? undefined : appUrl(project.video)}
         playsInline
         preload="metadata"
         onPlay={() => {
@@ -553,7 +554,7 @@ export function Portfolio({ shell }: { shell: XmbShell }): React.JSX.Element {
       {snapshot.preferences.wallpaper !== "" ? (
         <img
           className="vsh-wallpaper"
-          src={snapshot.preferences.wallpaper}
+          src={appUrl(snapshot.preferences.wallpaper)}
           alt=""
           aria-hidden="true"
         />
@@ -567,7 +568,7 @@ export function Portfolio({ shell }: { shell: XmbShell }): React.JSX.Element {
         {preview === undefined ? null : (
           <img
             key={preview}
-            src={preview}
+            src={appUrl(preview)}
             alt=""
             onError={(event) => {
               event.currentTarget.style.visibility = "hidden";

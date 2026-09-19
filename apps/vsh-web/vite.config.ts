@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import type { Plugin } from "vite";
 import { createPresence } from "./server/presence.ts";
+import { projects } from "../../packages/content/src/project.js";
 
 const ORIGINAL = "/original/";
 const TYPES: Readonly<Record<string, string>> = {
@@ -57,9 +58,32 @@ function originals(dir: string): Plugin {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
+    {
+      name: "xmp-pages-routes",
+      apply: "build",
+      enforce: "post",
+      generateBundle(_options, bundle) {
+        if (mode !== "pages") return;
+        const index = bundle["index.html"];
+        if (index?.type !== "asset")
+          throw new Error("The Pages entry file is missing.");
+        for (const route of [
+          "user",
+          ...projects.map((project) => `work/${project.id}`),
+        ]) {
+          this.emitFile({
+            type: "asset",
+            fileName: `${route}/index.html`,
+            source: index.source,
+          });
+        }
+        this.emitFile({ type: "asset", fileName: "404.html", source: index.source });
+        this.emitFile({ type: "asset", fileName: ".nojekyll", source: "" });
+      },
+    },
     originals(resolve(import.meta.dirname, "../../assets/original")),
     {
       name: "vsh-presence",
@@ -83,4 +107,4 @@ export default defineConfig({
   build: {
     target: "es2022",
   },
-});
+}));

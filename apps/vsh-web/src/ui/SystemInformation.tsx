@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { useEffect, useState } from "react";
 import packageInfo from "../../package.json";
 import type { XmbShell } from "../runtime/shell.js";
@@ -62,7 +63,7 @@ export function SystemInformation({ shell }: { shell: XmbShell }): React.JSX.Ele
           className="vsh-system-icon"
           aria-hidden="true"
           style={{
-            backgroundImage: `url(${shell.iconMaterial("system-information", 13).current ?? "/portfolio/system.svg"})`,
+            backgroundImage: `url(${shell.iconMaterial("system-information", 13).current ?? appUrl("/portfolio/system.svg")})`,
           }}
         />
         System Information

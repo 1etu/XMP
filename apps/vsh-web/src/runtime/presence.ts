@@ -21,6 +21,10 @@ function visitor(): string {
 }
 
 export function watchPresence(update: (count: number | undefined) => void): () => void {
+  if (import.meta.env.MODE === "pages") {
+    update(undefined);
+    return () => undefined;
+  }
   let source: EventSource | undefined;
   const connect = (): void => {
     if (source !== undefined || document.visibilityState === "hidden") return;

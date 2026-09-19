@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { preferenceLabel, projectOf, SETTING_LABELS } from "@vsh/content";
 import type { ChoiceSetting } from "@vsh/content";
@@ -177,7 +178,7 @@ export function Xmb({ shell }: { shell: XmbShell }): React.JSX.Element {
         return (
           <Tag
             key={l.id}
-            href={href}
+            href={href === undefined ? undefined : appUrl(href)}
             data-shell-link="true"
             data-entry-id={l.id}
             className={l.focused ? "xmb-label xmb-label-on" : "xmb-label"}

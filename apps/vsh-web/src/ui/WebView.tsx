@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import {
   useEffect,
   useLayoutEffect,
@@ -115,7 +116,7 @@ export function WebView({ browser }: { browser: WebBrowser }): React.JSX.Element
       const style = doc.createElement("style");
       style.textContent = import.meta.env.DEV
         ? `html,body{cursor:url('/original/browser/pointer-arrow.png') 17 1,default}a,button{cursor:url('/original/browser/pointer-finger.png') 15 1,pointer}`
-        : "html,body{cursor:url('/portfolio/cursor.svg') 2 1,default}a,button{cursor:pointer}";
+        : `html,body{cursor:url('${appUrl("/portfolio/cursor.svg")}') 2 1,default}a,button{cursor:pointer}`;
       doc.head.append(style);
       doc.addEventListener("click", (event) => {
         const element = event.target;

@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { useLayoutEffect, useRef } from "react";
 import { profile, siteCredits, researchCredits } from "@vsh/content";
 import type { XmbShell } from "../runtime/shell.js";
@@ -126,7 +127,7 @@ export function About({ shell }: { shell: XmbShell }): React.JSX.Element {
           >
             {"image" in credit ? (
               <img
-                src={credit.image}
+                src={appUrl(credit.image)}
                 alt={`${credit.title} logo`}
                 width={180}
                 height={180}

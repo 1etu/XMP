@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { useCallback, useLayoutEffect, useRef, useSyncExternalStore } from "react";
 import { boardChannels } from "@vsh/content";
 import type { Board, BoardCommand } from "../runtime/board.js";
@@ -199,7 +200,7 @@ export function InformationBoard({
                       refresh.current();
                     }}
                   >
-                    <img src={item.image} alt="" draggable={false} />
+                    <img src={appUrl(item.image)} alt="" draggable={false} />
                     <span className="vsh-board-row-title">
                       <span data-board-title={item.id}>{item.title}</span>
                     </span>
@@ -243,7 +244,7 @@ export function InformationBoard({
         {mode === "article" && current !== undefined ? (
           <>
             <div className="vsh-board-article-heading">
-              <img src={current.image} alt="" />
+              <img src={appUrl(current.image)} alt="" />
               <h2>{current.title}</h2>
               <time dateTime={current.date}>{current.date.replaceAll("-", ".")}</time>
             </div>

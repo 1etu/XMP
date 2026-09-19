@@ -1,3 +1,4 @@
+import { appPath } from "./path.js";
 import { FrameClock, SysRtc, daylightAt, hourOf, monthPositionOf } from "@vsh/librtc";
 import type { Rtc } from "@vsh/librtc";
 import { THEME_COLORS } from "@vsh/content";
@@ -80,7 +81,7 @@ export function createRuntime(opts: RuntimeOpts): Runtime {
   let themePending = false;
   let themeFollowsMaterials = false;
   const reference = opts.appearance === "reference";
-  const direct = globalThis.location.pathname !== "/";
+  const direct = appPath() !== "/";
   const boot = new Boot();
   const clock = new FrameClock();
   let spline: Spline | undefined;
@@ -442,7 +443,7 @@ export function createRuntime(opts: RuntimeOpts): Runtime {
       iconMaterials !== undefined &&
       shell !== undefined &&
       (startupFrame.done || startupFrame.elapsedMs >= MENU_START - ICON_PREPARE_LEAD) &&
-      pageAlpha === 0 &&
+      (pageAlpha === 0 || !initialMaterialsReady) &&
       paletteMix.done &&
       !themeFollowsMaterials &&
       (!themePending || shell.materialSettled) &&

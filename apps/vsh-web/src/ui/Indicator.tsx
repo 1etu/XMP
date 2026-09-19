@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { SysRtc } from "@vsh/librtc";
@@ -12,15 +13,24 @@ export function Indicator({ rtc }: { rtc?: Rtc }): React.JSX.Element {
   const [visitors, setVisitors] = useState<number | undefined>(undefined);
 
   useEffect(() => watchPresence(setVisitors), []);
-  useEffect(() => () => { clock.dispose(); }, [clock]);
+  useEffect(
+    () => () => {
+      clock.dispose();
+    },
+    [clock],
+  );
 
   return (
     <div className="xmb-indicator">
       <div className="xmb-indicator-identity">
-        <img className="xmb-indicator-plus" src="/xmb/icons/plus.png" alt="" />
+        <img
+          className="xmb-indicator-plus"
+          src={appUrl("/xmb/icons/plus.png")}
+          alt=""
+        />
         <img
           className="xmb-indicator-avatar"
-          src={profile.avatar}
+          src={appUrl(profile.avatar)}
           alt={profile.handle}
         />
         <span
@@ -32,7 +42,7 @@ export function Indicator({ rtc }: { rtc?: Rtc }): React.JSX.Element {
               : `${visitors} ${visitors === 1 ? "visitor" : "visitors"} here now`
           }
         >
-          <img src="/xmb/icons/friend.png" alt="" />
+          <img src={appUrl("/xmb/icons/friend.png")} alt="" />
           <span aria-hidden="true">{visitors ?? "—"}</span>
         </span>
       </div>

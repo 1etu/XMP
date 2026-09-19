@@ -1,3 +1,4 @@
+import { appUrl } from "../runtime/path.js";
 import { profile, projects } from "@vsh/content";
 import type { Page } from "../runtime/presentation.js";
 import type { XmbShell } from "../runtime/shell.js";
@@ -28,7 +29,7 @@ export function Profile({
     >
       <header className="vsh-profile-header">
         <div className="vsh-profile-avatar">
-          <img src={profile.avatar} alt={`${profile.handle} avatar`} />
+          <img src={appUrl(profile.avatar)} alt={`${profile.handle} avatar`} />
         </div>
         <div className="vsh-profile-status">
           <div className="vsh-profile-balloon">

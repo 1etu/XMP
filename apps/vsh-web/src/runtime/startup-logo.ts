@@ -1,4 +1,5 @@
 import { design, measured, verified } from "@vsh/qgl";
+import { appUrl } from "./path.js";
 
 const WIDTH = verified(700);
 const HEIGHT = verified(350);
@@ -25,7 +26,9 @@ interface LogoFrame {
 async function logoTextures(
   signal: AbortSignal,
 ): Promise<readonly [Uint8ClampedArray, Uint8ClampedArray, Uint8ClampedArray]> {
-  const response = await fetch("/portfolio/branding/startup-etu.png", { signal });
+  const response = await fetch(appUrl("/portfolio/branding/startup-etu.png"), {
+    signal,
+  });
   if (!response.ok) throw new Error("Startup logo is unavailable");
   const bitmap = await createImageBitmap(await response.blob());
   try {
