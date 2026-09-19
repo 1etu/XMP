@@ -28,7 +28,7 @@ Get-ChildItem -LiteralPath (Join-Path $projectRoot 'apps/vsh-web/dist') -Force |
 foreach ($item in @('marketing', 'LICENSE', 'RESEARCH.md', 'THIRD_PARTY_NOTICES.md', 'THIRD_PARTY_LICENSES.txt')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot $item) -Destination $staging -Recurse -Force
 }
-$readme = Get-Content -LiteralPath (Join-Path $projectRoot 'README.md') -Raw
+$readme = Get-Content -LiteralPath (Join-Path $projectRoot 'README.md') -Raw -Encoding UTF8
 $deploymentText = "## This repository`n`nThis repository hosts the compiled website and campaign kit. Development takes place in a separate source checkout.`n`nGitHub Pages cannot run the live visitor server, so the static site shows a dash.`n`n"
 $readme = [regex]::Replace($readme, '(?s)## Run\r?\n.*?(?=## Controls)', $deploymentText)
 [System.IO.File]::WriteAllText((Join-Path $staging 'README.md'), $readme)
